@@ -497,6 +497,10 @@ html {
     text-decoration: none;
 }
 
+.category__item-name {
+    margin-left: 4px;
+}
+
 .category__item--primary {
     background-color: #0D5CB6;
 }
@@ -514,6 +518,11 @@ html {
 .menu-catalog__item {
     height: 41px;
     padding: 10px;
+    cursor: pointer;
+}
+
+.menu-catalog__item-name {
+    margin-left: 4px;
 }
 
 .slick-prev {
@@ -637,6 +646,7 @@ html {
 .product__item-link {
     text-decoration: none;
     color: #000;
+    display: block;
 }
 
 /* Addd */

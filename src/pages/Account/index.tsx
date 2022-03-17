@@ -1,13 +1,20 @@
-import React from "react";
-// import Header from "../../components/Header";
+import React, { useEffect } from "react";
+import Header from "../../components/Header";
+import TopCategory from "../../components/TopCategory";
+import AccountProfile from "./components/AccountProfile";
 
 type Props = {};
 
 const Account = (props: Props) => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [])
+
   return (
     <>
-        <div></div>
-      <div>Account</div>
+      <Header />
+      <TopCategory />
+      <AccountProfile />
     </>
   );
 };

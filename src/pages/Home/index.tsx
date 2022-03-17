@@ -1,21 +1,20 @@
-import React, { Component } from "react";
+import React from "react";
 import Header from "../../components/Header";
 import TopCategory from "../../components/TopCategory";
+import Banner from "../../components/Banner";
+import ThreeBanner from "../../components/ThreeBanner";
+import ProductList from "../../components/ProductList";
 
-type Props = {};
+const Home = () => {
+  return (
+    <>
+      <Header />
+      <TopCategory />
+      <Banner />
+      <ThreeBanner />
+      <ProductList />
+    </>
+  );
+};
 
-type State = {};
-
-export default class Home extends Component<Props, State> {
-  state = {};
-
-  render() {
-    return (
-      <>
-        <Header />
-        <TopCategory />
-        <div>Home</div>
-      </>
-    );
-  }
-}
+export default Home;

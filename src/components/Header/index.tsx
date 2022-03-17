@@ -41,7 +41,7 @@ export default class Header extends Component<Props, State> {
             <div className="row">
               <div className="col l-3 m-4 c-4">
                 <div className="home-page__logo">
-                  <Link to="#">
+                  <Link to="/">
                     <SVG
                       name="logo_divine_pure_white"
                       alt="logo-divineshop"
@@ -50,7 +50,7 @@ export default class Header extends Component<Props, State> {
                       height="60px"
                     />
                   </Link>
-                  <Link to="#">
+                  <Link to="/">
                     <SVG
                       name="logo-divineshop"
                       alt="logo-divineshop"
@@ -146,7 +146,7 @@ export default class Header extends Component<Props, State> {
                       </div>
                       <div className="logged-dropdown__body">
                         <ul className="logged-dropdown__list">
-                          <Link to="#" className="logged-dropdown__list-item-wrapper">
+                          <Link to="/account" className="logged-dropdown__list-item-wrapper">
                             <li className="logged-dropdown__list-item">Lịch sử mua hàng</li>
                           </Link>
                           <Link to="#" className="logged-dropdown__list-item-wrapper">
