@@ -146,11 +146,11 @@ export default class Header extends Component<Props, State> {
                       </div>
                       <div className="logged-dropdown__body">
                         <ul className="logged-dropdown__list">
-                          <Link to="/account" className="logged-dropdown__list-item-wrapper">
+                          <Link to="/purchase-history" className="logged-dropdown__list-item-wrapper">
                             <li className="logged-dropdown__list-item">Lịch sử mua hàng</li>
                           </Link>
-                          <Link to="#" className="logged-dropdown__list-item-wrapper">
-                            <li className="logged-dropdown__list-item">Thông tin sản phẩm</li>
+                          <Link to="/account" className="logged-dropdown__list-item-wrapper">
+                            <li className="logged-dropdown__list-item">Thông tin tài khoản</li>
                           </Link>
                           <Link to="#" className="logged-dropdown__list-item-wrapper">
                             <li className="logged-dropdown__list-item">Sản phẩm yêu thích</li>

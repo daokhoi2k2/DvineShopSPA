@@ -5,6 +5,7 @@ import "./assets/css/base.css";
 import Account from "./pages/Account";
 import Home from "./pages/Home";
 import ProductDetail from "./pages/ProductDetail";
+import PurchaseHistory from "./pages/PurchaseHistory";
 
 const App: React.FC = () => {
   useEffect(() => {
@@ -16,6 +17,7 @@ const App: React.FC = () => {
         <Route path="/" element={<Home />} />
         <Route path="/account" element={<Account />} />
         <Route path="/product-detail/:productId" element={<ProductDetail />} />
+        <Route path="/purchase-history" element={<PurchaseHistory />} />
       </Routes>
     </>
   );

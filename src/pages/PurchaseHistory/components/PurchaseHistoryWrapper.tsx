@@ -1,16 +1,15 @@
 import React from "react";
-import "../../../assets/css/account.css";
 import AccountHeader from "../../../components/AccountHeader";
-import AccountBody from "./AccountBody";
+import PurchaseHistoryBody from "./PurchaseHistoryBody";
 
-const AccountProfile = () => {
+const PurchaseHistoryBodyWrapper: React.FC = () => {
   return (
     <div className="account__header-wrapper">
       <div className="grid wide">
         <div className="row">
           <div className="col l-12 m-12 c-12">
             <AccountHeader />
-            <AccountBody />
+            <PurchaseHistoryBody />
           </div>
         </div>
       </div>
@@ -18,4 +17,4 @@ const AccountProfile = () => {
   );
 };
 
-export default AccountProfile;
+export default PurchaseHistoryBodyWrapper;
