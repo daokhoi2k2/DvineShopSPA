@@ -5,6 +5,7 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import Img from "../../designs/Img";
 
+
 type Props = {};
 
 const Banner = (props: Props) => {
