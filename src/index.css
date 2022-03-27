@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    html {
+        font-family: 'Roboto Condensed', sans-serif;
+    }
+
+    body {
+        background-color: #F3F4F6;
+    }
+
+    .slickCustom li {
+        @apply mx-0.5
+    }
+
+    .slickCustom li.slick-active,
+    .slickCustom li.slick-active button::before{
+        @apply w-10 opacity-100
+    }
+
+    .slickCustom li button {
+        opacity: .5;
+    }
+
+    .slickCustom {
+        @apply absolute bottom-1
+
+    }
+
+    .slick-dots li button::before {
+        height: 4px;
+        @apply border rounded-md bg-white block font-sans
+    }
+
+    .SliderWrapper,
+    .SliderWrapper .slick-list,
+    .SliderWrapper .slick-track,
+    .SliderWrapper .slick-arrow,
+    .SliderWrapper .slick-slide div{
+        height: 100%;
+    }
+}

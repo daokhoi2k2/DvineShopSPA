@@ -1,19 +1,20 @@
 import React from "react";
-import Header from "../../components/Header";
-import TopCategory from "../../components/TopCategory";
-import Banner from "../../components/Banner";
-import ThreeBanner from "../../components/ThreeBanner";
-import ProductList from "../../components/ProductList";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import { Container } from "./styles";
+import Header from "components/Header";
+import Banner from "components/Banner";
+
 
 const Home = () => {
+
   return (
-    <>
-      <Header />
-      <TopCategory />
-      <Banner />
-      <ThreeBanner />
-      <ProductList />
-    </>
+    <Container>
+      <Header>
+      </Header>
+      <Banner>
+      </Banner>
+    </Container>
   );
 };
 

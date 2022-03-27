@@ -1,9 +1,9 @@
-import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
-import "@fortawesome/fontawesome-free/css/all.min.css";
+import "index.css"
+
 
 ReactDOM.render(
   // <React.StrictMode>

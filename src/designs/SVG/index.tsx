@@ -13,7 +13,7 @@ const SVG: React.FC<Props> = (props) => {
 
   return (
     <img
-      src={require(`../../assets/svg/${name}.svg`)}
+      src={require(`assets/svg/${name}.svg`)}
       alt={`${name} icon`}
       {...(rest as any)}
     />
