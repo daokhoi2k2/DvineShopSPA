@@ -10,6 +10,9 @@ module.exports = {
 			lg: { max: "991px" },
 			// => @media (max-width: 991px) { ... }
 
+			mid: { max: "860px" },
+			// => @media (max-width: 860px) { ... }
+
 			md: { max: "767px" },
 			// => @media (max-width: 767px) { ... }
 
@@ -23,6 +26,10 @@ module.exports = {
 			light: 300,
 			regular: 400,
 			medium: 500
+		},
+
+		fontSize: {
+			
 		},
 
 		gridTemplateColumns: {

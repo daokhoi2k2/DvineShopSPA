@@ -3,6 +3,7 @@ import tw from "twin.macro";
 export const Nav = tw.div`
     py-2
     bg-white
+    border-b-[1px]
 
     lg:hidden
 `;

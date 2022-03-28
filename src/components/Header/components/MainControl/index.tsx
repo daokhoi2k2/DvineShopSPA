@@ -1,6 +1,7 @@
 import { CartIcon, MoreIcon, PersonIcon, SearchIcon } from "designs/icons/Drawer";
 import SVG from "designs/SVG";
 import React from "react";
+import { Link } from "react-router-dom"
 import {
   AuthWrapper,
   ButtonSearch,
@@ -22,10 +23,12 @@ import {
 const MainControl: React.FC = () => {
   return (
     <MainControlWrapper>
-      <LogoWrappep>
-        <SVG name="logo_divine_pure_white" className="w-[49px] h-[49px]"></SVG>
-        <LogoText>Divine Shop</LogoText>
-      </LogoWrappep>
+      <Link to="/">
+        <LogoWrappep>
+          <SVG name="logo_divine_pure_white" className="w-[49px] h-[49px]"></SVG>
+          <LogoText>Divine Shop</LogoText>
+        </LogoWrappep>
+      </Link>
       {/* Show when screen is tablet or mobile */}
       <ShowMore>
         <MoreIcon className="w-6 h-9 text-white" />

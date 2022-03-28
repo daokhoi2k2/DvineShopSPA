@@ -41,4 +41,8 @@
     .SliderWrapper .slick-slide div{
         height: 100%;
     }
+
+    .toastCustom {
+        @apply text-sm
+    }
 }

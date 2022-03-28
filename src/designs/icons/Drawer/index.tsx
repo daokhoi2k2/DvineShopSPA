@@ -22,6 +22,9 @@ export { ReactComponent as SteamWalletIcon } from "assets/svg/SteamWallet-41454.
 export { ReactComponent as SignalIcon } from "assets/svg/Signal-61321.svg";
 export { ReactComponent as GooglePlayIcon } from "assets/svg/Google Play-42608.svg";
 export { ReactComponent as XboxIcon } from "assets/svg/Xbox Logo-88261.svg";
+export { ReactComponent as BoxIcon } from "assets/svg/box.svg";
+export { ReactComponent as TagIcon } from "assets/svg/tag.svg";
+export { ReactComponent as CoppyIcon } from "assets/svg/coppy.svg";
 
 export { ReactComponent as FCPhone } from "assets/svg/Nap-thesvg-30724.svg";
 export { ReactComponent as FCGift } from "assets/svg/Gioi-thieu-ban-be-87652.svg";
