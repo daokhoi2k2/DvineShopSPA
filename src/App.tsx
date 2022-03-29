@@ -4,6 +4,7 @@ import Home from "pages/Home";
 import ProductDetail from "pages/ProductDetail";
 import { ToastContainer } from "react-toastify";
 import Search from "pages/Search";
+import Profile from "pages/Profile";
 
 const App: React.FC = () => {
   useEffect(() => {
@@ -16,6 +17,7 @@ const App: React.FC = () => {
         <Route path="/:hash_name" element={<ProductDetail />} />
         <Route path="/search" element={<Search />} />
         <Route path="/admin" element={<div>Hello World</div>} />
+        <Route path="/user/profile" element={<Profile />} />
       </Routes>
       <ToastContainer
         position="bottom-right"

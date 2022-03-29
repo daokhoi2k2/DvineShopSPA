@@ -5,6 +5,8 @@ import SubControl from "./components/SubControl";
 import TextSlide from "./components/TextSlide";
 import TopNav from "./components/TopNav";
 import Utilities from "./components/Utilities";
+import NavDrawer from "components/NavDrawer";
+
 import {
   Content,
   HeaderContent,
@@ -16,6 +18,7 @@ import {
   NavText,
   TopHeader,
 } from "./styles";
+import AuthModalBox from "components/AuthModalBox";
 
 const Header: React.FC = () => {
   return (
@@ -47,6 +50,8 @@ const Header: React.FC = () => {
           </Utilities>
         </NavContent>
       </Nav>
+      <NavDrawer></NavDrawer>
+      <AuthModalBox></AuthModalBox>
     </>
   );
 };

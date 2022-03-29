@@ -5,7 +5,7 @@ export const MainControlWrapper = tw.div`
     gap-x-10
 `;
 
-export const LogoWrappep = tw.div`
+export const LogoWrapper = tw.div`
     flex
     items-center
     cursor-pointer
@@ -74,6 +74,7 @@ export const ControlAuthWrapper = tw.div`
     gap-x-1
     cursor-pointer
 
+    min-w-[185px]
 `;
 
 export const ControlAuthItem = tw.div`
@@ -91,7 +92,10 @@ export const CartWrapper = tw.div`
     border
 
     cursor-pointer
+    min-w-[141px]
     hover:opacity-90
+    sm:min-w-0
+
 `;
 
 export const CartTitle = tw.div`

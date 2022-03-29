@@ -56,7 +56,7 @@ export const PrevArrowWrapper = tw.div`
     group-hover:bg-[rgba(0, 0, 0, 0.2)]
 
     before:hidden
-    z-50
+    z-10
 `;
 
 export const PrevArrowIcon = tw.div`

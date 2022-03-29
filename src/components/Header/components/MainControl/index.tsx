@@ -2,6 +2,7 @@ import { CartIcon, MoreIcon, PersonIcon, SearchIcon } from "designs/icons/Drawer
 import SVG from "designs/SVG";
 import React from "react";
 import { Link } from "react-router-dom"
+import { useDispatch } from "react-redux"
 import {
   AuthWrapper,
   ButtonSearch,
@@ -14,23 +15,44 @@ import {
   IconAuthWrapper,
   InputSearch,
   LogoText,
-  LogoWrappep,
+  LogoWrapper,
   MainControlWrapper,
   SearchWrapper,
   ShowMore,
 } from "./styles";
+import { setAuthModalBox, toggleNavDrawer } from "redux/actions/config";
 
 const MainControl: React.FC = () => {
+  const dispatch = useDispatch();
+  
+  const handleToggleNavDrawer = () => {
+    dispatch(toggleNavDrawer())
+  }
+
+  const showLoginRegisterModalBox = () => {
+    dispatch(setAuthModalBox({
+      isShow: true,
+      boxName: "login"
+    }))
+  }
+
+  const showRegisterModelBox = () => {
+    dispatch(setAuthModalBox({
+      isShow: true,
+      boxName: "register"
+    }))
+  }
+
   return (
     <MainControlWrapper>
-      <Link to="/">
-        <LogoWrappep>
+      <Link to="/" className="lg:hidden">
+        <LogoWrapper>
           <SVG name="logo_divine_pure_white" className="w-[49px] h-[49px]"></SVG>
           <LogoText>Divine Shop</LogoText>
-        </LogoWrappep>
+        </LogoWrapper>
       </Link>
       {/* Show when screen is tablet or mobile */}
-      <ShowMore>
+      <ShowMore onClick={handleToggleNavDrawer}>
         <MoreIcon className="w-6 h-9 text-white" />
       </ShowMore>
       {/* End */}
@@ -41,15 +63,15 @@ const MainControl: React.FC = () => {
         </ButtonSearch>
       </SearchWrapper>
       <AuthWrapper>
-        <IconAuthWrapper>
+        <IconAuthWrapper onClick={showLoginRegisterModalBox}>
           <IconAuth>
             <PersonIcon className="w-[18.5px] h-[18.5px] text-white" />
           </IconAuth>
         </IconAuthWrapper>
         <ControlAuthWrapper>
-          <ControlAuthItem>Đăng nhập</ControlAuthItem>
+          <ControlAuthItem onClick={showLoginRegisterModalBox}>Đăng nhập</ControlAuthItem>
           <ControlAuthItem>/</ControlAuthItem>
-          <ControlAuthItem>Đăng ký</ControlAuthItem>
+          <ControlAuthItem onClick={showRegisterModelBox}>Đăng ký</ControlAuthItem>
         </ControlAuthWrapper>
       </AuthWrapper>
       <CartWrapper>

@@ -6,7 +6,7 @@ import Header from "components/Header";
 import Banner from "components/Banner";
 import TitleList from "components/TitleList";
 import ProductList from "components/ProductList";
-
+import Footer from "components/Footer";
 
 const Home = () => {
   const fakeData = [
@@ -85,6 +85,9 @@ const Home = () => {
             </ProductList>
           </HotProductInner>
       </HotProductWrapper>
+      <Footer>
+
+      </Footer>
     </Container>
   );
 };

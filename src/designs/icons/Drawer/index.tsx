@@ -25,6 +25,13 @@ export { ReactComponent as XboxIcon } from "assets/svg/Xbox Logo-88261.svg";
 export { ReactComponent as BoxIcon } from "assets/svg/box.svg";
 export { ReactComponent as TagIcon } from "assets/svg/tag.svg";
 export { ReactComponent as CoppyIcon } from "assets/svg/coppy.svg";
+export { ReactComponent as CloseIcon } from "assets/svg/close.svg";
+export { ReactComponent as HomeIcon } from "assets/svg/home.svg";
+export { ReactComponent as PlusIcon } from "assets/svg/plus.svg";
+export { ReactComponent as UserLockIcon } from "assets/svg/userlock.svg";
+export { ReactComponent as HeartIcon } from "assets/svg/heart.svg";
+export { ReactComponent as ShareIcon } from "assets/svg/share.svg";
+
 
 export { ReactComponent as FCPhone } from "assets/svg/Nap-thesvg-30724.svg";
 export { ReactComponent as FCGift } from "assets/svg/Gioi-thieu-ban-be-87652.svg";

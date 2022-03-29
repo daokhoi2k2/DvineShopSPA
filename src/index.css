@@ -45,4 +45,19 @@
     .toastCustom {
         @apply text-sm
     }
+
+    @keyframes toRight{
+        from {
+            transform: translateX(-100%);
+            opacity: 0.7;
+        }
+        to {
+            transform: translateX(0%);
+            opacity: 1;
+        }
+    }
+    
+    .NavDrawerTransition { 
+       animation: toRight 0.3s ease-in;
+    }
 }
