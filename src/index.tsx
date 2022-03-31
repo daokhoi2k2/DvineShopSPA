@@ -4,6 +4,7 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from 'react-redux'
 import store from "redux/store"
+import { GlobalStyles } from "twin.macro";
 import "index.css"
 
 store.subscribe(() => {
@@ -14,6 +15,7 @@ ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
       <App />
+      <GlobalStyles /> {/* Fix tailwind transform variable css */}
     </BrowserRouter>
   </Provider>,
   // </React.StrictMode>

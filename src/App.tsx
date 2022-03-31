@@ -5,11 +5,16 @@ import ProductDetail from "pages/ProductDetail";
 import { ToastContainer } from "react-toastify";
 import Search from "pages/Search";
 import Profile from "pages/Profile";
+import OrderHistory from "pages/OrderHistory";
+import Wishlist from "pages/Wishlist";
+import Security from "pages/Security";
+import Overview from "pages/Admin/Overview";
 
 const App: React.FC = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+  
   return (
     <>
       <Routes>
@@ -18,6 +23,10 @@ const App: React.FC = () => {
         <Route path="/search" element={<Search />} />
         <Route path="/admin" element={<div>Hello World</div>} />
         <Route path="/user/profile" element={<Profile />} />
+        <Route path="/user/orders" element={<OrderHistory />} />
+        <Route path="/user/wishlist" element={<Wishlist />} />
+        <Route path="/user/security" element={<Security />} />
+        <Route path="/admin/" element={<Overview />} />
       </Routes>
       <ToastContainer
         position="bottom-right"

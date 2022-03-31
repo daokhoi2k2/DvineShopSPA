@@ -31,6 +31,9 @@ export { ReactComponent as PlusIcon } from "assets/svg/plus.svg";
 export { ReactComponent as UserLockIcon } from "assets/svg/userlock.svg";
 export { ReactComponent as HeartIcon } from "assets/svg/heart.svg";
 export { ReactComponent as ShareIcon } from "assets/svg/share.svg";
+export { ReactComponent as ArrowDownIcon } from "assets/svg/arrowDown.svg";
+export { ReactComponent as FilterIcon } from "assets/svg/filter.svg";
+export { ReactComponent as ClipboardIcon } from "assets/svg/clipboard.svg";
 
 
 export { ReactComponent as FCPhone } from "assets/svg/Nap-thesvg-30724.svg";

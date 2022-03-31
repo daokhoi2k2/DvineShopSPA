@@ -23,3 +23,8 @@ export const setAuthModalBox = (payload: IAuthModalBox) => ({
     type: types.SET_AUTH_MODAL_BOX,
     payload
 })
+
+export const setAdminNavDrawer = (payload: boolean) => ({
+    type: types.SET_ADMIN_NAV_DRAWER,
+    payload
+})

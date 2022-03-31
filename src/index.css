@@ -3,61 +3,84 @@
 @tailwind utilities;
 
 @layer base {
-    html {
-        font-family: 'Roboto Condensed', sans-serif;
-    }
+  html {
+    font-family: "Roboto Condensed", sans-serif;
+  }
 
-    body {
-        background-color: #F3F4F6;
-    }
+  body {
+    background-color: #f3f4f6;
+  }
 
-    .slickCustom li {
-        @apply mx-0.5
-    }
+  .slickCustom li {
+    @apply mx-0.5;
+  }
 
-    .slickCustom li.slick-active,
-    .slickCustom li.slick-active button::before{
-        @apply w-10 opacity-100
-    }
+  .slickCustom li.slick-active,
+  .slickCustom li.slick-active button::before {
+    @apply w-10 opacity-100;
+  }
 
-    .slickCustom li button {
-        opacity: .5;
-    }
+  .slickCustom li button {
+    opacity: 0.5;
+  }
 
-    .slickCustom {
-        @apply absolute bottom-1
+  .slickCustom {
+    @apply absolute bottom-1;
+  }
 
-    }
+  .slick-dots li button::before {
+    height: 4px;
+    @apply border rounded-md bg-white block font-sans;
+  }
 
-    .slick-dots li button::before {
-        height: 4px;
-        @apply border rounded-md bg-white block font-sans
-    }
+  .SliderWrapper,
+  .SliderWrapper .slick-list,
+  .SliderWrapper .slick-track,
+  .SliderWrapper .slick-arrow,
+  .SliderWrapper .slick-slide div {
+    height: 100%;
+  }
 
-    .SliderWrapper,
-    .SliderWrapper .slick-list,
-    .SliderWrapper .slick-track,
-    .SliderWrapper .slick-arrow,
-    .SliderWrapper .slick-slide div{
-        height: 100%;
-    }
+  .toastCustom {
+    @apply text-sm;
+  }
 
-    .toastCustom {
-        @apply text-sm
+  @keyframes toRight {
+    from {
+      transform: translateX(-100%);
+      opacity: 0.7;
     }
+    to {
+      transform: translateX(0%);
+      opacity: 1;
+    }
+  }
 
-    @keyframes toRight{
-        from {
-            transform: translateX(-100%);
-            opacity: 0.7;
-        }
-        to {
-            transform: translateX(0%);
-            opacity: 1;
-        }
-    }
-    
-    .NavDrawerTransition { 
-       animation: toRight 0.3s ease-in;
-    }
+  .NavDrawerTransition {
+    animation: toRight 0.3s ease-in;
+  }
+
+  .isHaveValue + .labelInputDynamic {
+    @apply translate-y-[-0.5rem]
+    scale-[0.85]
+    origin-top-left
+    transition-transform;
+  }
+
+  .inputPeer:focus + .labelInputDynamic {
+    @apply translate-y-[-0.5rem]
+    scale-[0.85]
+    origin-top-left
+    transition-transform
+    text-[#2579f2];
+  }
+
+  .selectCustomArrow {
+    background: url("data:image/svg+xml,<svg height='10px' width='10px' viewBox='0 0 16 16' fill='%23000000' xmlns='http://www.w3.org/2000/svg'><path d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/></svg>") no-repeat;
+    background-position: calc(100% - 0.75rem) center !important;
+    -moz-appearance:none !important;
+    -webkit-appearance: none !important; 
+    appearance: none !important;
+    padding-right: 2rem !important
+  }
 }
