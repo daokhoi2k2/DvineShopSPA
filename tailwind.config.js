@@ -35,10 +35,9 @@ module.exports = {
       boxShadow: {
         '2w': '0 0px 0px 2px #2579f2',
       },
-
       backgroundImage: {
         'arrowDown': `url("assets/svg/arrowDown.svg")`,
-      }
+      },
     },
   },
   plugins: [],

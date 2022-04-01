@@ -37,6 +37,9 @@ const reducer = (state: IConfig = initialState, action: any) => {
       case types.SET_AUTH_MODAL_BOX:
         draft.AuthModalBox = action.payload;
         break;
+      case types.TOGGLE_ADMIN_NAV_DRAWER:
+        draft.isAdminNavDrawer = !state.isAdminNavDrawer;
+        break;
       case types.SET_ADMIN_NAV_DRAWER:
         draft.isAdminNavDrawer = action.payload;
         break;
@@ -44,44 +47,6 @@ const reducer = (state: IConfig = initialState, action: any) => {
   });
 
   return result;
-
-  /* Trước khi dùng ImmerJS thì dùng Destructuring ES6 return sẽ rất dài  */
-
-  // switch (action.type) {
-  //   case types.TOGGLE_NAV_DRAWER:
-  //     return {
-  //       ...state,
-  //       isNavDrawer: !state.isNavDrawer,
-  //     };
-  //   case types.SET_NAV_DRAWER:
-  //     return {
-  //       ...state,
-  //       isNavDrawer: action.payload,
-  //     };
-  //   case types.TOGGLE_AUTH_MODAL_BOX:
-  //     console.log("Toggle auth modal box");
-  //     return {
-  //       ...state,
-  //       AuthModalBox: {
-  //         ...state.AuthModalBox,
-  //         isShow: !state.AuthModalBox.isShow,
-  //       },
-  //     };
-  //   case types.SET_AUTH_MODAL_BOX:
-  //     // Khi không dùng emmerjs return sẽ trở nên dài dòng
-  //     // Lưu ý khi mutate state sẽ không render lại UI
-  //     return {
-  //       ...state,
-  //       AuthModalBox: {
-  //         ...state.AuthModalBox,
-  //         ...action.payload,
-  //       },
-  //     };
-
-  //   default:
-  //     // console.error("Invalid action")
-  //     return state;
-  // }
 };
 
 export default reducer;

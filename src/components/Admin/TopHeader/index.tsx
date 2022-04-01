@@ -1,5 +1,7 @@
 import { MoreIcon, NextArrow } from "designs/icons/Drawer";
 import React from "react";
+import { useDispatch } from "react-redux";
+import { toggleAdminNavDrawer } from "redux/actions/config";
 import {
   BreadCumb,
   MainBreadCumb,
@@ -9,17 +11,27 @@ import {
   UIControl,
 } from "./styles";
 
-const TopHeader: React.FC = () => {
+interface BreadCumb {
+  subBreadCumb: string;
+  mainBreadCumb: string;
+}
+
+const TopHeader: React.FC<BreadCumb> = ({subBreadCumb, mainBreadCumb}) => {
+  const dispatch = useDispatch();
+
+  const handleToggleAdminDrawer = () => {
+    dispatch(toggleAdminNavDrawer())
+  }
   return (
     <TopHeaderWrapper>
       <UIControl>
-        <ShowMoreBtn>
+        <ShowMoreBtn onClick={handleToggleAdminDrawer}>
           <MoreIcon className="w-[20px] h-[20px]" />
         </ShowMoreBtn>
         <BreadCumb>
-          <SubBreadCumb>Bảng điều khiển</SubBreadCumb>
+          <SubBreadCumb>{subBreadCumb}</SubBreadCumb>
             <NextArrow className="h-[20px] w-[20px] scale-50 opacity-50" />
-          <MainBreadCumb>Tổng quan</MainBreadCumb>
+          <MainBreadCumb>{mainBreadCumb}</MainBreadCumb>
         </BreadCumb>
       </UIControl>
     </TopHeaderWrapper>

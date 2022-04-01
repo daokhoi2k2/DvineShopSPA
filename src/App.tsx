@@ -9,6 +9,7 @@ import OrderHistory from "pages/OrderHistory";
 import Wishlist from "pages/Wishlist";
 import Security from "pages/Security";
 import Overview from "pages/Admin/Overview";
+import ProductAdmin from "pages/Admin/Product";
 
 const App: React.FC = () => {
   useEffect(() => {
@@ -21,12 +22,12 @@ const App: React.FC = () => {
         <Route path="/" element={<Home />} />
         <Route path="/:hash_name" element={<ProductDetail />} />
         <Route path="/search" element={<Search />} />
-        <Route path="/admin" element={<div>Hello World</div>} />
         <Route path="/user/profile" element={<Profile />} />
         <Route path="/user/orders" element={<OrderHistory />} />
         <Route path="/user/wishlist" element={<Wishlist />} />
         <Route path="/user/security" element={<Security />} />
         <Route path="/admin/" element={<Overview />} />
+        <Route path="/admin/product" element={<ProductAdmin />} />
       </Routes>
       <ToastContainer
         position="bottom-right"

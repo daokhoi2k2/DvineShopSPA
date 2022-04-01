@@ -4,7 +4,7 @@ import React from "react";
 
 import { Container, Layout, Wrapper } from "./styles";
 
-const Overview: React.FC = () => {
+const ProductAdmin: React.FC = () => {
 
 
   return (
@@ -14,7 +14,7 @@ const Overview: React.FC = () => {
           
         </NavDrawer>
         <Container>
-          <TopHeader subBreadCumb="Bảng điều khiển" mainBreadCumb="Tổng quan">
+          <TopHeader subBreadCumb="Bảng điều khiển" mainBreadCumb="Sản phẩm">
 
           </TopHeader>
         </Container>
@@ -23,4 +23,4 @@ const Overview: React.FC = () => {
   );
 };
 
-export default Overview;
+export default ProductAdmin;

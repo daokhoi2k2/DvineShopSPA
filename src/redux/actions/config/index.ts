@@ -24,6 +24,10 @@ export const setAuthModalBox = (payload: IAuthModalBox) => ({
     payload
 })
 
+export const toggleAdminNavDrawer = () => ({
+    type: types.TOGGLE_ADMIN_NAV_DRAWER,
+})
+
 export const setAdminNavDrawer = (payload: boolean) => ({
     type: types.SET_ADMIN_NAV_DRAWER,
     payload

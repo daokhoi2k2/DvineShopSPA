@@ -34,6 +34,8 @@ export { ReactComponent as ShareIcon } from "assets/svg/share.svg";
 export { ReactComponent as ArrowDownIcon } from "assets/svg/arrowDown.svg";
 export { ReactComponent as FilterIcon } from "assets/svg/filter.svg";
 export { ReactComponent as ClipboardIcon } from "assets/svg/clipboard.svg";
+export { ReactComponent as ProductIcon } from "assets/svg/product.svg";
+export { ReactComponent as GridIcon } from "assets/svg/grid.svg";
 
 
 export { ReactComponent as FCPhone } from "assets/svg/Nap-thesvg-30724.svg";
