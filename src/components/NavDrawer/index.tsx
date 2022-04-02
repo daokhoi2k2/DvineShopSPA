@@ -25,7 +25,7 @@ import {
 const NavDrawer: React.FC = () => {
   const isNavDrawer = useSelector((state: RootState) => state.config.isNavDrawer);
   const dispatch = useDispatch();
-
+  
   const handleCloseNavDrawer = () => {
     dispatch(setNavDrawer(false));
   };
