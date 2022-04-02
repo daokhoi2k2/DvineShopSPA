@@ -9,8 +9,9 @@ export const NavDrawerWrapper = styled.div<{ isAdminDrawerNav: any }>(({ isAdmin
     z-30
     bg-white
     transition[width ease-in 100ms]
+    lg:absolute
     shadow-md`,
-  isAdminDrawerNav ? tw`` : tw`w-[64px]`,
+  isAdminDrawerNav ? tw`` : tw`w-[64px] min-w-0 lg:w-[0]`,
 ]);
 
 export const LogoWrapper = styled.div<{ isAdminDrawerNav: any }>(({ isAdminDrawerNav }) => [

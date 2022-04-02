@@ -1,4 +1,3 @@
-import { type } from "os";
 import * as types from "redux/types/config";
 import produce from "immer";
 
@@ -11,6 +10,7 @@ export interface IConfig {
   isNavDrawer: boolean;
   AuthModalBox: IAuthModalBox;
   isAdminNavDrawer: boolean;
+  isDialogModal: boolean;
 }
 
 const initialState: IConfig = {
@@ -20,6 +20,7 @@ const initialState: IConfig = {
     isShow: false,
     boxName: "login",
   },
+  isDialogModal: false,
 };
 
 const reducer = (state: IConfig = initialState, action: any) => {
@@ -42,6 +43,9 @@ const reducer = (state: IConfig = initialState, action: any) => {
         break;
       case types.SET_ADMIN_NAV_DRAWER:
         draft.isAdminNavDrawer = action.payload;
+        break;
+      case types.SET_DIALOG_MODAL:
+        draft.isDialogModal = action.payload;
         break;
     }
   });

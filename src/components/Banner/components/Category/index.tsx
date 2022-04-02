@@ -1,82 +1,35 @@
-import {
-  GameIcon,
-  GooglePlayIcon,
-  OriginIcon,
-  PubgIcon,
-  SignalIcon,
-  SteamIcon,
-  SteamWalletIcon,
-  StudyIcon,
-  WorkIcon,
-  XboxIcon,
-} from "designs/icons/Drawer";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllCategories } from "redux/actions/category";
+import { RootState } from "redux/reducers";
 import { CategoryItem, CategoryList, CategoryWrapper, CateIco, CateText } from "./style";
 
 const Category: React.FC = () => {
+  const categories = useSelector((state:RootState) => state.category.categories);
+  const dispatch = useDispatch();
+  // const getAllCategories = useSelector
+  useEffect(() => {
+    dispatch(getAllCategories("HELLO"))
+  }, [])
+  // useEffect(() => {
+  //   getAllCategoryService().then((res: any) => {
+  //     setCategories(res.data)
+  //   })
+  // }, []);
+
   return (
     <CategoryWrapper>
       <CategoryList>
-        <CategoryItem>
-          <CateIco>
-            <GameIcon className="w-[21px] h-[17.5px]"></GameIcon>
-          </CateIco>
-          <CateText>Giải trí</CateText>
-        </CategoryItem>
-        <CategoryItem>
-          <CateIco>
-            <WorkIcon className="w-[21px] h-[17.5px]"></WorkIcon>
-          </CateIco>
-          <CateText>Làm việc</CateText>
-        </CategoryItem>
-        <CategoryItem>
-          <CateIco>
-            <StudyIcon className="w-[21px] h-[17.5px]"></StudyIcon>
-          </CateIco>
-          <CateText>Học tập</CateText>
-        </CategoryItem>
-        <CategoryItem>
-          <CateIco>
-            <SteamIcon className="w-[21px] h-[17.5px]"></SteamIcon>
-          </CateIco>
-          <CateText>Game Steam</CateText>
-        </CategoryItem>
-        <CategoryItem>
-          <CateIco>
-            <OriginIcon className="w-[21px] h-[17.5px]"></OriginIcon>
-          </CateIco>
-          <CateText>Game Origin</CateText>
-        </CategoryItem>
-        <CategoryItem>
-          <CateIco>
-            <PubgIcon className="w-[21px] h-[17.5px]"></PubgIcon>
-          </CateIco>
-          <CateText>PUBG</CateText>
-        </CategoryItem>
-        <CategoryItem>
-          <CateIco>
-            <SteamWalletIcon className="w-[21px] h-[17.5px]"></SteamWalletIcon>
-          </CateIco>
-          <CateText>Steam Wallet</CateText>
-        </CategoryItem>
-        <CategoryItem>
-          <CateIco>
-            <SignalIcon className="w-[21px] h-[17.5px]"></SignalIcon>
-          </CateIco>
-          <CateText>Gói Data Mobile</CateText>
-        </CategoryItem>
-        <CategoryItem>
-          <CateIco>
-            <GooglePlayIcon className="w-[21px] h-[17.5px]"></GooglePlayIcon>
-          </CateIco>
-          <CateText>Google Play, iTunes</CateText>
-        </CategoryItem>
-        <CategoryItem>
-          <CateIco>
-            <XboxIcon className="w-[21px] h-[17.5px]"></XboxIcon>
-          </CateIco>
-          <CateText>Xbox Gift Card</CateText>
-        </CategoryItem>
+        {categories.map((item: any) => {
+          return (
+            <CategoryItem key={item?.title}>
+              <CateIco>
+                <img src={item?.icon} className="w-[21px] h-[17.5px]" alt={item?.title} />
+              </CateIco>
+              <CateText>{item?.title}</CateText>
+            </CategoryItem>
+          );
+        })}
       </CategoryList>
     </CategoryWrapper>
   );

@@ -12,6 +12,8 @@ export const ShowMoreBtn = tw.div`
     items-center
     h-full
     cursor-pointer
+    lg:order-2
+    lg:mr-5
 `;
 
 export const UIControl = tw.div`
@@ -19,6 +21,7 @@ export const UIControl = tw.div`
     h-full
     gap-x-3
     ml-3
+    lg:justify-between
 `;
 
 export const BreadCumb = tw.div`

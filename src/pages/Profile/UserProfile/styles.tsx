@@ -28,11 +28,12 @@ export const Title = tw.h3`
 export const ListInfo = tw.div`
     flex
     flex-wrap
+    gap-x-1
 `;
 
 export const InfoItem = tw.div`
-    flex-basis[25%]
-    w-[25%]
+    flex-basis[24%]
+    w-[24%]
 
     sm:flex-basis[100%]
     sm:w-[100%]

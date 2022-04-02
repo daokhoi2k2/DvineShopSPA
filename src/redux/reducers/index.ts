@@ -1,9 +1,10 @@
 import { combineReducers } from "redux";
 import configReducer from "./config";
+import categoReducer from "./category";
 
 export const rootReducer = combineReducers({
-  config: configReducer
-  // auth: authReducer,
+  config: configReducer,
+  category: categoReducer
 });
 
 // Yêu cầu trả về redux của typescript
