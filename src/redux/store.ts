@@ -30,19 +30,22 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 // Dùng 1 action khác để dispatch lấy kết quả đế tránh vòng lặp vô hạn khi
 // dispatch => middleware => dispatch lại cái cũ => middleware , .....
-const print1 = (store:any) => {
+const handleAsyncLogic = (store:any) => {
   return (next:any) => {
     return async (action: any) => {
-      if(action.type === GET_ALL_CATEGORIES) {
-        const res:any = await getAllCategoryService()
-        return store.dispatch(getAllCategoriesSuccess(res.data));
+      if(typeof action === 'function') {
+          // Next sẽ là store.dispatch nếu đây là middleware cuối cùng 
+          // Nên dùng action(next) vì có thể còn có middleware ở phía sau nếu dùng action(store.distpach) sẽ bỏ qua tất cả middleware ở phía dưới
+          return action(next)
       }
+
       return next(action);
     }
   }
 }
 
-const middlewareEnchancer = applyMiddleware(print1);
+
+const middlewareEnchancer = applyMiddleware(handleAsyncLogic);
 
 
 // Create store

@@ -1,10 +1,12 @@
 import { combineReducers } from "redux";
 import configReducer from "./config";
-import categoReducer from "./category";
+import categoryReducer from "./category";
+import productReducer from "./product";
 
 export const rootReducer = combineReducers({
   config: configReducer,
-  category: categoReducer
+  category: categoryReducer,
+  product: productReducer
 });
 
 // Yêu cầu trả về redux của typescript
