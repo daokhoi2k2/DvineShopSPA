@@ -18,12 +18,6 @@ const initialState = {
   data: [],
 };
 
-export const fetchProduct = () => async (dispatch: any) => {
-  const res:any = await getAllProductsServices();
-
-  dispatch(getAllProductsSuccess(res.data))
-}
-
 const reducer = (state = initialState, action: any) =>
   produce(state, (draft) => {
     switch (action.type) {

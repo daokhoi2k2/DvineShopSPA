@@ -1,8 +1,8 @@
-import Header from "components/Header";
-import UserNav from "components/UserNav";
-import React from "react";
-import { Container, UserInner, UserWrapper } from "./styles";
-import UserOrder from "./UserOrder";
+import Header from 'components/Header';
+import UserNav from 'components/UserNav';
+import React from 'react';
+import { Container, UserInner, UserWrapper } from './styles';
+import UserOrder from './UserOrder';
 // import UserProfile from "./UserProfile";
 
 const OrderHistory = () => {
@@ -12,9 +12,7 @@ const OrderHistory = () => {
       <UserWrapper>
         <UserInner>
           <UserNav></UserNav>
-          <UserOrder>
-            ASD
-          </UserOrder>
+          <UserOrder>ASD</UserOrder>
           {/* <UserProfile></UserProfile> */}
         </UserInner>
       </UserWrapper>

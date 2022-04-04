@@ -1,6 +1,8 @@
-import { applyMiddleware, compose, createStore } from "redux";
-import { rootReducer } from "./reducers";
-import thunk from "redux-thunk"
+import { applyMiddleware, compose, createStore } from 'redux';
+import { rootReducer } from './reducers';
+import thunk from 'redux-thunk';
+import createSagaMiddleware from 'redux-saga'
+import rootSaga from './saga';
 
 // Use Redux Developer with Typescript
 declare global {
@@ -41,10 +43,20 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 //   };
 // };
 
+const sagaMiddleware = createSagaMiddleware();
+
+
+
 // const middlewareEnchancer = applyMiddleware(handleAsyncLogic);
-const middlewareEnchancer = applyMiddleware(thunk);
+const middlewareEnchancer = applyMiddleware(sagaMiddleware);
 
 // Create store
-const store = createStore(rootReducer, {}, composeEnhancers(middlewareEnchancer));
+const store = createStore(
+  rootReducer,
+  {},
+  composeEnhancers(middlewareEnchancer)
+);
+
+sagaMiddleware.run(rootSaga)
 
 export default store;

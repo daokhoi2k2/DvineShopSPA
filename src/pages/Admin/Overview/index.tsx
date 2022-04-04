@@ -1,13 +1,22 @@
-import NavDrawer from "components/Admin/NavDrawer";
-import TopHeader from "components/Admin/TopHeader";
-import Input from "components/Input";
-import Table, { IColumns } from "components/Table";
-import React, { useMemo, useState } from "react";
+import NavDrawer from 'components/Admin/NavDrawer';
+import TopHeader from 'components/Admin/TopHeader';
+import Input from 'components/Input';
+import Table, { IColumns } from 'components/Table';
+import React, { useMemo, useState } from 'react';
 
-import { AddBtnWrapper, AddButton, Container, Content, ControlUIWrapper, Layout, SearchInput, Wrapper } from "./styles";
+import {
+  AddBtnWrapper,
+  AddButton,
+  Container,
+  Content,
+  ControlUIWrapper,
+  Layout,
+  SearchInput,
+  Wrapper,
+} from './styles';
 
 const Overview: React.FC = () => {
-  const [searchValue, setSearchValue] = useState("");
+  const [searchValue, setSearchValue] = useState('');
 
   const onBlurSearch = () => {
     console.log(searchValue);
@@ -16,24 +25,24 @@ const Overview: React.FC = () => {
   const columns: IColumns[] = useMemo(
     () => [
       {
-        text: "Mã sản phẩm",
-        dataField: "masp",
+        text: 'Mã sản phẩm',
+        dataField: 'masp',
       },
       {
-        text: "Thumnail",
-        dataField: "thumbnail",
+        text: 'Thumnail',
+        dataField: 'thumbnail',
       },
       {
-        text: "Tên sản phẩm",
-        dataField: "namesp",
+        text: 'Tên sản phẩm',
+        dataField: 'namesp',
       },
       {
-        text: "Hiển thị",
-        dataField: "isShow",
+        text: 'Hiển thị',
+        dataField: 'isShow',
       },
       {
-        text: "Điều khiển",
-        dataField: "control",
+        text: 'Điều khiển',
+        dataField: 'control',
       },
     ],
     []
@@ -41,7 +50,7 @@ const Overview: React.FC = () => {
 
   const data = [
     {
-      thumbnail: "ASDC",
+      thumbnail: 'ASDC',
     },
   ];
 
@@ -50,7 +59,10 @@ const Overview: React.FC = () => {
       <Layout>
         <NavDrawer></NavDrawer>
         <Container className="w-full">
-          <TopHeader subBreadCumb="Bảng điều khiển" mainBreadCumb="Tổng quan"></TopHeader>
+          <TopHeader
+            subBreadCumb="Bảng điều khiển"
+            mainBreadCumb="Tổng quan"
+          ></TopHeader>
           <Content>
             <ControlUIWrapper>
               <SearchInput>
@@ -67,17 +79,15 @@ const Overview: React.FC = () => {
               </AddBtnWrapper>
             </ControlUIWrapper>
             <Table columns={columns} page={1} totalSize={10}>
-              {
-                data.map((item) => [
-                  {
-                    thumbnail: <h1>{item.thumbnail}</h1>,
-                    masp: "Admin Duy",
-                    namesp: "Game of Thrones",
-                    isShow: true,
-                    control: "asd",
-                  }
-                ])
-              }
+              {data.map((item) => [
+                {
+                  thumbnail: <h1>{item.thumbnail}</h1>,
+                  masp: 'Admin Duy',
+                  namesp: 'Game of Thrones',
+                  isShow: true,
+                  control: 'asd',
+                },
+              ])}
             </Table>
           </Content>
         </Container>

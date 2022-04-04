@@ -1,25 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllCategories } from "redux/actions/category";
-import { getAllProducts } from "redux/actions/product";
 import { RootState } from "redux/reducers";
-import { fetchCategories } from "redux/reducers/category";
-import { fetchProduct } from "redux/reducers/product";
-import { getAllProductsServices } from "services/product";
 import { CategoryItem, CategoryList, CategoryWrapper, CateIco, CateText } from "./style";
 
 const Category: React.FC = () => {
-  const categories = useSelector((state:RootState) => state.category.data);
+  const categories = useSelector((state:RootState) => state.category.allCategory);
   const dispatch = useDispatch();
   // const getAllCategories = useSelector
   useEffect(() => {
-    // dispatch(getAllCategories())
-    dispatch(fetchCategories())
+    dispatch(getAllCategories())
   }, [dispatch])
 
   useEffect(() => {
-    // dispatch((getAllProducts()))
-    dispatch(fetchProduct());
+    // dispatch(fetchProduct());
   }, [dispatch]);
 
   return (

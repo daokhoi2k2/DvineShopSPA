@@ -2,7 +2,7 @@ import { ClipboardIcon, ProductIcon } from "designs/icons/Drawer";
 import SVG from "designs/SVG";
 import React from "react";
 import { useSelector } from "react-redux";
-import { useLocation } from "react-router-dom";
+import { useLocation, useMatch, useResolvedPath } from "react-router-dom";
 import { RootState } from "redux/reducers";
 import {
   IconRoute,
@@ -39,7 +39,7 @@ const NavDrawer: React.FC = () => {
       </LogoWrapper>
       <Routes>
         {RouteList.map((route) => (
-          <RouteItem key={route.path} to={route.path} active={route.path === path.pathname ? "true" : "false"}>
+          <RouteItem key={route.path} to={route.path} active={route.path === path.pathname.toLowerCase() ? "true" : "false"}>
             <IconRoute>
               {route.icon}
             </IconRoute>

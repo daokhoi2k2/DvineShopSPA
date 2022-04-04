@@ -17,7 +17,7 @@ export const AuthDescription = tw.div`
     mb-3
 `;
 
-export const FormAuth = tw.div``;
+export const FormAuth = tw.form``;
 
 export const Input = tw.input`
     rounded-md

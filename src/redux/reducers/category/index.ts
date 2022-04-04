@@ -10,24 +10,24 @@ export interface ICategoryItem {
 }
 
 export interface ICategory {
-  data: ICategoryItem[];
+  allCategory: ICategoryItem[];
 }
 
 const initialState: ICategory = {
-  data: [],
+  allCategory: [],
 };
 
-export const fetchCategories = () => async (dispatch: any) => {
-  const res:any = await getAllCategoryService();
+// export const fetchCategories = () => async (dispatch: any) => {
+//   const res:any = await getAllCategoryService();
 
-  dispatch(getAllCategoriesSuccess(res.data));
-}
+//   dispatch(getAllCategoriesSuccess(res.data));
+// }
 
 const reducer = (state = initialState, action: any) =>
   produce(state, (draft) => {
     switch (action.type) {
       case types.GET_ALL_CATEGORIES_SUCCESS:
-        draft.data = action.payload
+        draft.allCategory = action.payload
         break;
     }
   });

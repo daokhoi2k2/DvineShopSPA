@@ -1,8 +1,18 @@
+import styled from "@emotion/styled";
+import { Link } from "react-router-dom";
 import tw from "twin.macro";
 
 export const MainControlWrapper = tw.div`
     flex
     gap-x-10
+`;
+
+export const AuthControlWrapper = tw.div`
+    w-52
+    flex
+    items-center
+
+    md:hidden
 `;
 
 export const LogoWrapper = tw.div`
@@ -20,7 +30,7 @@ export const LogoText = tw.h4`
     font-semibold
 `;
 
-// Search Style 
+// Search Style
 export const SearchWrapper = tw.div`
     flex
     flex-grow
@@ -48,7 +58,7 @@ export const AuthWrapper = tw.div`
     flex
     gap-x-2.5
 
-    md:hidden
+
 `;
 
 export const IconAuthWrapper = tw.div`
@@ -125,4 +135,83 @@ export const ShowMore = tw.div`
     cursor-pointer
 
     lg:flex
-`
+`;
+// User control
+export const UserControlWrapper = tw.div`
+    flex
+    items-center
+    gap-x-2
+    justify-center
+    w-full
+    cursor-pointer
+    relative
+`;
+
+export const UserAvatar = tw.div`
+    
+`;
+
+export const ImgAvatar = tw.img`
+    rounded-full
+`;
+
+export const UserText = tw.div`
+    text-white
+    font-bold
+    text-sm
+`;
+
+export const UserInfoWrapper = tw.div`
+    absolute
+    w-[168px]
+    bg-white
+    rounded-md
+    top-12
+    p-3
+    z-30
+    hidden
+    shadow-xl
+    group-hover:block
+
+    before:block
+    before:w-full
+    before:h-5
+    before:absolute
+    before:left-0
+    before:top-[-20px]
+`;
+
+// Balance
+export const Balance = tw.div`
+    p-2
+`;
+
+export const BalanceTitle = tw.div`
+    text-sm
+`;
+
+export const BalanceInfo = tw.div`
+    flex
+    items-center
+    gap-x-2
+`;
+
+export const BalanceMoney = tw.h3`
+    font-semibold
+    text-black
+`;
+
+export const BalanceIcon = tw.div``;
+
+export const NavList = tw.div``;
+
+export const NavItem = styled(Link)(() => [
+  tw`
+    text-sm
+    p-2
+    max-w-full
+    block
+    hover:bg-[#F3F4F6]
+    rounded-md
+`,
+]);
