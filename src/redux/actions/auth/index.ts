@@ -15,3 +15,11 @@ export const authLoginSuccess = (payload: IUser) => ({
     type: types.AUTH_LOGIN_SUCCESS,
     payload
 });
+
+export const authLogout = () => ({
+    type: types.AUTH_LOGOUT
+})
+
+export const authLogoutSuccess = () => ({
+    type: types.AUTH_LOGOUT_SUCCESS
+})

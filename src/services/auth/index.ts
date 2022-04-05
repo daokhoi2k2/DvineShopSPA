@@ -4,11 +4,14 @@ import axiosJWT from 'utils/axiosJWT';
 
 export const loginUserServices = async (user: ILogin) => {
   try {
-    const res = await axiosJWT.post(
+    const res = await axios.post(
       `${process.env.REACT_APP_API_URL}/auth/login`,
       {
         account: user.account,
         password: user.password,
+      },
+      {
+        withCredentials: true,
       }
     );
 
@@ -18,21 +21,35 @@ export const loginUserServices = async (user: ILogin) => {
   }
 };
 
-export const refreshTokenServices = async (refreshToken: string) => {
+export const refreshTokenServices = async () => {
   try {
     const res = await axios.post(
       `${process.env.REACT_APP_API_URL}/auth/refresh`,
       {},
       {
-        headers: {
-          "refreshToken": `${refreshToken}`,
-        },
+        withCredentials: true,
       }
     );
 
     return res;
   } catch (err: any) {
-    return err.response;
+    throw new Error('Error: ', err);
+  }
+};
+
+export const logoutUserServices = async () => {
+  try {
+    const res = await axiosJWT.post(
+      `${process.env.REACT_APP_API_URL}/auth/logout`,
+      {},
+      {
+        withCredentials: true,
+      }
+    );
+
+    return res;
+  } catch (err: any) {
+    throw new Error('Error: ', err);
   }
 };
 
@@ -43,7 +60,7 @@ export const getUserInfoCurrent = async (accessToken: string) => {
       {},
       {
         headers: {
-          "token": `Bearer ${accessToken}`,
+          token: `Bearer ${accessToken}`,
         },
       }
     );

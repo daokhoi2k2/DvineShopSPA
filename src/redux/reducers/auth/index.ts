@@ -36,6 +36,10 @@ const reducer = (state = initialState, action: any) =>
       case types.AUTH_LOGIN_FAILURE:
         draft.msgError = action.payload;
         break;
+      case types.AUTH_LOGOUT_SUCCESS:
+        draft.user = {};
+        draft.msgError = "";
+        break;
     }
   });
 

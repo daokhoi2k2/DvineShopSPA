@@ -12,7 +12,6 @@ import {
 const ProductDetail = () => {
   return (
     <Container>
-      <Header></Header>
       <ProductDetailWrapper>
         <ProductDetailInner>
           <MoreThumbNail></MoreThumbNail>

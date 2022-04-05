@@ -73,8 +73,6 @@ const Home = () => {
 
   return (
     <Container>
-      <Header>
-      </Header>
       <Banner>
       </Banner>
       <HotProductWrapper>

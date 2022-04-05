@@ -1,6 +1,7 @@
 import { applyMiddleware, compose, createStore } from 'redux';
 import { rootReducer } from './reducers';
-import thunk from 'redux-thunk';
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage'
 import createSagaMiddleware from 'redux-saga'
 import rootSaga from './saga';
 
@@ -11,6 +12,16 @@ declare global {
     __REDUX_DEVTOOLS_EXTENSION__?: typeof compose;
   }
 }
+
+// Config redux persist
+const persistConfig = {
+  key: 'auth',
+  storage,
+  whitelist: ['auth'] // Chỉ lưu localStorage auth
+}
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
 
 // preloadedState tham số thứ 2 của createStore sẽ có độ ưu tiện cao hơn initialState trong Reducer
 // Docs: https://redux.js.org/usage/structuring-reducers/initializing-state
@@ -52,11 +63,12 @@ const middlewareEnchancer = applyMiddleware(sagaMiddleware);
 
 // Create store
 const store = createStore(
-  rootReducer,
+  persistedReducer,
   {},
   composeEnhancers(middlewareEnchancer)
 );
 
 sagaMiddleware.run(rootSaga)
 
+export const persistor = persistStore(store);
 export default store;

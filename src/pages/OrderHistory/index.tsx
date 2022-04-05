@@ -8,7 +8,6 @@ import UserOrder from "./UserOrder";
 const OrderHistory = () => {
   return (
     <Container>
-      <Header></Header>
       <UserWrapper>
         <UserInner>
           <UserNav></UserNav>

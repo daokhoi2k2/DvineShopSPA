@@ -1,10 +1,11 @@
-import ReactDOM from "react-dom";
-import App from "./App";
-import { BrowserRouter } from "react-router-dom";
-import { Provider } from 'react-redux'
-import store from "redux/store"
-import { GlobalStyles } from "twin.macro";
-import "index.css"
+import ReactDOM from 'react-dom';
+import App from './App';
+import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import store, { persistor } from 'redux/store';
+import { GlobalStyles } from 'twin.macro';
+import { PersistGate } from 'redux-persist/integration/react';
+import 'index.css';
 
 // store.subscribe(() => {
 //   console.log("Change state", store.getState());
@@ -12,12 +13,13 @@ import "index.css"
 ReactDOM.render(
   // <React.StrictMode>
   <Provider store={store}>
-    <BrowserRouter>
-      <App />
-      <GlobalStyles /> {/* Fix tailwind transform variable css */}
-    </BrowserRouter>
+    <PersistGate loading={null} persistor={persistor}>
+      <BrowserRouter>
+        <App />
+        <GlobalStyles /> {/* Fix tailwind transform variable css */}
+      </BrowserRouter>
+    </PersistGate>
   </Provider>,
   // </React.StrictMode>
-  document.getElementById("root")
+  document.getElementById('root')
 );
-

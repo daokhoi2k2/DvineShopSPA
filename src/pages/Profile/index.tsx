@@ -7,7 +7,6 @@ import UserProfile from "./UserProfile";
 const Profile = () => {
   return (
     <Container>
-      <Header></Header>
       <UserWrapper>
         <UserInner>
           <UserNav></UserNav>

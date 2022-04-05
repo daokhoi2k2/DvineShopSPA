@@ -36,6 +36,7 @@ import {
 import { setAuthModalBox, toggleNavDrawer } from "redux/actions/config";
 import { RootState } from "redux/reducers";
 import { getAllCategories } from "redux/actions/category";
+import { authLogout } from "redux/actions/auth";
 
 const MainControl: React.FC = () => {
   const dispatch = useDispatch();
@@ -65,6 +66,10 @@ const MainControl: React.FC = () => {
 
   const handleClickLogo = () => {
     dispatch(getAllCategories());
+  }
+
+  const handleLogout = () => {
+    dispatch(authLogout())
   }
 
   return (
@@ -127,7 +132,7 @@ const MainControl: React.FC = () => {
                 <NavItem to="/user/profile">Quản lý tài khoản</NavItem>
                 <NavItem to="/user/orders">Lịch sử đơn hàng</NavItem>
                 <NavItem to="/user/wishlist">Sản phẩm yêu thích</NavItem>
-                <NavItem to="/">Đăng xuất</NavItem>
+                <NavItem onClick={handleLogout} to="#">Đăng xuất</NavItem>
               </NavList>
             </UserInfoWrapper>
           </UserControlWrapper>

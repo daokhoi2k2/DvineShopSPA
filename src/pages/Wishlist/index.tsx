@@ -9,7 +9,6 @@ import UserOrder from "./UserWishlist";
 const Wishlist = () => {
   return (
     <Container>
-      <Header></Header>
       <UserWrapper>
         <UserInner>
           <UserNav></UserNav>

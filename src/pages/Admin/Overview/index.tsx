@@ -55,44 +55,39 @@ const Overview: React.FC = () => {
   ];
 
   return (
-    <Wrapper>
-      <Layout>
-        <NavDrawer></NavDrawer>
-        <Container className="w-full">
-          <TopHeader
-            subBreadCumb="Bảng điều khiển"
-            mainBreadCumb="Tổng quan"
-          ></TopHeader>
-          <Content>
-            <ControlUIWrapper>
-              <SearchInput>
-                <Input
-                  title="Search"
-                  onChange={(e) => setSearchValue(e.target.value)}
-                  value={searchValue}
-                  name="search"
-                  onBlur={onBlurSearch}
-                />
-              </SearchInput>
-              <AddBtnWrapper>
-                <AddButton>Thêm</AddButton>
-              </AddBtnWrapper>
-            </ControlUIWrapper>
-            <Table columns={columns} page={1} totalSize={10}>
-              {data.map((item) => [
-                {
-                  thumbnail: <h1>{item.thumbnail}</h1>,
-                  masp: 'Admin Duy',
-                  namesp: 'Game of Thrones',
-                  isShow: true,
-                  control: 'asd',
-                },
-              ])}
-            </Table>
-          </Content>
-        </Container>
-      </Layout>
-    </Wrapper>
+    <Container className="w-full">
+      <TopHeader
+        subBreadCumb="Bảng điều khiển"
+        mainBreadCumb="Tổng quan"
+      ></TopHeader>
+      <Content>
+        <ControlUIWrapper>
+          <SearchInput>
+            <Input
+              title="Search"
+              onChange={(e) => setSearchValue(e.target.value)}
+              value={searchValue}
+              name="search"
+              onBlur={onBlurSearch}
+            />
+          </SearchInput>
+          <AddBtnWrapper>
+            <AddButton>Thêm</AddButton>
+          </AddBtnWrapper>
+        </ControlUIWrapper>
+        <Table columns={columns} page={1} totalSize={10}>
+          {data.map((item) => [
+            {
+              thumbnail: <h1>{item.thumbnail}</h1>,
+              masp: 'Admin Duy',
+              namesp: 'Game of Thrones',
+              isShow: true,
+              control: 'asd',
+            },
+          ])}
+        </Table>
+      </Content>
+    </Container>
   );
 };
 

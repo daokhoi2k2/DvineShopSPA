@@ -1,10 +1,12 @@
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
 import { getUserInfoCurrent, refreshTokenServices } from 'services/auth';
+import store from "redux/store";
+import { authLoginSuccess, authLogout } from 'redux/actions/auth';
+
 
 const axiosJWT = axios.create();
-
-interface IInfoJWT {
+export interface IInfoJWT {
   exp: number;
   iat: number;
   role: number;
@@ -13,17 +15,31 @@ interface IInfoJWT {
 }
 
 axiosJWT.interceptors.request.use(
-  async (request) => {
-    const accessToken: any = localStorage.getItem('accessToken');
-    const refreshToken: any = localStorage.getItem('refreshToken');
-    const decodedToken: IInfoJWT = jwt_decode(accessToken);
+  async (request:any) => {
+    const auth: any = store.getState().auth;
+    const decodedToken: IInfoJWT = jwt_decode(auth?.user.accessToken);
 
+    request.headers["token"] = "Bearer " + auth.user.accessToken;
     if (decodedToken.exp < Date.now() / 1000) {
-      const data = await refreshTokenServices(refreshToken);
-      data.accessToken && localStorage.setItem('accessToken', data.accessToken);
-      data.refreshToken &&
-        localStorage.setItem('refreshToken', data.refreshToken);
+      try {
+        const res:any = await refreshTokenServices();
+
+        const refreshUser = {
+          ...auth.user,
+          accessToken: res.data.accessToken
+        }
+
+        store.dispatch(authLoginSuccess(refreshUser))
+        // Nếu như refresh sẽ bỏ token mới vào request
+        request.headers["token"] = "Bearer " + res.data.accessToken;
+      } catch (err) {
+        // Catch case can't take new accessToken
+        store.dispatch(authLogout());
+        return Promise.reject(err); 
+      }
     }
+
+    // request.headers["token"] = "Bearer " + auth.user.accessToken;
 
     return request;
   },

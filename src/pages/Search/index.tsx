@@ -6,7 +6,6 @@ import { Container } from "./styles";
 const Search: React.FC = () => {
   return (
     <Container>
-      <Header></Header>
         {/* <SearchController>
             
         </SearchController> */}

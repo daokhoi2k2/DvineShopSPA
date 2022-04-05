@@ -8,7 +8,6 @@ import UserSecurity from "./UserSecurity";
 const Security = () => {
   return (
     <Container>
-      <Header></Header>
       <UserWrapper>
         <UserInner>
           <UserNav></UserNav>
