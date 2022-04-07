@@ -1,3 +1,4 @@
+import useAuth from 'hooks/useAuth';
 import Home from 'pages/Home';
 import React, { Component } from 'react';
 import { Navigate, Route, useNavigate } from 'react-router-dom';
@@ -8,15 +9,10 @@ export interface IRouteFC {
   restProps?: any;
 }
 
-const PrivateRoute: React.FC<IRouteFC> = (props) => {
-  const { isAuthenticated, component, ...restProps } = props;
-  const navigate = useNavigate();
-  console.log(component);
-  //   return <Route
-  //     {...restProps}
-  //     // element={isAuthenticated ? Component : navigate("/")}
-  //   ></Route>;
-  return <Route path="/test" element={<Home />} />;
-};
+function PrivateRoute({ children }: any) {
+  const auth:any = useAuth();
+
+  return auth.isAuthAdmin ? children : <Navigate to="/" />;
+}
 
 export default PrivateRoute;

@@ -1,8 +1,5 @@
-import axios from "axios";
 import produce from "immer";
-import { getAllProductsSuccess } from "redux/actions/product";
 import * as types from "redux/types/product";
-import { getAllProductsServices } from "services/product";
 
 // export interface IProductItem {
 //   _id: string;

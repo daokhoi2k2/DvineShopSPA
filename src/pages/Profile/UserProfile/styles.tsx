@@ -65,8 +65,8 @@ export const HrY = tw.div`border-l md:hidden ml-4`;
 
 export const AvatarWrapper = tw.div`flex gap-x-3`;
 
-export const AvatarContent = styled(Img)(() => [
-    tw`rounded-full w-36 h-36`
+export const AvatarContent = styled.img(() => [
+    tw`rounded-full w-36 h-36 border`
 ])
 
 export const AvatarButtonWrapper = tw.div`flex items-center`;
@@ -80,7 +80,7 @@ export const AvatarControlWrapper = tw.div`flex md:flex-col md:justify-center md
 // User Profile
 export const FormWrapper = tw.div``;
 
-export const FormList = tw.div`
+export const FormList = tw.form`
     mt-5
     w-80
 `;

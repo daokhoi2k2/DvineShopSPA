@@ -1,6 +1,12 @@
 import { toast } from 'react-toastify';
 import { call, put } from 'redux-saga/effects';
-import { authLoginFailure, authLoginSuccess, authLogout, authLogoutSuccess } from 'redux/actions/auth';
+import {
+  authLoginFailure,
+  authLoginSuccess,
+  authLogout,
+  authLogoutSuccess,
+  authRefreshuserSuccess,
+} from 'redux/actions/auth';
 import { setAuthModalBox } from 'redux/actions/config';
 import * as services from 'services/auth';
 import Swal from 'sweetalert2';
@@ -36,11 +42,24 @@ export function* logoutUserSaga(): any {
     const response = yield call(services.logoutUserServices);
 
     if (response.status === 200) {
-      yield put(authLogoutSuccess())
-      toast.success("Đăng xuất thành công");
+      yield put(authLogoutSuccess());
+      toast.success('Đăng xuất thành công');
     }
   } catch (err) {
     console.error('Lỗi', err);
-    toast.error("Đăng xuất thất bại");
+    // Catch error don't have refreshToken or server return fail
+    toast.success('Đăng xuất thành công');
+    // toast.error("Đăng xuất thất bại");
   }
+}
+
+export function* authRefreshUserSaga(): any {
+  try {
+    const response = yield call(services.getUserInfoCurrent);
+
+    console.log("Response: ", response);
+    if (response.status === 200) {
+      yield put(authRefreshuserSuccess(response?.data));
+    }
+  } catch (err) {}
 }

@@ -3,6 +3,15 @@ export interface ILogin {
     password: string;
 }
 
-export interface IUser { 
-    // accessToken
-}
+export interface IUserInfo {
+    _id: string;
+    username: string;
+    email: string;
+    balance: number;
+    accumulated: number;
+    role: number;
+    createdAt: string;
+    updatedAt: string;
+    membership: number;
+  }
+  

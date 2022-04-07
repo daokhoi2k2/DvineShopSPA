@@ -6,6 +6,8 @@ import store, { persistor } from 'redux/store';
 import { GlobalStyles } from 'twin.macro';
 import { PersistGate } from 'redux-persist/integration/react';
 import 'index.css';
+import 'flowbite';
+
 
 // store.subscribe(() => {
 //   console.log("Change state", store.getState());

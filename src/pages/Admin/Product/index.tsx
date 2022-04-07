@@ -96,6 +96,7 @@ const ProductAdmin: React.FC = () => {
           ])}
         </Table>
       </Content>
+      <Dialog />
     </Container>
   );
 };

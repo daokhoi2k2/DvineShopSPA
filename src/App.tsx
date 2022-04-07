@@ -33,9 +33,24 @@ const App: React.FC = () => {
             <Route path="security" element={<Security />} />
           </Route>
         </Route>
-        <Route path="/admin" element={<LayoutAdmin />}>
+        <Route
+          path="/admin"
+          element={
+            <PrivateRoute>
+              <LayoutAdmin />
+            </PrivateRoute>
+          }
+        >
           <Route index element={<Overview />} />
           <Route path="product" element={<ProductAdmin />} />
+          <Route
+            path="private"
+            element={
+              <PrivateRoute>
+                <div>Hello world</div>
+              </PrivateRoute>
+            }
+          />
         </Route>
       </Routes>
       <ToastContainer

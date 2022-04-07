@@ -1,5 +1,4 @@
 import NavDrawer from 'components/Admin/NavDrawer';
-import React from 'react';
 import { Outlet } from 'react-router-dom';
 import { Container, Layout, Wrapper } from './styles';
 

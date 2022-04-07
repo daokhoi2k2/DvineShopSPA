@@ -1,9 +1,9 @@
-import styled from "@emotion/styled";
-import tw from "twin.macro";
+import styled from '@emotion/styled';
+import tw from 'twin.macro';
 
 export const Title = tw.div`text-3xl font-semibold`;
 
-export const DialogWrapper = styled.div<{isOpen: boolean}>(({isOpen}) => [
+export const DialogWrapper = styled.div<{ isOpen: boolean }>(({ isOpen }) => [
   tw`
     fixed
     top-0
@@ -16,7 +16,7 @@ export const DialogWrapper = styled.div<{isOpen: boolean}>(({isOpen}) => [
     justify-center
     items-center
 `,
-    !isOpen ?  tw`hidden`: ""
+  !isOpen ? tw`hidden` : '',
 ]);
 
 export const Layout = tw.div`
@@ -24,12 +24,15 @@ export const Layout = tw.div`
     rounded
     p-5
     max-w-[860px]
+    max-h-[80%]
+    overflow-y-auto
     w-full
 `;
 
 export const GroupRow = tw.div`
     flex
     gap-x-3
+    mt-3
 `;
 
 export const DialogHeader = tw.div`
@@ -45,3 +48,17 @@ export const CloseDialog = tw.div`
 `;
 
 export const DialogBody = tw.div``;
+
+export const SubmitBtn = tw.button`
+    bg-blue-700 hover:bg-blue-800
+    py-2
+    px-3
+    rounded-md
+    text-white
+    text-sm
+    font-semibold
+    block
+    ml-auto
+`;
+
+export const CheckBox = tw.input``;

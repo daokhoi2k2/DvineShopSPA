@@ -10,9 +10,7 @@ import {
   Container,
   Content,
   ControlUIWrapper,
-  Layout,
   SearchInput,
-  Wrapper,
 } from './styles';
 
 const Overview: React.FC = () => {

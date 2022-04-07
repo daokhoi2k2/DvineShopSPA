@@ -1,7 +1,5 @@
 import produce from "immer";
-import { getAllCategoriesSuccess } from "redux/actions/category";
 import * as types from "redux/types/category";
-import { getAllCategoryService } from "services/category";
 
 export interface ICategoryItem {
   _id: string;

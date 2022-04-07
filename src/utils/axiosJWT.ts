@@ -2,7 +2,7 @@ import axios from 'axios';
 import jwt_decode from 'jwt-decode';
 import { getUserInfoCurrent, refreshTokenServices } from 'services/auth';
 import store from "redux/store";
-import { authLoginSuccess, authLogout } from 'redux/actions/auth';
+import { authLoginSuccess, authLogout, authLogoutSuccess } from 'redux/actions/auth';
 
 
 const axiosJWT = axios.create();
@@ -33,8 +33,9 @@ axiosJWT.interceptors.request.use(
         // Nếu như refresh sẽ bỏ token mới vào request
         request.headers["token"] = "Bearer " + res.data.accessToken;
       } catch (err) {
+        // Catch case user remove refreshToken in browser
         // Catch case can't take new accessToken
-        store.dispatch(authLogout());
+        store.dispatch(authLogoutSuccess());
         return Promise.reject(err); 
       }
     }

@@ -23,7 +23,7 @@ export const loginUserServices = async (user: ILogin) => {
 
 export const refreshTokenServices = async () => {
   try {
-    const res = await axios.post(
+    const res = await axiosJWT.post(
       `${process.env.REACT_APP_API_URL}/auth/refresh`,
       {},
       {
@@ -53,16 +53,11 @@ export const logoutUserServices = async () => {
   }
 };
 
-export const getUserInfoCurrent = async (accessToken: string) => {
+export const getUserInfoCurrent = async () => {
   try {
-    const res = await axios.post(
+    const res = await axiosJWT.post(
       `${process.env.REACT_APP_API_URL}/auth/getCurrentUserInfo`,
       {},
-      {
-        headers: {
-          token: `Bearer ${accessToken}`,
-        },
-      }
     );
 
     return res;

@@ -2,7 +2,7 @@ import { CartIcon, MoreIcon, PersonIcon, PlusIcon, SearchIcon } from "designs/ic
 import SVG from "designs/SVG";
 import React from "react";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   AuthControlWrapper,
   AuthWrapper,
@@ -34,14 +34,12 @@ import {
   UserText,
 } from "./styles";
 import { setAuthModalBox, toggleNavDrawer } from "redux/actions/config";
-import { RootState } from "redux/reducers";
-import { getAllCategories } from "redux/actions/category";
-import { authLogout } from "redux/actions/auth";
+import useAuth, { IUseAuth } from "hooks/useAuth";
 
 const MainControl: React.FC = () => {
   const dispatch = useDispatch();
-  const user:any = useSelector((state: RootState) => state.auth.user);
-
+  const account:IUseAuth = useAuth();
+  console.log("Account", account)
   const handleToggleNavDrawer = () => {
     dispatch(toggleNavDrawer());
   };
@@ -63,13 +61,8 @@ const MainControl: React.FC = () => {
       })
     );
   };
-
-  const handleClickLogo = () => {
-    dispatch(getAllCategories());
-  }
-
   const handleLogout = () => {
-    dispatch(authLogout())
+    account.logout();
   }
 
   return (
@@ -77,7 +70,7 @@ const MainControl: React.FC = () => {
       <Link to="/" className="lg:hidden">
         <LogoWrapper>
           <SVG name="logo_divine_pure_white" className="w-[49px] h-[49px]"></SVG>
-          <LogoText onClick={handleClickLogo}>Divine Shop</LogoText>
+          <LogoText>Divine Shop</LogoText>
         </LogoWrapper>
       </Link>
       {/* Show when screen is tablet or mobile */}
@@ -92,7 +85,7 @@ const MainControl: React.FC = () => {
         </ButtonSearch>
       </SearchWrapper>
       <AuthControlWrapper className="group">
-        {!user.userInfo ? (
+        {!account.isAuth ? (
           <AuthWrapper>
             <IconAuthWrapper onClick={showLoginRegisterModalBox}>
               <IconAuth>
@@ -110,10 +103,10 @@ const MainControl: React.FC = () => {
             <UserAvatar>
               <ImgAvatar
                 className="w-[42px] h-[42px]"
-                src="https://cdn.divineshop.vn/image/avatar/48384.jpg?hash=1604888765"
+                src={require("../../../../assets/images/trend-avatar-1-73987.jpg")}
               />
             </UserAvatar>
-            <UserText>{user.userInfo.username}</UserText>
+            <UserText>{account.accountInfo.username}</UserText>
             <ImgAvatar
               className="w-[21px] h-[21px]"
               src="https://cdn.divineshop.vn/image/catalog/image_compression/badge-gold-2-50px.png"
