@@ -18,6 +18,7 @@ export const RowItem = tw.tr``;
 export const Icolumn = tw.td`
     py-4
     px-6
+    whitespace-nowrap
 `;
 
 export const Theader = tw.thead`

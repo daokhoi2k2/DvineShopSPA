@@ -1,5 +1,7 @@
 import axios from 'axios';
+import { setProgressPercentUpdateProduct } from 'redux/actions/config';
 import axiosJWT from 'utils/axiosJWT';
+import store from "redux/store";
 
 export const getAllProductsServices = async () => {
   try {
@@ -18,6 +20,10 @@ export const addProductServices = async (payload: any) => {
       {
         headers: {
             "Content-Type": "multipart/form-data; boundary=something"
+        },
+        onUploadProgress: (e) => {
+          const percent = Math.round((e.loaded / e.total) * 100) || 0;
+          store.dispatch(setProgressPercentUpdateProduct(percent));
         }
       }
     );

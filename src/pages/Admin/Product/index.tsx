@@ -59,12 +59,6 @@ const ProductAdmin: React.FC = () => {
     []
   );
 
-  const data = [
-    {
-      thumbnail: 'ASDC',
-    },
-  ];
-
   const handleOpenDialog = () => {
     dispatch(setDialogModal(true));
   };

@@ -37,3 +37,8 @@ export const setDialogModal = (payload: boolean) => ({
     type: types.SET_DIALOG_MODAL,
     payload
 })
+
+export const setProgressPercentUpdateProduct = (payload: number) => ({
+    type: types.SET_PROGRESS_PERCENT_UPDATE_PRODUCT,
+    payload
+})

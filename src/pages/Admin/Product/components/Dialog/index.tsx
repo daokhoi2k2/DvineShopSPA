@@ -14,17 +14,22 @@ import {
   DialogWrapper,
   GroupRow,
   Layout,
+  ResetBtn,
   SubmitBtn,
   Title,
 } from './styles';
 import Checkbox from 'components/Checkbox';
 import FileUpload from 'components/FileUpload';
 import { addProduct } from 'redux/actions/product';
+import ProgressBar from 'components/ProgressBar';
 
 const Dialog = () => {
   const dispatch = useDispatch();
   const isOpenModal = useSelector(
     (state: RootState) => state.config.isDialogModal
+  );
+  const percentProgressAddProduct = useSelector(
+    (state: RootState) => state.config.progressPercentUpdateProduct
   );
 
   const handleCloseDialog = () => {
@@ -76,11 +81,11 @@ const Dialog = () => {
             }}
             validationSchema={validationSchema}
             onSubmit={async (values: any) => {
-              const formData:any = new FormData();
-              
+              const formData: any = new FormData();
+
               // Append all form field for formData
-              for(let key in values) {
-                formData.append(key, values[key])
+              for (let key in values) {
+                formData.append(key, values[key]);
               }
 
               dispatch(addProduct(formData));
@@ -92,7 +97,7 @@ const Dialog = () => {
                   <GroupRow>
                     <Input
                       name="code"
-                      className='w-full'
+                      className="w-full"
                       title="Mã sản phẩm (*)"
                       onChange={formik.handleChange}
                       onBlur={formik.handleBlur}
@@ -168,6 +173,8 @@ const Dialog = () => {
                       onChange={(e) =>
                         formik.setFieldValue('thumb_nail', e.target.files[0])
                       }
+                      isPreviewImg={true}
+                      value={formik.values.thumb_nail}
                     ></FileUpload>
                   </GroupRow>
                   <GroupRow>
@@ -179,7 +186,13 @@ const Dialog = () => {
                       isChecked={formik.values.status}
                     />
                   </GroupRow>
-                  <SubmitBtn type="submit">Thêm sản phẩm</SubmitBtn>
+                  <GroupRow className='justify-end'>
+                    <ResetBtn onClick={() => formik.resetForm()} type="reset">Hủy</ResetBtn>
+                    <SubmitBtn type="submit">Thêm sản phẩm</SubmitBtn>
+                  </GroupRow>
+                  <ProgressBar
+                    percent={percentProgressAddProduct}
+                  ></ProgressBar>
                 </Form>
               );
             }}

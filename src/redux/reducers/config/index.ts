@@ -11,6 +11,7 @@ export interface IConfig {
   AuthModalBox: IAuthModalBox;
   isAdminNavDrawer: boolean;
   isDialogModal: boolean;
+  progressPercentUpdateProduct: number;
 }
 
 const initialState: IConfig = {
@@ -21,6 +22,7 @@ const initialState: IConfig = {
     boxName: "login",
   },
   isDialogModal: false,
+  progressPercentUpdateProduct: 0,
 };
 
 const reducer = (state: IConfig = initialState, action: any) => {
@@ -46,6 +48,9 @@ const reducer = (state: IConfig = initialState, action: any) => {
         break;
       case types.SET_DIALOG_MODAL:
         draft.isDialogModal = action.payload;
+        break;
+      case types.SET_PROGRESS_PERCENT_UPDATE_PRODUCT: 
+        draft.progressPercentUpdateProduct = action.payload;
         break;
     }
   });

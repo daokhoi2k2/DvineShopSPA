@@ -23,7 +23,6 @@ export interface ITable {
 const Table: React.FC<ITable> = (props) => {
 
   const { columns, children } = props;
-  console.log("children", children)
   return (
     <Wrapper>
         <TableWrapper>

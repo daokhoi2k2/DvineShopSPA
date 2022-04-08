@@ -15,6 +15,7 @@ export const DialogWrapper = styled.div<{ isOpen: boolean }>(({ isOpen }) => [
     flex
     justify-center
     items-center
+    
 `,
   !isOpen ? tw`hidden` : '',
 ]);
@@ -27,6 +28,7 @@ export const Layout = tw.div`
     max-h-[80%]
     overflow-y-auto
     w-full
+    relative
 `;
 
 export const GroupRow = tw.div`
@@ -59,8 +61,16 @@ export const SubmitBtn = tw.button`
     text-white
     text-sm
     font-semibold
-    block
-    ml-auto
+    // ml-auto
+`;
+
+export const ResetBtn = tw.button`
+    py-2
+    px-3
+    rounded-md
+    text-white
+    font-semibold
+    bg-gray-500
 `;
 
 export const CheckBox = tw.input``;
