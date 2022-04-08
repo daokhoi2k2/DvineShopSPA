@@ -3,7 +3,8 @@ import category from './category';
 import auth from './auth';
 import user from './user';
 import location from './location';
+import product from './product';
 
 export default function* rootSaga() {
-  yield all([category(), auth(), user(), location()]);
+  yield all([category(), auth(), user(), location(), product()]);
 }

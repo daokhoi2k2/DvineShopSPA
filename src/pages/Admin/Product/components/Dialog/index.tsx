@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setDialogModal } from 'redux/actions/config';
 import { RootState } from 'redux/reducers';
 import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
 import * as yup from 'yup';
 import {
   CloseDialog,
@@ -20,7 +19,7 @@ import {
 } from './styles';
 import Checkbox from 'components/Checkbox';
 import FileUpload from 'components/FileUpload';
-import Tooltip from 'components/Tooltip';
+import { addProduct } from 'redux/actions/product';
 
 const Dialog = () => {
   const dispatch = useDispatch();
@@ -31,6 +30,27 @@ const Dialog = () => {
   const handleCloseDialog = () => {
     dispatch(setDialogModal(false));
   };
+
+  const validationSchema = yup.object().shape({
+    code: yup
+      .string()
+      .required('Bạn đang bỏ trống 1 trường bắt buộc')
+      .max(20, 'Ký tự tối đa cho phép là 20'),
+    name: yup
+      .string()
+      .required('Bạn đang bỏ trống 1 trường bắt buộc')
+      .min(6, 'Ký tự tối thiểu là 6'),
+    price: yup
+      .number()
+      .required('Bạn đang bỏ trống 1 trường bắt buộc')
+      .typeError('Giá trị nhập không phải là đơn vị tiền tệ'),
+    price_promotion: yup
+      .number()
+      .typeError('Giá trị nhập không phải là đơn vị tiền tệ'),
+    amount: yup.number(),
+    description: yup.string(),
+    status: yup.boolean(),
+  });
 
   return (
     <DialogWrapper isOpen={isOpenModal}>
@@ -44,7 +64,7 @@ const Dialog = () => {
         <DialogBody>
           <Formik
             initialValues={{
-              _id: '',
+              // _id: '',
               code: '',
               name: '',
               price: '',
@@ -54,28 +74,16 @@ const Dialog = () => {
               status: false,
               thumb_nail: '',
             }}
-            validationSchema={yup.object().shape({
-              code: yup
-                .string()
-                .required('Bạn đang bỏ trống 1 trường bắt buộc')
-                .max(10, 'Ký tự tối đa cho phép là 10'),
-              name: yup
-                .string()
-                .required('Bạn đang bỏ trống 1 trường bắt buộc')
-                .min(6, 'Ký tự tối thiểu là 6'),
-              price: yup
-                .number()
-                .required('Bạn đang bỏ trống 1 trường bắt buộc')
-                .typeError('Giá trị nhập không phải là đơn vị tiền tệ'),
-              price_promotion: yup
-                .number()
-                .typeError('Giá trị nhập không phải là đơn vị tiền tệ'),
-              amount: yup.number(),
-              description: yup.string(),
-              status: yup.boolean(),
-            })}
-            onSubmit={(values) => {
-              console.log('Formik', values);
+            validationSchema={validationSchema}
+            onSubmit={async (values: any) => {
+              const formData:any = new FormData();
+              
+              // Append all form field for formData
+              for(let key in values) {
+                formData.append(key, values[key])
+              }
+
+              dispatch(addProduct(formData));
             }}
           >
             {(formik) => {
@@ -84,6 +92,7 @@ const Dialog = () => {
                   <GroupRow>
                     <Input
                       name="code"
+                      className='w-full'
                       title="Mã sản phẩm (*)"
                       onChange={formik.handleChange}
                       onBlur={formik.handleBlur}
@@ -92,11 +101,7 @@ const Dialog = () => {
                       touched={formik.touched.code}
                       isTooltip={true}
                     />
-                    <Tooltip
-                      name="code"
-                      errorMsg={formik.errors.code}
-                      touched={formik.touched.code}
-                    />
+
                     <Input
                       className="w-full"
                       name="name"
@@ -107,11 +112,6 @@ const Dialog = () => {
                       errorMsg={formik.errors.name}
                       touched={formik.touched.name}
                       isTooltip={true}
-                    />
-                    <Tooltip
-                      name="name"
-                      errorMsg={formik.errors.name}
-                      touched={formik.touched.name}
                     />
                   </GroupRow>
                   <GroupRow>
@@ -126,11 +126,7 @@ const Dialog = () => {
                       touched={formik.touched.price}
                       isTooltip={true}
                     />
-                    <Tooltip
-                      name="price"
-                      errorMsg={formik.errors.price}
-                      touched={formik.touched.price}
-                    />
+
                     <Input
                       className="w-full"
                       name="price_promotion"
@@ -141,11 +137,6 @@ const Dialog = () => {
                       errorMsg={formik.errors.price_promotion}
                       touched={formik.touched.price_promotion}
                       isTooltip={true}
-                    />
-                    <Tooltip
-                      name="price_promotion"
-                      errorMsg={formik.errors.price_promotion}
-                      touched={formik.touched.price_promotion}
                     />
                     <Input
                       className="w-full"
@@ -175,7 +166,7 @@ const Dialog = () => {
                   <GroupRow>
                     <FileUpload
                       onChange={(e) =>
-                        formik.setFieldValue('file', e.target.files[0])
+                        formik.setFieldValue('thumb_nail', e.target.files[0])
                       }
                     ></FileUpload>
                   </GroupRow>

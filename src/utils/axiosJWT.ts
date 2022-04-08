@@ -21,7 +21,9 @@ axiosJWT.interceptors.request.use(
 
     request.headers["token"] = "Bearer " + auth.user.accessToken;
     if (decodedToken.exp < Date.now() / 1000) {
+      // console.log("hết hạn token")
       try {
+        // console.log("refresh Token")
         const res:any = await refreshTokenServices();
 
         const refreshUser = {
@@ -35,7 +37,11 @@ axiosJWT.interceptors.request.use(
       } catch (err) {
         // Catch case user remove refreshToken in browser
         // Catch case can't take new accessToken
-        store.dispatch(authLogoutSuccess());
+        console.error(err);
+
+        // Logout account when refreshToken and accessToken invalid
+        store.dispatch(authLogoutSuccess())
+        // store.dispatch(authLogoutSuccess());
         return Promise.reject(err); 
       }
     }

@@ -38,7 +38,6 @@ export function* registerUserSaga({ payload }: any): any {
 export function* updateUserSaga({ payload }: any): any {
   try {
     const response = yield call(services.updateUserServices, payload);
-
     if(response.status === 200) {
       yield put(authRefreshUser());
       toast.success("Cập nhật thông tin thành công");

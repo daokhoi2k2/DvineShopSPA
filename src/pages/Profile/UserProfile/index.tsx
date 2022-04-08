@@ -53,13 +53,13 @@ const UserProfile: React.FC = () => {
     },
     onSubmit: (values) => {
       const newUserInfo = values;
-      if(values.city === "-1") {
-        newUserInfo.district = "-1";
-        newUserInfo.ward = "-1";
+      if (values.city === '-1') {
+        newUserInfo.district = '-1';
+        newUserInfo.ward = '-1';
       }
 
-      if(values.district === "-1") {
-        newUserInfo.ward = "-1";
+      if (values.district === '-1') {
+        newUserInfo.ward = '-1';
       }
 
       dispatch(updateUser({ data: newUserInfo, id: userInfo?._id }));
@@ -68,17 +68,18 @@ const UserProfile: React.FC = () => {
   });
 
   useEffect(() => {
-    dispatch(getCityLocation());
+    if (auth.isAuth) {
+      dispatch(getCityLocation());
 
-    if(userInfo?.city !== "-1" && Object.keys(userInfo).length) {
-      dispatch(getAllDistrictByCity(userInfo?.city));
+      if (userInfo?.city && userInfo?.city !== '-1' && Object.keys(userInfo).length) {
+        dispatch(getAllDistrictByCity(userInfo?.city));
+      }
+
+      if (userInfo?.district && userInfo?.district !== '-1' && Object.keys(userInfo).length) {
+        dispatch(getAllWardByDistrict(userInfo?.district));
+      }
     }
-
-    if(userInfo?.district !== "-1" && Object.keys(userInfo).length) {
-      dispatch(getAllWardByDistrict(userInfo?.district));
-    }
-
-  }, [userInfo.city, userInfo.district]);
+  }, [userInfo?.city, userInfo?.district]);
 
   const fakeData = useMemo(
     () => [
@@ -231,6 +232,8 @@ const UserProfile: React.FC = () => {
               specifyFieldValue="matp"
               noneSelect={{ value: '-1', name: '-' }}
               onChangeDispatch={getAllDistrictByCity}
+              onChangeResetOtherValue={["ward", "district"]}
+              formik={formik}
             ></Select>
             <Select
               className="mt-5"
@@ -242,6 +245,8 @@ const UserProfile: React.FC = () => {
               specifyFieldValue="maqh"
               noneSelect={{ value: '-1', name: '-' }}
               onChangeDispatch={getAllWardByDistrict}
+              onChangeResetOtherValue={["ward"]}
+              formik={formik}
             ></Select>
             <Select
               name="ward"

@@ -39,7 +39,7 @@ import useAuth, { IUseAuth } from "hooks/useAuth";
 const MainControl: React.FC = () => {
   const dispatch = useDispatch();
   const account:IUseAuth = useAuth();
-  console.log("Account", account)
+  
   const handleToggleNavDrawer = () => {
     dispatch(toggleNavDrawer());
   };

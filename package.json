@@ -17,7 +17,6 @@
     "@types/react": "^17.0.40",
     "@types/react-dom": "^17.0.13",
     "axios": "^0.26.1",
-    "flowbite": "^1.4.1",
     "formik": "^2.2.9",
     "immer": "^9.0.12",
     "jwt-decode": "^3.1.2",

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ErrorMsg, InputTag, InputWrapper, LabelTag } from './styles';
+import { ErrorMsg, InputTag, InputWrapper, LabelTag, Tooltip } from './styles';
 
 interface IInput {
   title: string;
@@ -19,7 +19,7 @@ const Input: React.FC<IInput> = (props) => {
   const {
     title,
     value,
-    className,
+    className = '',
     name,
     defaultValue,
     errorMsg,
@@ -28,19 +28,9 @@ const Input: React.FC<IInput> = (props) => {
     ...rest
   } = props;
 
-  let toolTipAttr = {};
-
-  // If have props isTooltip then add attribute data-tooltip-target for input
-  if (isTooltip) {
-    toolTipAttr = {
-      'data-tooltip-target': 'tooltip-' + name,
-    };
-  }
-
   return (
-    <InputWrapper className={className}>
+    <InputWrapper className={'group ' + className}>
       <InputTag
-        {...toolTipAttr}
         isInvalid={errorMsg && touched}
         name={name}
         {...rest}
@@ -51,6 +41,7 @@ const Input: React.FC<IInput> = (props) => {
       <LabelTag isInvalid={errorMsg && touched} className="labelInputDynamic">
         {title}
       </LabelTag>
+      {isTooltip && <Tooltip isError={!!errorMsg && !!touched}>{errorMsg}</Tooltip>}
     </InputWrapper>
   );
 };

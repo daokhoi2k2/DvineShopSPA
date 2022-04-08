@@ -6,7 +6,7 @@ import store, { persistor } from 'redux/store';
 import { GlobalStyles } from 'twin.macro';
 import { PersistGate } from 'redux-persist/integration/react';
 import 'index.css';
-import 'flowbite';
+import 'react-quill/dist/quill.snow.css';
 
 
 // store.subscribe(() => {

@@ -4,7 +4,7 @@ export const InputWrapper = tw.div`
     relative
 `;
 
-export const InputTag = styled.input<{isInvalid?: any}>(({isInvalid}) => [
+export const InputTag = styled.input<{ isInvalid?: any }>(({ isInvalid }) => [
   tw`    border
     px-3
     pt-4
@@ -12,7 +12,6 @@ export const InputTag = styled.input<{isInvalid?: any}>(({isInvalid}) => [
     rounded-md
     text-sm
     w-full
-
    
     outline-offset[2px]
     outline-color[#2579f2]
@@ -20,12 +19,16 @@ export const InputTag = styled.input<{isInvalid?: any}>(({isInvalid}) => [
     hover:border-[#2579f2]
 
     hover:shadow-2w
+
+    text-overflow[ellipsis]
+    // placeholder-shown:text-overflow[ellipsis]
     placeholder-shown:bg-black`,
-    isInvalid && tw`border-red-500 outline-none hover:shadow-none hover:border-red-500`
+  isInvalid &&
+    tw`border-red-500 outline-none hover:shadow-none hover:border-red-500`,
 ]);
 
-export const LabelTag = styled.label<{isInvalid?: any}>(({isInvalid}) => [
-    tw`  absolute
+export const LabelTag = styled.label<{ isInvalid?: any }>(({ isInvalid }) => [
+  tw`  absolute
     text-[#9ca3af]
     top-[1px]
     left-[1px]
@@ -34,7 +37,32 @@ export const LabelTag = styled.label<{isInvalid?: any}>(({isInvalid}) => [
     py-3    
     pointer-events-none
     whitespace-nowrap`,
-    isInvalid && tw`text-red-500`
-])
+  isInvalid && tw`text-red-500`,
+]);
 
 export const ErrorMsg = tw.div``;
+
+export const Tooltip = styled.div<{ isError: boolean }>(({ isError }) => [
+  tw`
+    absolute 
+    z-[100]
+    py-2 
+    px-3 
+    text-sm
+    font-medium 
+    text-white 
+    bg-gray-900 
+    rounded-lg 
+    shadow-sm 
+    transition-opacity 
+    duration-300
+    dark:bg-gray-700 
+    
+    whitespace-nowrap
+    top-[-40px]
+    left-[50%]
+    translate-x-[-50%]
+    hidden
+    `,
+  isError && tw`group-hover:inline-block`,
+]);

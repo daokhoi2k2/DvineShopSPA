@@ -23,7 +23,7 @@ export const loginUserServices = async (user: ILogin) => {
 
 export const refreshTokenServices = async () => {
   try {
-    const res = await axiosJWT.post(
+    const res = await axios.post(
       `${process.env.REACT_APP_API_URL}/auth/refresh`,
       {},
       {

@@ -23,22 +23,23 @@ export interface ITable {
 const Table: React.FC<ITable> = (props) => {
 
   const { columns, children } = props;
+  console.log("children", children)
   return (
     <Wrapper>
         <TableWrapper>
       <Theader>
         <RowItem>
-          {columns.map((item) => (
+          {columns?.map((item) => (
             <TheaderItem key={item.text}>{item.text}</TheaderItem>
           ))}
         </RowItem>
       </Theader>
       <Tbody>
         {children &&
-          children[0].map((item: any, index: any) => (
+          children?.map((item: any, index: any) => (
             <RowItem key={index}>
-              {columns.map((column, index) => (
-                <Icolumn key={index}>{item[column.dataField]}</Icolumn>
+              {columns?.map((column, index) => (
+                <Icolumn key={index}>{item[0][column.dataField]}</Icolumn>
               ))}
             </RowItem>
           ))}

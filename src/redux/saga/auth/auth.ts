@@ -47,7 +47,8 @@ export function* logoutUserSaga(): any {
     }
   } catch (err) {
     console.error('Lỗi', err);
-    // Catch error don't have refreshToken or server return fail
+    // Catch error don't have refreshToken, refreshToken invalid, or server return fail
+    yield put(authLogoutSuccess());
     toast.success('Đăng xuất thành công');
     // toast.error("Đăng xuất thất bại");
   }

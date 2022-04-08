@@ -12,14 +12,14 @@ import * as types from "redux/types/product";
 // }
 
 const initialState = {
-  data: [],
+  allProducts: [],
 };
 
 const reducer = (state = initialState, action: any) =>
   produce(state, (draft) => {
     switch (action.type) {
       case types.GET_ALL_PRODUCTS_SUCCESS:
-        draft.data = action.payload
+        draft.allProducts = action.payload
         break;
     }
   });

@@ -13,6 +13,8 @@ interface IInput {
   specifyFieldValue?: any;
   noneSelect?: any;
   onChangeDispatch?: any;
+  onChangeResetOtherValue?: any;
+  formik?: any;
 }
 
 const Select: React.FC<IInput> = (props) => {
@@ -26,6 +28,8 @@ const Select: React.FC<IInput> = (props) => {
     specifyFieldValue,
     noneSelect,
     onChangeDispatch,
+    onChangeResetOtherValue,
+    formik,
     ...rest
   } = props;
   const selectedOption = options.find(
@@ -37,6 +41,15 @@ const Select: React.FC<IInput> = (props) => {
     if (onChangeDispatch) {
       dispatch(onChangeDispatch(selectedValue));
     }
+
+    if(onChangeResetOtherValue) {
+      console.log("onChangeResetOtherValue", onChangeResetOtherValue)
+      // formik.setFieldValue()
+      onChangeResetOtherValue.forEach((name: string) => {
+        formik?.setFieldValue(name, "")
+      })
+    }
+
     const changeEvent = {
       target: {
         name: name,

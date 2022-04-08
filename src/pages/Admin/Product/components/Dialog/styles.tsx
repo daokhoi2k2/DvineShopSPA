@@ -33,6 +33,8 @@ export const GroupRow = tw.div`
     flex
     gap-x-3
     mt-3
+    md:flex-wrap
+    md:gap-y-3
 `;
 
 export const DialogHeader = tw.div`
