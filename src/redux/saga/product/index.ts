@@ -1,8 +1,5 @@
 import { all, takeLatest } from 'redux-saga/effects';
-import {
-  addProductSaga,
-  getAllProductsSaga,
-} from './product';
+import { addProductSaga, getAllProductsSaga } from './product';
 import * as types from 'redux/types/product';
 
 export default function* productSaga() {

@@ -2,6 +2,7 @@ import NavDrawer from 'components/Admin/NavDrawer';
 import TopHeader from 'components/Admin/TopHeader';
 import Input from 'components/Input';
 import Table, { IColumns } from 'components/Table';
+import { EditIcon, TrashIcon } from 'designs/icons/Drawer';
 import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setDialogModal } from 'redux/actions/config';
@@ -12,9 +13,11 @@ import Dialog from './components/Dialog';
 import {
   AddBtnWrapper,
   AddButton,
+  BtnItem,
   Container,
   Content,
   ControlUIWrapper,
+  ControlWrapper,
   Layout,
   SearchInput,
   Wrapper,
@@ -27,7 +30,7 @@ const ProductAdmin: React.FC = () => {
 
   useEffect(() => {
     dispatch(getAllProducts());
-  }, [])
+  }, []);
 
   const onBlurSearch = () => {
     console.log(searchValue);
@@ -88,10 +91,29 @@ const ProductAdmin: React.FC = () => {
           {products?.map((item: any) => [
             {
               masp: item.code,
-              thumbnail: <img className="w-[100px]" src={process.env.REACT_APP_API_URL + `/${item.thumb_nail}`} alt={item.thumbnail} />,
+              thumbnail: (
+                <img
+                  className="w-[100px]"
+                  src={
+                    item.thumb_nail
+                      ? process.env.REACT_APP_API_URL + `/${item.thumb_nail}`
+                      : require('../../../assets/images/defaultProduct.png')
+                  }
+                  alt={item.thumbnail}
+                />
+              ),
               namesp: item.name,
-              isShow: <h1>{item.isShow ? "Còn hàng" : "Hết hàng"} </h1>,
-              control: '',
+              isShow: <h1>{item.status ? 'Còn hàng' : 'Hết hàng'} </h1>,
+              control: (
+                <ControlWrapper>
+                  <BtnItem>
+                    <EditIcon className="w-[20px] h-[20px]" />
+                  </BtnItem>
+                  <BtnItem>
+                    <TrashIcon className="w-[20px] h-[20px]" />
+                  </BtnItem>
+                </ControlWrapper>
+              ),
             },
           ])}
         </Table>

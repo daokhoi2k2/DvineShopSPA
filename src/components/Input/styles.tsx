@@ -4,8 +4,9 @@ export const InputWrapper = tw.div`
     relative
 `;
 
-export const InputTag = styled.input<{ isInvalid?: any }>(({ isInvalid }) => [
-  tw`    border
+export const InputTag = styled.input<{ isInvalid?: any, disabled?: boolean }>(({ isInvalid, disabled }) => [
+  tw`   
+   border
     px-3
     pt-4
     h-[42px]
@@ -25,6 +26,7 @@ export const InputTag = styled.input<{ isInvalid?: any }>(({ isInvalid }) => [
     placeholder-shown:bg-black`,
   isInvalid &&
     tw`border-red-500 outline-none hover:shadow-none hover:border-red-500`,
+    disabled && tw`hover:shadow-none outline-none hover:border-none`
 ]);
 
 export const LabelTag = styled.label<{ isInvalid?: any }>(({ isInvalid }) => [

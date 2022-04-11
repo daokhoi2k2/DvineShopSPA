@@ -43,3 +43,13 @@ export const AddButton = tw.button`
     text-white
     font-bold
 `;
+
+export const BtnItem = tw.button`
+    p-3
+    rounded-md
+    hover:bg-gray-200
+`;
+
+export const ControlWrapper = tw.div`
+    flex
+`;

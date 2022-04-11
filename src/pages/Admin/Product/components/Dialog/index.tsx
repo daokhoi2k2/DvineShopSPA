@@ -1,7 +1,7 @@
 import Input from 'components/Input';
 import { CloseIcon } from 'designs/icons/Drawer';
 import { Field, Form, Formik } from 'formik';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setDialogModal } from 'redux/actions/config';
 import { RootState } from 'redux/reducers';
@@ -22,6 +22,9 @@ import Checkbox from 'components/Checkbox';
 import FileUpload from 'components/FileUpload';
 import { addProduct } from 'redux/actions/product';
 import ProgressBar from 'components/ProgressBar';
+import Select from 'components/Select';
+import { getAllCategories } from 'redux/actions/category';
+import parseUrl from 'utils/parseUrl';
 
 const Dialog = () => {
   const dispatch = useDispatch();
@@ -32,9 +35,25 @@ const Dialog = () => {
     (state: RootState) => state.config.progressPercentUpdateProduct
   );
 
+  const categoryList = useSelector(
+    (state: RootState) => state.category.allCategory
+  );
+
+  useEffect(() => {
+    if (!categoryList.length) {
+      dispatch(getAllCategories());
+    }
+  }, []);
+
   const handleCloseDialog = () => {
     dispatch(setDialogModal(false));
   };
+
+  const handleDependentFieldOfName = (value: any, formik: any) => {
+    if(!formik.touched.name_url) {
+      formik.setFieldValue("name_url", parseUrl(value))
+    }
+  }
 
   const validationSchema = yup.object().shape({
     code: yup
@@ -72,12 +91,14 @@ const Dialog = () => {
               // _id: '',
               code: '',
               name: '',
+              name_url: '',
               price: '',
               price_promotion: '',
               amount: '',
               description: '',
               status: false,
               thumb_nail: '',
+              categoryId: '',
             }}
             validationSchema={validationSchema}
             onSubmit={async (values: any) => {
@@ -106,7 +127,6 @@ const Dialog = () => {
                       touched={formik.touched.code}
                       isTooltip={true}
                     />
-
                     <Input
                       className="w-full"
                       name="name"
@@ -117,6 +137,18 @@ const Dialog = () => {
                       errorMsg={formik.errors.name}
                       touched={formik.touched.name}
                       isTooltip={true}
+                      handleDependentFieldOf={handleDependentFieldOfName}
+                    />
+                  </GroupRow>
+                  <GroupRow>
+                    <Input
+                      className="w-full"
+                      name="name_url"
+                      title="Đường dẫn sản phẩm (*)"
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                      value={formik.values.name_url}
+                      touched={formik.touched.name_url}
                     />
                   </GroupRow>
                   <GroupRow>
@@ -131,7 +163,6 @@ const Dialog = () => {
                       touched={formik.touched.price}
                       isTooltip={true}
                     />
-
                     <Input
                       className="w-full"
                       name="price_promotion"
@@ -151,6 +182,17 @@ const Dialog = () => {
                       onBlur={formik.handleBlur}
                       value={formik.values.amount}
                     />
+                  </GroupRow>
+                  <GroupRow>
+                    <Select
+                      placeholder="Thể loại"
+                      options={categoryList}
+                      name="categoryId"
+                      specifyFieldValue={'_id'}
+                      specifyFieldTitle={'title'}
+                      onChange={formik.handleChange}
+                      selected={formik.values.categoryId}
+                    ></Select>
                   </GroupRow>
                   <GroupRow>
                     <Field name="description">
@@ -186,8 +228,10 @@ const Dialog = () => {
                       isChecked={formik.values.status}
                     />
                   </GroupRow>
-                  <GroupRow className='justify-end'>
-                    <ResetBtn onClick={() => formik.resetForm()} type="reset">Hủy</ResetBtn>
+                  <GroupRow className="justify-end">
+                    <ResetBtn onClick={() => formik.resetForm()} type="reset">
+                      Hủy
+                    </ResetBtn>
                     <SubmitBtn type="submit">Thêm sản phẩm</SubmitBtn>
                   </GroupRow>
                   <ProgressBar

@@ -40,7 +40,7 @@ const ProductCard: React.FC<IProductInfo> = (props) => {
       <Link to="tai-khoan-netflix">
         <LazyLoad>
           <CardImg>
-            <img src={thumb_nail} alt={name} className="rounded-md" />
+            <img src={`${process.env.REACT_APP_API_URL}/${thumb_nail}`} alt={name} className="rounded-md" />
           </CardImg>
         </LazyLoad>
         <CardInfo>

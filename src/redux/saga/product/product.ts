@@ -6,11 +6,12 @@ import {
   getAllProductsSuccess,
 } from 'redux/actions/product';
 import { toast } from 'react-toastify';
-import { setDialogModal } from 'redux/actions/config';
+import { setDialogModal, setProgressPercentUpdateProduct } from 'redux/actions/config';
 
 export function* getAllProductsSaga(): any {
   const response = yield call(services.getAllProductsServices);
   const result = response?.data;
+  
   if (result) {
     yield put(getAllProductsSuccess(result));
   }
@@ -24,7 +25,8 @@ export function* addProductSaga({payload}: any): any {
     if (result) {
       yield put(addProductSuccess(result));
       yield put(setDialogModal(false));
-      yield put(getAllProducts());
+      yield put(getAllProducts()); // Sẽ 
+      yield put(setProgressPercentUpdateProduct(0));
       toast.success("Thêm sản phẩm thành công");
 
     }

@@ -11,6 +11,7 @@ interface IInput {
   selected?: any;
   name?: string;
   specifyFieldValue?: any;
+  specifyFieldTitle?: any;
   noneSelect?: any;
   onChangeDispatch?: any;
   onChangeResetOtherValue?: any;
@@ -26,6 +27,7 @@ const Select: React.FC<IInput> = (props) => {
     selected,
     name,
     specifyFieldValue,
+    specifyFieldTitle,
     noneSelect,
     onChangeDispatch,
     onChangeResetOtherValue,
@@ -57,7 +59,7 @@ const Select: React.FC<IInput> = (props) => {
       },
     };
     onChange(changeEvent);
-  };
+  };  
 
   return (
     <SelectWrapper {...rest}>
@@ -72,7 +74,7 @@ const Select: React.FC<IInput> = (props) => {
             key={option[specifyFieldValue] || option.value}
             value={option[specifyFieldValue] || option.value}
           >
-            {option.name}
+            {option[specifyFieldTitle || "name"]}
           </option>
         ))}
       </SelectionTag>
