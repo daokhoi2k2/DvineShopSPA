@@ -7,6 +7,7 @@ interface IProductInfo {
   promotional_price?: number;
   price: number;
   thumb_nail: string;
+  name_url: string;
   // sale_percent: number;
 }
 
@@ -25,6 +26,7 @@ const ProductList: React.FC<IProductList> = ({ data }) => {
           sale_percent={1}
           thumb_nail={item.thumb_nail}
           promotional_price={item.promotional_price}
+          name_url={item.name_url}
         />
       ))}
     </ProductListWrapper>

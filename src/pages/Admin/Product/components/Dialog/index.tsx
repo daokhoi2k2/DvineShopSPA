@@ -1,7 +1,7 @@
 import Input from 'components/Input';
 import { CloseIcon } from 'designs/icons/Drawer';
 import { Field, Form, Formik } from 'formik';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setDialogModal } from 'redux/actions/config';
 import { RootState } from 'redux/reducers';
@@ -20,7 +20,7 @@ import {
 } from './styles';
 import Checkbox from 'components/Checkbox';
 import FileUpload from 'components/FileUpload';
-import { addProduct } from 'redux/actions/product';
+import { addProduct, updateProduct } from 'redux/actions/product';
 import ProgressBar from 'components/ProgressBar';
 import Select from 'components/Select';
 import { getAllCategories } from 'redux/actions/category';
@@ -28,7 +28,7 @@ import parseUrl from 'utils/parseUrl';
 
 const Dialog = () => {
   const dispatch = useDispatch();
-  const isOpenModal = useSelector(
+  const { isOpen, editField } = useSelector(
     (state: RootState) => state.config.isDialogModal
   );
   const percentProgressAddProduct = useSelector(
@@ -39,6 +39,22 @@ const Dialog = () => {
     (state: RootState) => state.category.allCategory
   );
 
+  const initialValueForm = useMemo(
+    () => ({
+      code: editField?.code || '',
+      name: editField?.name || '',
+      name_url: editField?.name_url || '',
+      price: editField?.price || '',
+      price_promotion: editField?.price_promotion || '',
+      amount: editField?.amount || '',
+      description: editField?.description || '',
+      status: editField?.status || false,
+      thumb_nail: editField?.thumb_nail || null,
+      categoryId: editField?.categoryId || '-1',
+    }),
+    [editField]
+  );
+
   useEffect(() => {
     if (!categoryList.length) {
       dispatch(getAllCategories());
@@ -46,20 +62,40 @@ const Dialog = () => {
   }, []);
 
   const handleCloseDialog = () => {
-    dispatch(setDialogModal(false));
+    dispatch(
+      setDialogModal({
+        isOpen: false,
+        editField: null,
+      })
+    );
   };
 
   const handleDependentFieldOfName = (value: any, formik: any) => {
-    if(!formik.touched.name_url) {
-      formik.setFieldValue("name_url", parseUrl(value))
+    if (!formik.touched.name_url) {
+      formik.setFieldValue('name_url', parseUrl(value));
     }
-  }
+  };
+
+  const handleResetForm = (formik: any) => {
+    if(editField) {
+      formik.resetForm();
+      dispatch(
+        setDialogModal({
+          isOpen,
+          editField: {},
+        })
+      );
+    } else {
+      formik.resetForm();
+    }
+
+  };
 
   const validationSchema = yup.object().shape({
     code: yup
       .string()
       .required('Bạn đang bỏ trống 1 trường bắt buộc')
-      .max(20, 'Ký tự tối đa cho phép là 20'),
+      .max(30, 'Ký tự tối đa cho phép là 30'),
     name: yup
       .string()
       .required('Bạn đang bỏ trống 1 trường bắt buộc')
@@ -77,39 +113,36 @@ const Dialog = () => {
   });
 
   return (
-    <DialogWrapper isOpen={isOpenModal}>
+    <DialogWrapper isOpen={isOpen}>
       <Layout>
         <DialogHeader>
-          <Title>Thêm sản phẩm</Title>
+          <Title>{!editField ? 'Thêm sản phẩm' : 'Cập nhật sản phẩm'}</Title>
           <CloseDialog onClick={handleCloseDialog}>
             <CloseIcon className="w-[24px] h-[24px]" />
           </CloseDialog>
         </DialogHeader>
         <DialogBody>
           <Formik
-            initialValues={{
-              // _id: '',
-              code: '',
-              name: '',
-              name_url: '',
-              price: '',
-              price_promotion: '',
-              amount: '',
-              description: '',
-              status: false,
-              thumb_nail: '',
-              categoryId: '',
-            }}
+            initialValues={initialValueForm}
             validationSchema={validationSchema}
-            onSubmit={async (values: any) => {
+            enableReinitialize={true}
+            onSubmit={async (values: any, {resetForm}) => {
               const formData: any = new FormData();
 
               // Append all form field for formData
               for (let key in values) {
                 formData.append(key, values[key]);
               }
+              if (editField) {
+                const _id = editField?._id;
+                formData.append('_id', _id);
 
-              dispatch(addProduct(formData));
+                dispatch(updateProduct(formData));
+                
+              } else {
+                dispatch(addProduct(formData));
+                resetForm();
+              }
             }}
           >
             {(formik) => {
@@ -229,10 +262,15 @@ const Dialog = () => {
                     />
                   </GroupRow>
                   <GroupRow className="justify-end">
-                    <ResetBtn onClick={() => formik.resetForm()} type="reset">
-                      Hủy
+                    <ResetBtn
+                      onClick={() => handleResetForm(formik)}
+                      type="reset"
+                    >
+                      Làm mới
                     </ResetBtn>
-                    <SubmitBtn type="submit">Thêm sản phẩm</SubmitBtn>
+                    <SubmitBtn type="submit">
+                      {!editField ? 'Thêm sản phẩm' : 'Cập nhật'}
+                    </SubmitBtn>
                   </GroupRow>
                   <ProgressBar
                     percent={percentProgressAddProduct}

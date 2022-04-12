@@ -10,8 +10,8 @@ interface IInput {
   onChange?: (e: React.ChangeEvent<any>, callback?: Function) => void;
   onBlur?: (e: React.FocusEvent<any, Element>) => void;
   defaultValue?: string;
-  errorMsg?: string;
-  touched?: boolean;
+  errorMsg?: any;
+  touched?: any;
   isTooltip?: any;
   readOnly?: boolean;
   disabled?: boolean;

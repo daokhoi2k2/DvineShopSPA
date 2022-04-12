@@ -10,7 +10,7 @@ export interface IConfig {
   isNavDrawer: boolean;
   AuthModalBox: IAuthModalBox;
   isAdminNavDrawer: boolean;
-  isDialogModal: boolean;
+  isDialogModal: any;
   progressPercentUpdateProduct: number;
 }
 
@@ -21,7 +21,10 @@ const initialState: IConfig = {
     isShow: false,
     boxName: "login",
   },
-  isDialogModal: false,
+  isDialogModal: {
+    isOpen: false,
+    editField: null,
+  },
   progressPercentUpdateProduct: 0,
 };
 

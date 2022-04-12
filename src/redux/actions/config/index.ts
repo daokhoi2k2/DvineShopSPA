@@ -33,7 +33,7 @@ export const setAdminNavDrawer = (payload: boolean) => ({
     payload
 })
 
-export const setDialogModal = (payload: boolean) => ({
+export const setDialogModal = (payload: any) => ({
     type: types.SET_DIALOG_MODAL,
     payload
 })

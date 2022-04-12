@@ -1,8 +1,8 @@
-import Img from "designs/Img";
-import React from "react";
-import LazyLoad from "react-lazyload";
-import NumberFormat from "react-number-format";
-import { Link } from "react-router-dom";
+import Img from 'designs/Img';
+import React from 'react';
+import LazyLoad from 'react-lazyload';
+import NumberFormat from 'react-number-format';
+import { Link } from 'react-router-dom';
 
 import {
   CardImg,
@@ -13,7 +13,7 @@ import {
   PriceWrapper,
   ProductCardWrapper,
   SalePercent,
-} from "./styles";
+} from './styles';
 
 interface IProductInfo {
   name: string;
@@ -21,13 +21,17 @@ interface IProductInfo {
   price: number;
   sale_percent: number;
   thumb_nail: string;
+  name_url: string;
 }
 
 const ProductCard: React.FC<IProductInfo> = (props) => {
-  const { thumb_nail, name, price, promotional_price } = props;
+  const { thumb_nail, name, price, promotional_price, name_url } = props;
   const haveSale = promotional_price && true;
 
-  const handleSalePercent = (promotional_price: number | undefined, price: number) => {
+  const handleSalePercent = (
+    promotional_price: number | undefined,
+    price: number
+  ) => {
     if (promotional_price) {
       const result = (1 - promotional_price / price) * 100;
       return Math.floor(result);
@@ -37,10 +41,14 @@ const ProductCard: React.FC<IProductInfo> = (props) => {
 
   return (
     <ProductCardWrapper>
-      <Link to="tai-khoan-netflix">
+      <Link to={name_url}>
         <LazyLoad>
           <CardImg>
-            <img src={`${process.env.REACT_APP_API_URL}/${thumb_nail}`} alt={name} className="rounded-md" />
+            <img
+              src={`${process.env.REACT_APP_API_URL}/${thumb_nail}`}
+              alt={name}
+              className="rounded-md"
+            />
           </CardImg>
         </LazyLoad>
         <CardInfo>
@@ -50,10 +58,10 @@ const ProductCard: React.FC<IProductInfo> = (props) => {
               {
                 <NumberFormat
                   value={promotional_price}
-                  displayType={"text"}
+                  displayType={'text'}
                   decimalSeparator=","
                   thousandSeparator="."
-                  suffix={"đ"}
+                  suffix={'đ'}
                 />
               }
             </PricePromotion>
@@ -61,14 +69,18 @@ const ProductCard: React.FC<IProductInfo> = (props) => {
               {
                 <NumberFormat
                   value={price}
-                  displayType={"text"}
+                  displayType={'text'}
                   decimalSeparator=","
                   thousandSeparator="."
-                  suffix={"đ"}
+                  suffix={'đ'}
                 />
               }
             </Price>
-            {haveSale && <SalePercent>-{handleSalePercent(promotional_price, price)}%</SalePercent>}
+            {haveSale && (
+              <SalePercent>
+                -{handleSalePercent(promotional_price, price)}%
+              </SalePercent>
+            )}
           </PriceWrapper>
         </CardInfo>
       </Link>

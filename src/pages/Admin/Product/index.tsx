@@ -6,8 +6,9 @@ import { EditIcon, TrashIcon } from 'designs/icons/Drawer';
 import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setDialogModal } from 'redux/actions/config';
-import { getAllProducts } from 'redux/actions/product';
+import { deleteProduct, getAllProducts } from 'redux/actions/product';
 import { RootState } from 'redux/reducers';
+import AlertPrompt from './components/AlertPrompt';
 import Dialog from './components/Dialog';
 
 import {
@@ -26,6 +27,7 @@ import {
 const ProductAdmin: React.FC = () => {
   const [searchValue, setSearchValue] = useState('');
   const dispatch = useDispatch();
+
   const products = useSelector((state: RootState) => state.product.allProducts);
 
   useEffect(() => {
@@ -63,7 +65,12 @@ const ProductAdmin: React.FC = () => {
   );
 
   const handleOpenDialog = () => {
-    dispatch(setDialogModal(true));
+    dispatch(
+      setDialogModal({
+        isOpen: true,
+        editField: null,
+      })
+    );
   };
 
   return (
@@ -106,10 +113,16 @@ const ProductAdmin: React.FC = () => {
               isShow: <h1>{item.status ? 'Còn hàng' : 'Hết hàng'} </h1>,
               control: (
                 <ControlWrapper>
-                  <BtnItem>
+                  <BtnItem
+                    onClick={() =>
+                      dispatch(
+                        setDialogModal({ isOpen: true, editField: item })
+                      )
+                    }
+                  >
                     <EditIcon className="w-[20px] h-[20px]" />
                   </BtnItem>
-                  <BtnItem>
+                  <BtnItem onClick={() => dispatch(deleteProduct(item?._id))}>
                     <TrashIcon className="w-[20px] h-[20px]" />
                   </BtnItem>
                 </ControlWrapper>
@@ -119,6 +132,7 @@ const ProductAdmin: React.FC = () => {
         </Table>
       </Content>
       <Dialog />
+      {/* <AlertPrompt /> */}
     </Container>
   );
 };

@@ -36,7 +36,7 @@ const Select: React.FC<IInput> = (props) => {
   } = props;
   const selectedOption = options.find(
     (option: any) => option[specifyFieldValue || 'value'] === selected
-  );
+  ) || {_id: '-1'}
 
   const handleOptionChange = (selectedOption: any) => {
     const selectedValue = selectedOption.target.value;
@@ -45,8 +45,6 @@ const Select: React.FC<IInput> = (props) => {
     }
 
     if(onChangeResetOtherValue) {
-      console.log("onChangeResetOtherValue", onChangeResetOtherValue)
-      // formik.setFieldValue()
       onChangeResetOtherValue.forEach((name: string) => {
         formik?.setFieldValue(name, "")
       })
@@ -68,7 +66,7 @@ const Select: React.FC<IInput> = (props) => {
         className={'selectCustomArrow'}
         value={selectedOption?.[specifyFieldValue || 'value']}
       >
-        <option value={"-1"}>{'-'}</option>
+        <option value={-1}>-</option>
         {options.map((option: any) => (
           <option
             key={option[specifyFieldValue] || option.value}
