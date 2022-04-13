@@ -5,8 +5,9 @@ import { Provider } from 'react-redux';
 import store, { persistor } from 'redux/store';
 import { GlobalStyles } from 'twin.macro';
 import { PersistGate } from 'redux-persist/integration/react';
-import 'index.css';
 import 'react-quill/dist/quill.snow.css';
+import 'react-quill/dist/quill.bubble.css';
+import 'index.css';
 
 
 // store.subscribe(() => {

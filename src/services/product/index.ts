@@ -6,7 +6,30 @@ import { updateProductFailed } from 'redux/actions/product';
 
 export const getAllProductsServices = async () => {
   try {
-    const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/product`);
+    const res = await axiosJWT.get(`${process.env.REACT_APP_API_URL}/api/product`);
+    return res;
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const getProductsListServices = async (payload: any) => {
+  try {
+    const res = await axios.get(
+      `${process.env.REACT_APP_API_URL}/api/product/list`,
+      { params: payload }
+    );
+    return res;
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const getProductByHashNameServices = async (payload: any) => {
+  try {
+    const res = await axios.get(
+      `${process.env.REACT_APP_API_URL}/api/product/hash_name/${payload}`
+    );
     return res;
   } catch (err) {
     console.error(err);
@@ -52,7 +75,7 @@ export const updateProductServices = async (payload: any) => {
     return res;
   } catch (err: any) {
     const keyPattern = err?.response?.data;
-    if(keyPattern) {
+    if (keyPattern) {
       return keyPattern;
     }
 

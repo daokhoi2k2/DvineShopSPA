@@ -3,7 +3,9 @@ import tw from "twin.macro";
 import { Link } from "react-router-dom";
 
 export const NavDrawerWrapper = styled.div<{ isAdminDrawerNav: any }>(({ isAdminDrawerNav }) => [
-  tw`h-screen
+  tw`
+    min-h-screen
+    h-full
     w-[260px]
     overflow-y-auto
     z-30

@@ -13,6 +13,7 @@ import ProductAdmin from 'pages/Admin/Product';
 import PrivateRoute from 'routes/components/PrivateRoute';
 import NavHeader from 'pages/NavHeader';
 import LayoutAdmin from 'pages/Admin/LayoutAdmin';
+import Account from 'pages/Account';
 
 const App: React.FC = () => {
   useEffect(() => {
@@ -26,7 +27,7 @@ const App: React.FC = () => {
           <Route index element={<Home />} />
           <Route path=":hash_name" element={<ProductDetail />} />
           <Route path="search" element={<Search />} />
-          <Route path="user">
+          <Route path="user" element={<Account />}>
             <Route path="profile" element={<Profile />} />
             <Route path="orders" element={<OrderHistory />} />
             <Route path="wishlist" element={<Wishlist />} />

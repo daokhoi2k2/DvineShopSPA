@@ -4,7 +4,7 @@ import { ProductListWrapper } from "./styles";
 
 interface IProductInfo {
   name: string;
-  promotional_price?: number;
+  price_promotion?: number;
   price: number;
   thumb_nail: string;
   name_url: string;
@@ -25,7 +25,7 @@ const ProductList: React.FC<IProductList> = ({ data }) => {
           price={item.price}
           sale_percent={1}
           thumb_nail={item.thumb_nail}
-          promotional_price={item.promotional_price}
+          price_promotion={item?.price_promotion}
           name_url={item.name_url}
         />
       ))}

@@ -1,9 +1,10 @@
-import { Price, SalePercent } from "components/ProductCard/styles";
-import { BoxIcon, CardIcon, CartIcon, TagIcon } from "designs/icons/Drawer";
-import React from "react";
+import { Price, SalePercent } from 'components/ProductCard/styles';
+import { BoxIcon, CardIcon, CartIcon, TagIcon } from 'designs/icons/Drawer';
+import React from 'react';
+import NumberFormat from 'react-number-format';
 import {
-    Button,
-    BuyControl,
+  Button,
+  BuyControl,
   ExtraInformation,
   Hr,
   Name,
@@ -20,14 +21,35 @@ import {
   VariantsList,
   VariantsSelect,
   VariantsTitle,
-} from "./styles";
+} from './styles';
 
-const ProductMainInfo: React.FC = () => {
+interface IProductMainInfo {
+  name: string;
+  status: boolean;
+  categoryId: any;
+  price: number;
+  price_promotion?: number;
+}
+
+const ProductMainInfo: React.FC<IProductMainInfo> = (props) => {
+  const { name, status, categoryId, price, price_promotion } = props;
+
+  const handleSalePercent = (
+    price_promotion: number | undefined,
+    price: number
+  ) => {
+    if (price_promotion) {
+      const result = (1 - price_promotion / price) * 100;
+      return Math.floor(result);
+    }
+    return 0;
+  };
+
   return (
     <ProudctMainInfoWrapper>
       <Title>Sản phẩm</Title>
       <ProductInfo>
-        <Name>Tài khoản Netflix Premium for 1 User (1 Tháng)</Name>
+        <Name>{name}</Name>
         <ExtraInformation>
           <BoxIcon className="w-[17.5px] h-[17.5px]" />
           <Text>
@@ -36,36 +58,58 @@ const ProductMainInfo: React.FC = () => {
         </ExtraInformation>
         <ExtraInformation>
           <TagIcon className="w-[17.5px] h-[17.5px]" />
-          <Text>Thể loại: App, Giải trí, Xem phim</Text>
+          <Text>Thể loại: {categoryId?.title}</Text>
         </ExtraInformation>
         <PriceInformation>
-          <PricePromotion>79.000đ</PricePromotion>
+          <PricePromotion>
+            <NumberFormat
+              value={price}
+              displayType={'text'}
+              decimalSeparator=","
+              thousandSeparator="."
+              suffix={'đ'}
+            />
+          </PricePromotion>
           <ReducedPrice>
-            <Price haveSale>260.000đ</Price>
-            <SalePercent>-70%</SalePercent>
+            <Price haveSale>
+              {
+                <NumberFormat
+                  value={price_promotion}
+                  displayType={'text'}
+                  decimalSeparator=","
+                  thousandSeparator="."
+                  suffix={'đ'}
+                />
+              }
+            </Price>
+            {price_promotion && (
+              <SalePercent>
+                -{handleSalePercent(price_promotion, price)}%
+              </SalePercent>
+            )}
           </ReducedPrice>
           {/* {haveSale && <SalePercent>-{handleSalePercent(promotional_price, price)}%</SalePercent>} */}
         </PriceInformation>
         <Hr />
-        <VariantsSelect>
-            <VariantsTitle>Thời hạn sử dụng</VariantsTitle>
-            <VariantsList>
-                <VariantItem selected>1 Tháng</VariantItem>
-                <VariantItem>3 Tháng</VariantItem>
-                <VariantItem>6 Tháng</VariantItem>
-                <VariantItem>1 Ngày</VariantItem>
-                <VariantItem>1 Tuần</VariantItem>
-            </VariantsList>
-        </VariantsSelect>
+        {/* <VariantsSelect>
+          <VariantsTitle>Thời hạn sử dụng</VariantsTitle>
+          <VariantsList>
+            <VariantItem selected>1 Tháng</VariantItem>
+            <VariantItem>3 Tháng</VariantItem>
+            <VariantItem>6 Tháng</VariantItem>
+            <VariantItem>1 Ngày</VariantItem>
+            <VariantItem>1 Tuần</VariantItem>
+          </VariantsList>
+        </VariantsSelect> */}
         <BuyControl>
-            <Button primary>
-                <CardIcon className="w-[17.5px] h-[17.5px]" />
-                <TextButton>Mua ngay</TextButton>
-            </Button>
-            <Button>
-                <CartIcon className="w-[17.5px] h-[17.5px]" />
-                <TextButton>Thêm vào giỏ</TextButton>
-            </Button>
+          <Button primary>
+            <CardIcon className="w-[17.5px] h-[17.5px]" />
+            <TextButton>Mua ngay</TextButton>
+          </Button>
+          <Button>
+            <CartIcon className="w-[17.5px] h-[17.5px]" />
+            <TextButton>Thêm vào giỏ</TextButton>
+          </Button>
         </BuyControl>
       </ProductInfo>
     </ProudctMainInfoWrapper>
