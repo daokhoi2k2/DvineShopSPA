@@ -34,3 +34,17 @@ export const AccountLayoutInner = tw.div`
 
     md:p-5
 `;
+
+export const SubmitBtn = tw.button`
+    mt-3
+    bg-[#2579f2]
+    border
+    font-medium
+    text-sm
+    text-white
+    h-10
+    rounded-md
+    px-4
+
+    hover:opacity-90
+`;

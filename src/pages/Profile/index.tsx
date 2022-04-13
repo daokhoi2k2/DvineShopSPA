@@ -162,119 +162,111 @@ const Profile = () => {
 
   return (
     <>
-      {auth.isAuth ? (
-        <>
-          <Title>Tổng quan</Title>
-          <ListInfo>
-            {fakeData.map((item) => (
-              <InfoItem key={item.title}>
-                <InfoTitle>{item.title}</InfoTitle>
-                <InfoValue>{item.value}</InfoValue>
-              </InfoItem>
-            ))}
-          </ListInfo>
-          <Hr />
-          <AvatarWrapper>
-            <AvatarContent
-              src={require('../../assets/images/trend-avatar-1-73987.jpg')}
-            ></AvatarContent>
-            <AvatarControlWrapper>
-              <AvatarButtonWrapper>
-                <AvatarButton htmlFor="fileAvatar">
-                  Sửa ảnh đại diện
-                </AvatarButton>
-              </AvatarButtonWrapper>
-              <input type="file" id="fileAvatar" hidden />
-              <HrY />
-              <AvatarDescription>
-                <p>Vui lòng chọn ảnh nhỏ hơn 5MB</p>{' '}
-                <p> Chọn hình ảnh phù hợp, không phản cảm</p>
-              </AvatarDescription>
-            </AvatarControlWrapper>
-          </AvatarWrapper>
-          <Hr />
-          <FormWrapper>
-            <Title>Cá nhân</Title>
-            <FormList onSubmit={formik.handleSubmit}>
-              <Input
-                className="mt-5"
-                title="Họ và tên"
-                name="fullName"
-                onChange={formik.handleChange}
-                value={formik.values.fullName}
-              />
-              <Input
-                className="mt-5"
-                title="Số điện thoại"
-                name="phoneNumber"
-                onChange={formik.handleChange}
-                value={formik.values.phoneNumber}
-              />
-              <Input
-                className="mt-5"
-                title="Chứng minh nhân dân"
-                name="citizenIdentificationNumber"
-                onChange={formik.handleChange}
-                value={formik.values.citizenIdentificationNumber}
-              />
-              <Input
-                className="mt-5"
-                title="Số nhà / Đường"
-                name="address"
-                onChange={formik.handleChange}
-                value={formik.values.address}
-              />
-              <Select
-                name="sex"
-                className="mt-5"
-                placeholder="Giới tính"
-                options={selectSexData}
-                onChange={formik.handleChange}
-                selected={formik.values.sex}
-              ></Select>
-              <Select
-                className="mt-5"
-                name="city"
-                placeholder="Tỉnh / Thành phố"
-                options={location.city}
-                onChange={formik.handleChange}
-                selected={formik.values.city}
-                specifyFieldValue="matp"
-                noneSelect={{ value: '-1', name: '-' }}
-                onChangeDispatch={getAllDistrictByCity}
-                onChangeResetOtherValue={['ward', 'district']}
-                formik={formik}
-              ></Select>
-              <Select
-                className="mt-5"
-                placeholder="Quận / Huyện"
-                name="district"
-                options={location.district}
-                onChange={formik.handleChange}
-                selected={formik.values.district}
-                specifyFieldValue="maqh"
-                noneSelect={{ value: '-1', name: '-' }}
-                onChangeDispatch={getAllWardByDistrict}
-                onChangeResetOtherValue={['ward']}
-                formik={formik}
-              ></Select>
-              <Select
-                name="ward"
-                className="mt-5"
-                placeholder="Xã / Phường"
-                options={location.ward}
-                onChange={formik.handleChange}
-                selected={formik.values.ward}
-                specifyFieldValue="xaid"
-                noneSelect={{ value: '-1', name: '-' }}
-              ></Select>
-              <SubmitBtn type="submit">Lưu thay đổi</SubmitBtn>
-            </FormList>
-          </FormWrapper>{' '}
-        </>
-      ) : (
-        <SubmitBtn onClick={handleOpenLogin}>Đăng nhập để tiếp tục</SubmitBtn>
-      )}
+      <Title>Tổng quan</Title>
+      <ListInfo>
+        {fakeData.map((item) => (
+          <InfoItem key={item.title}>
+            <InfoTitle>{item.title}</InfoTitle>
+            <InfoValue>{item.value}</InfoValue>
+          </InfoItem>
+        ))}
+      </ListInfo>
+      <Hr />
+      <AvatarWrapper>
+        <AvatarContent
+          src={require('../../assets/images/trend-avatar-1-73987.jpg')}
+        ></AvatarContent>
+        <AvatarControlWrapper>
+          <AvatarButtonWrapper>
+            <AvatarButton htmlFor="fileAvatar">Sửa ảnh đại diện</AvatarButton>
+          </AvatarButtonWrapper>
+          <input type="file" id="fileAvatar" hidden />
+          <HrY />
+          <AvatarDescription>
+            <p>Vui lòng chọn ảnh nhỏ hơn 5MB</p>{' '}
+            <p> Chọn hình ảnh phù hợp, không phản cảm</p>
+          </AvatarDescription>
+        </AvatarControlWrapper>
+      </AvatarWrapper>
+      <Hr />
+      <FormWrapper>
+        <Title>Cá nhân</Title>
+        <FormList onSubmit={formik.handleSubmit}>
+          <Input
+            className="mt-5"
+            title="Họ và tên"
+            name="fullName"
+            onChange={formik.handleChange}
+            value={formik.values.fullName}
+          />
+          <Input
+            className="mt-5"
+            title="Số điện thoại"
+            name="phoneNumber"
+            onChange={formik.handleChange}
+            value={formik.values.phoneNumber}
+          />
+          <Input
+            className="mt-5"
+            title="Chứng minh nhân dân"
+            name="citizenIdentificationNumber"
+            onChange={formik.handleChange}
+            value={formik.values.citizenIdentificationNumber}
+          />
+          <Input
+            className="mt-5"
+            title="Số nhà / Đường"
+            name="address"
+            onChange={formik.handleChange}
+            value={formik.values.address}
+          />
+          <Select
+            name="sex"
+            className="mt-5"
+            placeholder="Giới tính"
+            options={selectSexData}
+            onChange={formik.handleChange}
+            selected={formik.values.sex}
+          ></Select>
+          <Select
+            className="mt-5"
+            name="city"
+            placeholder="Tỉnh / Thành phố"
+            options={location.city}
+            onChange={formik.handleChange}
+            selected={formik.values.city}
+            specifyFieldValue="matp"
+            noneSelect={{ value: '-1', name: '-' }}
+            onChangeDispatch={getAllDistrictByCity}
+            onChangeResetOtherValue={['ward', 'district']}
+            formik={formik}
+          ></Select>
+          <Select
+            className="mt-5"
+            placeholder="Quận / Huyện"
+            name="district"
+            options={location.district}
+            onChange={formik.handleChange}
+            selected={formik.values.district}
+            specifyFieldValue="maqh"
+            noneSelect={{ value: '-1', name: '-' }}
+            onChangeDispatch={getAllWardByDistrict}
+            onChangeResetOtherValue={['ward']}
+            formik={formik}
+          ></Select>
+          <Select
+            name="ward"
+            className="mt-5"
+            placeholder="Xã / Phường"
+            options={location.ward}
+            onChange={formik.handleChange}
+            selected={formik.values.ward}
+            specifyFieldValue="xaid"
+            noneSelect={{ value: '-1', name: '-' }}
+          ></Select>
+          <SubmitBtn type="submit">Lưu thay đổi</SubmitBtn>
+        </FormList>
+      </FormWrapper>
     </>
   );
 };

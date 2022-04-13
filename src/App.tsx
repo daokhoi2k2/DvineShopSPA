@@ -14,6 +14,8 @@ import PrivateRoute from 'routes/components/PrivateRoute';
 import NavHeader from 'pages/NavHeader';
 import LayoutAdmin from 'pages/Admin/LayoutAdmin';
 import Account from 'pages/Account';
+import Affiliate from 'pages/Affiliate';
+import Transactions from 'pages/Transactions';
 
 const App: React.FC = () => {
   useEffect(() => {
@@ -32,6 +34,8 @@ const App: React.FC = () => {
             <Route path="orders" element={<OrderHistory />} />
             <Route path="wishlist" element={<Wishlist />} />
             <Route path="security" element={<Security />} />
+            <Route path="affiliate" element={<Affiliate />} />
+            <Route path="transactions" element={<Transactions />} />
           </Route>
         </Route>
         <Route

@@ -8,17 +8,9 @@ import UserOrder from "./UserWishlist";
 
 const Wishlist = () => {
   return (
-    <Container>
-      <UserWrapper>
-        <UserInner>
-          <UserNav></UserNav>
-          <UserWishlist>
-            ASD
-          </UserWishlist>
-          {/* <UserProfile></UserProfile> */}
-        </UserInner>
-      </UserWrapper>
-    </Container>
+    <>
+      Wishlish
+    </>
   );
 };
 
