@@ -6,7 +6,9 @@ import { updateProductFailed } from 'redux/actions/product';
 
 export const getAllProductsServices = async () => {
   try {
-    const res = await axiosJWT.get(`${process.env.REACT_APP_API_URL}/api/product`);
+    const res = await axiosJWT.get(
+      `${process.env.REACT_APP_API_URL}/api/product`
+    );
     return res;
   } catch (err) {
     console.error(err);

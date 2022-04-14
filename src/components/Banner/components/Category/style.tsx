@@ -1,4 +1,5 @@
 import tw from "twin.macro";
+import { Link } from "react-router-dom";
 
 export const CategoryWrapper = tw.div`
     col-span-5
@@ -18,7 +19,7 @@ export const CategoryList = tw.div`
     p-1.5
 `;
 
-export const CategoryItem = tw.div`
+export const CategoryItem = tw(Link)`
     flex
     items-center
     w-full

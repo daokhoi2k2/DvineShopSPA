@@ -13,6 +13,7 @@ import {
   Container,
   SubmitBtn,
 } from './styles';
+
 const Account = () => {
   const auth = useAuth();
   const dispatch = useDispatch();

@@ -7,6 +7,7 @@ export const SelectWrapper = tw.div`
 
 export const SelectionTag = tw.select`
     border
+    bg-white
     px-3
     pt-4
     h-[42px]
@@ -28,7 +29,7 @@ export const SelectionTag = tw.select`
 export const LabelTag = tw.label`
     absolute
     text-[#9ca3af]
-    top-[1px]
+    // top-[1px]
     left-[1px]
     text-sm  
     scale-[0.85]

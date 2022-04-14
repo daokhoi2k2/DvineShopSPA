@@ -16,6 +16,8 @@ interface IInput {
   readOnly?: boolean;
   disabled?: boolean;
   handleDependentFieldOf?: Function;
+  labelStyle?: Object;
+  type?: string;
 }
 
 const Input: React.FC<IInput> = (props) => {
@@ -30,6 +32,7 @@ const Input: React.FC<IInput> = (props) => {
     touched,
     isTooltip,
     handleDependentFieldOf,
+    labelStyle,
     ...rest
   } = props;
 
@@ -54,7 +57,7 @@ const Input: React.FC<IInput> = (props) => {
         defaultValue={defaultValue}
         value={value}
       />
-      <LabelTag isInvalid={errorMsg && touched} className="labelInputDynamic">
+      <LabelTag isInvalid={errorMsg && touched} className="labelInputDynamic" style={labelStyle}>
         {title}
       </LabelTag>
       {isTooltip && (

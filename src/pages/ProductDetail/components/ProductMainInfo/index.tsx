@@ -34,6 +34,8 @@ interface IProductMainInfo {
 const ProductMainInfo: React.FC<IProductMainInfo> = (props) => {
   const { name, status, categoryId, price, price_promotion } = props;
 
+  const haveSale = price_promotion && price_promotion !== price && true;
+
   const handleSalePercent = (
     price_promotion: number | undefined,
     price: number
@@ -61,17 +63,20 @@ const ProductMainInfo: React.FC<IProductMainInfo> = (props) => {
           <Text>Thể loại: {categoryId?.title}</Text>
         </ExtraInformation>
         <PriceInformation>
-          <PricePromotion>
-            <NumberFormat
-              value={price}
-              displayType={'text'}
-              decimalSeparator=","
-              thousandSeparator="."
-              suffix={'đ'}
-            />
-          </PricePromotion>
+          {haveSale && (
+            <PricePromotion>
+              <NumberFormat
+                value={price}
+                displayType={'text'}
+                decimalSeparator=","
+                thousandSeparator="."
+                suffix={'đ'}
+              />
+            </PricePromotion>
+          )}
+
           <ReducedPrice>
-            <Price haveSale>
+            <Price haveSale={haveSale}>
               {
                 <NumberFormat
                   value={price_promotion}
@@ -82,7 +87,7 @@ const ProductMainInfo: React.FC<IProductMainInfo> = (props) => {
                 />
               }
             </Price>
-            {price_promotion && (
+            {haveSale && (
               <SalePercent>
                 -{handleSalePercent(price_promotion, price)}%
               </SalePercent>

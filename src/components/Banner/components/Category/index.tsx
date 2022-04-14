@@ -9,7 +9,9 @@ const Category: React.FC = () => {
   const dispatch = useDispatch();
   // const getAllCategories = useSelector
   useEffect(() => {
-    dispatch(getAllCategories())
+    if(!categories.length) {
+      dispatch(getAllCategories())
+    }
   }, [dispatch])
 
   useEffect(() => {
@@ -21,7 +23,7 @@ const Category: React.FC = () => {
       <CategoryList>
         {categories.map((item: any) => {
           return (
-            <CategoryItem key={item?.title}>
+            <CategoryItem to={`search?category_id=${item?._id}`} key={item?.title}>
               <CateIco>
                 <img src={item?.icon} className="w-[21px] h-[17.5px]" alt={item?.title} />
               </CateIco>

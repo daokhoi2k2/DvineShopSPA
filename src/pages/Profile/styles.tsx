@@ -83,6 +83,9 @@ export const FormWrapper = tw.div``;
 export const FormList = tw.form`
     mt-5
     w-80
+    flex
+    flex-wrap
+    gap-y-3
 `;
 
 export const SubmitBtn = tw.button`

@@ -131,14 +131,18 @@ const Dialog = () => {
 
               // Append all form field for formData
               for (let key in values) {
+                if(key === "price_promotion" && !values[key]) {
+                  values[key] = values.price;
+                } 
+                // if()
                 formData.append(key, values[key]);
               }
+
               if (editField) {
                 const _id = editField?._id;
                 formData.append('_id', _id);
 
                 dispatch(updateProduct(formData));
-                
               } else {
                 dispatch(addProduct(formData));
                 resetForm();
@@ -234,6 +238,7 @@ const Dialog = () => {
                           className="w-full min-h-[200px] mb-14 rounded-md"
                           value={field.value}
                           onChange={field.onChange(field.name)}
+                          formats={['color']}
                           onBlur={() =>
                             formik.handleBlur({
                               target: { name: 'description' },

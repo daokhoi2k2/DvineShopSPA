@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import tw from 'twin.macro';
 export const InputWrapper = tw.div`
     relative
+    w-full
 `;
 
 export const InputTag = styled.input<{ isInvalid?: any, disabled?: boolean }>(({ isInvalid, disabled }) => [
@@ -13,6 +14,7 @@ export const InputTag = styled.input<{ isInvalid?: any, disabled?: boolean }>(({
     rounded-md
     text-sm
     w-full
+    // flex-basis[100%]
    
     outline-offset[2px]
     outline-color[#2579f2]
@@ -32,7 +34,6 @@ export const InputTag = styled.input<{ isInvalid?: any, disabled?: boolean }>(({
 export const LabelTag = styled.label<{ isInvalid?: any }>(({ isInvalid }) => [
   tw`  absolute
     text-[#9ca3af]
-    top-[1px]
     left-[1px]
     text-sm
     px-4

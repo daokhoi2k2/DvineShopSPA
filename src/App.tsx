@@ -36,6 +36,7 @@ const App: React.FC = () => {
             <Route path="security" element={<Security />} />
             <Route path="affiliate" element={<Affiliate />} />
             <Route path="transactions" element={<Transactions />} />
+            <Route path="search" element={<Search />} />
           </Route>
         </Route>
         <Route

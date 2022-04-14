@@ -193,28 +193,24 @@ const Profile = () => {
         <Title>Cá nhân</Title>
         <FormList onSubmit={formik.handleSubmit}>
           <Input
-            className="mt-5"
             title="Họ và tên"
             name="fullName"
             onChange={formik.handleChange}
             value={formik.values.fullName}
           />
           <Input
-            className="mt-5"
             title="Số điện thoại"
             name="phoneNumber"
             onChange={formik.handleChange}
             value={formik.values.phoneNumber}
           />
           <Input
-            className="mt-5"
             title="Chứng minh nhân dân"
             name="citizenIdentificationNumber"
             onChange={formik.handleChange}
             value={formik.values.citizenIdentificationNumber}
           />
           <Input
-            className="mt-5"
             title="Số nhà / Đường"
             name="address"
             onChange={formik.handleChange}
@@ -222,14 +218,12 @@ const Profile = () => {
           />
           <Select
             name="sex"
-            className="mt-5"
             placeholder="Giới tính"
             options={selectSexData}
             onChange={formik.handleChange}
             selected={formik.values.sex}
           ></Select>
           <Select
-            className="mt-5"
             name="city"
             placeholder="Tỉnh / Thành phố"
             options={location.city}
@@ -242,7 +236,6 @@ const Profile = () => {
             formik={formik}
           ></Select>
           <Select
-            className="mt-5"
             placeholder="Quận / Huyện"
             name="district"
             options={location.district}
@@ -256,7 +249,6 @@ const Profile = () => {
           ></Select>
           <Select
             name="ward"
-            className="mt-5"
             placeholder="Xã / Phường"
             options={location.ward}
             onChange={formik.handleChange}

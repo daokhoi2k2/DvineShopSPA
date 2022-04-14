@@ -26,7 +26,7 @@ interface IProductInfo {
 
 const ProductCard: React.FC<IProductInfo> = (props) => {
   const { thumb_nail, name, price, price_promotion, name_url } = props;
-  const haveSale = price_promotion && true;
+  const haveSale = price_promotion && price !== price_promotion && true;
 
   const handleSalePercent = (
     promotional_price: number | undefined,
@@ -41,7 +41,7 @@ const ProductCard: React.FC<IProductInfo> = (props) => {
 
   return (
     <ProductCardWrapper>
-      <Link to={name_url}>
+      <Link to={'/' + name_url}>
         <LazyLoad>
           <CardImg>
             <img
@@ -54,17 +54,19 @@ const ProductCard: React.FC<IProductInfo> = (props) => {
         <CardInfo>
           <Name>{name}</Name>
           <PriceWrapper>
-            <PricePromotion>
-              {
-                <NumberFormat
-                  value={price_promotion}
-                  displayType={'text'}
-                  decimalSeparator=","
-                  thousandSeparator="."
-                  suffix={'đ'}
-                />
-              }
-            </PricePromotion>
+            {haveSale && (
+              <PricePromotion>
+                {
+                  <NumberFormat
+                    value={price_promotion}
+                    displayType={'text'}
+                    decimalSeparator=","
+                    thousandSeparator="."
+                    suffix={'đ'}
+                  />
+                }
+              </PricePromotion>
+            )}
             <Price haveSale={haveSale}>
               {
                 <NumberFormat

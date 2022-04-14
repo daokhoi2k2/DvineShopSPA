@@ -12,10 +12,13 @@ interface IInput {
   name?: string;
   specifyFieldValue?: any;
   specifyFieldTitle?: any;
+  sepecifyDefaultValue?: any;
+  specifyDefaultTitle?: string;
   noneSelect?: any;
   onChangeDispatch?: any;
   onChangeResetOtherValue?: any;
   formik?: any;
+  labelStyle?: Object;
 }
 
 const Select: React.FC<IInput> = (props) => {
@@ -28,15 +31,18 @@ const Select: React.FC<IInput> = (props) => {
     name,
     specifyFieldValue,
     specifyFieldTitle,
+    sepecifyDefaultValue,
+    specifyDefaultTitle,
     noneSelect,
     onChangeDispatch,
     onChangeResetOtherValue,
+    labelStyle,
     formik,
     ...rest
   } = props;
   const selectedOption = options.find(
     (option: any) => option[specifyFieldValue || 'value'] === selected
-  ) || {_id: '-1'}
+  ) || { _id: sepecifyDefaultValue };
 
   const handleOptionChange = (selectedOption: any) => {
     const selectedValue = selectedOption.target.value;
@@ -44,10 +50,10 @@ const Select: React.FC<IInput> = (props) => {
       dispatch(onChangeDispatch(selectedValue));
     }
 
-    if(onChangeResetOtherValue) {
+    if (onChangeResetOtherValue) {
       onChangeResetOtherValue.forEach((name: string) => {
-        formik?.setFieldValue(name, "")
-      })
+        formik?.setFieldValue(name, '');
+      });
     }
 
     const changeEvent = {
@@ -57,7 +63,7 @@ const Select: React.FC<IInput> = (props) => {
       },
     };
     onChange(changeEvent);
-  };  
+  };
 
   return (
     <SelectWrapper {...rest}>
@@ -66,17 +72,17 @@ const Select: React.FC<IInput> = (props) => {
         className={'selectCustomArrow'}
         value={selectedOption?.[specifyFieldValue || 'value']}
       >
-        <option value={-1}>-</option>
+        <option value={sepecifyDefaultValue}>{specifyDefaultTitle || '-'}</option>
         {options.map((option: any) => (
           <option
             key={option[specifyFieldValue] || option.value}
             value={option[specifyFieldValue] || option.value}
           >
-            {option[specifyFieldTitle || "name"]}
+            {option[specifyFieldTitle || 'name']}
           </option>
         ))}
       </SelectionTag>
-      <LabelTag className="labelInputDynamic">{placeholder}</LabelTag>
+      <LabelTag className={"labelInputDynamic"} style={labelStyle}>{placeholder}</LabelTag>
     </SelectWrapper>
   );
 };
