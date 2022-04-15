@@ -16,6 +16,7 @@ import LayoutAdmin from 'pages/Admin/LayoutAdmin';
 import Account from 'pages/Account';
 import Affiliate from 'pages/Affiliate';
 import Transactions from 'pages/Transactions';
+import Cart from 'pages/Cart';
 
 const App: React.FC = () => {
   useEffect(() => {
@@ -29,6 +30,7 @@ const App: React.FC = () => {
           <Route index element={<Home />} />
           <Route path=":hash_name" element={<ProductDetail />} />
           <Route path="search" element={<Search />} />
+          <Route path="cart" element={<Cart />} />
           <Route path="user" element={<Account />}>
             <Route path="profile" element={<Profile />} />
             <Route path="orders" element={<OrderHistory />} />

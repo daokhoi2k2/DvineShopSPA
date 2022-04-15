@@ -5,6 +5,7 @@ import ProductList from 'components/ProductList';
 import { ProductListWrapper } from 'components/ProductList/styles';
 import Select from 'components/Select';
 import { FilterIcon } from 'designs/icons/Drawer';
+import Img from 'designs/Img';
 import { Form, Formik } from 'formik';
 import { FilterButton } from 'pages/OrderHistory/styles';
 
@@ -16,6 +17,7 @@ import { RootState } from 'redux/reducers';
 import { getProductsListServices } from 'services/product';
 import {
   Container,
+  ProductEmpty,
   SearchController,
   SearchLayout,
   SearchTable,
@@ -30,7 +32,7 @@ const Search: React.FC = () => {
 
   const searchParamsObject = useMemo(() => {
     return Object.fromEntries([...searchParams]);
-  }, [searchParams])
+  }, [searchParams]);
 
   const sortOptions = [
     {
@@ -169,7 +171,19 @@ const Search: React.FC = () => {
             </Formik>
           </SearchController>
           <SearchTable>
-            <ProductList data={products}></ProductList>
+            {products.length ? (
+              <ProductList data={products}></ProductList>
+            ) : (
+              <ProductEmpty>
+                <h2 className="text-lg font-semibold text-center">
+                  Không có sản phẩm phù hợp với tìm kiếm!
+                </h2>
+                <h4 className="text-sm text-center">
+                  Bạn có thể thử từ khóa đơn giản hơn hoặc liên hệ với hỗ trợ.
+                </h4>
+                <Img name="emptyProduct.svg" className="mx-auto mt-10" />
+              </ProductEmpty>
+            )}
           </SearchTable>
         </SearchLayout>
       </SearchWrapper>

@@ -131,7 +131,7 @@ const MainControl: React.FC = () => {
           </UserControlWrapper>
         )}
       </AuthControlWrapper>
-      <CartWrapper>
+      <CartWrapper to="/cart">
         <CartIcon className="text-white w-[20px] h-[17.5px]"></CartIcon>
         <CartTitle>Giỏ hàng</CartTitle>
         <CartAmount>0</CartAmount>

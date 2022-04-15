@@ -6,7 +6,6 @@ import Header from 'components/Header';
 import Banner from 'components/Banner';
 import TitleList from 'components/TitleList';
 import ProductList from 'components/ProductList';
-import Footer from 'components/Footer';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'redux/reducers';
 import { getAllProducts } from 'redux/actions/product';
@@ -42,7 +41,6 @@ const Home = () => {
           <ProductList data={products}></ProductList>
         </HotProductInner>
       </HotProductWrapper>
-      <Footer></Footer>
     </Container>
   );
 };

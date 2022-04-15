@@ -28,8 +28,6 @@ const ProductDetail = () => {
     })();
   }, [hash_name]);
 
-  console.log("Asd")
-
   return (
     <Container>
       <ProductDetailWrapper>

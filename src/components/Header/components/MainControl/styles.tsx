@@ -92,7 +92,7 @@ export const ControlAuthItem = tw.div`
 `;
 
 // Cart Style
-export const CartWrapper = tw.div`
+export const CartWrapper = tw(Link)`
     flex
     items-center
 

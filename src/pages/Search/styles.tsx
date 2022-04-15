@@ -34,3 +34,8 @@ export const SeparateBetweenInput = tw.div`
 export const SearchTable = tw.div`
     p-2.5
 `;
+
+export const ProductEmpty = tw.div`
+    w-full
+    mt-10
+`;
