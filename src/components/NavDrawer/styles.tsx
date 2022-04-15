@@ -96,3 +96,8 @@ export const CloseDrawer = tw.div`
     cursor-pointer
 `;
 
+export const UserInfo = tw.div`
+    flex
+    gap-x-3
+    items-center
+`;

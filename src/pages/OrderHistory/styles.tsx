@@ -50,8 +50,8 @@ export const FilterButton = tw.button`
     rounded-md
     gap-x-1
     m-2
-    sm:px-3
-    sm:py-2   
+    lg:px-3
+    lg:py-2   
     sm:mx-2
     sm:my-0
 `;

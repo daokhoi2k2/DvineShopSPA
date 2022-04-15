@@ -29,6 +29,8 @@ export const SeparateBetweenInput = tw.div`
     font-semibold
     whitespace-nowrap
     text-sm
+
+    lg:hidden
 `;
 
 export const SearchTable = tw.div`

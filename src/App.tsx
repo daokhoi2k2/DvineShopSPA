@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import Home from 'pages/Home';
 import ProductDetail from 'pages/ProductDetail';
 import { ToastContainer } from 'react-toastify';
@@ -19,9 +19,11 @@ import Transactions from 'pages/Transactions';
 import Cart from 'pages/Cart';
 
 const App: React.FC = () => {
+  const { pathname } = useLocation();
+ 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
+  }, [pathname]);
 
   return (
     <>

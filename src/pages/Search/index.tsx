@@ -110,10 +110,10 @@ const Search: React.FC = () => {
               }}
             >
               {(formik) => (
-                <Form className="flex">
+                <Form className="flex lg:flex-wrap">
                   <Select
                     name="categoryId"
-                    className="p-2"
+                    className="p-2 lg:flex-basis[50%] lg:w-[50%]"
                     placeholder="Danh mục"
                     options={categories}
                     onChange={formik.handleChange}
