@@ -21,6 +21,7 @@ export const NavDrawerInner = tw.div`
     bg-white
     min-w-[18rem]
     z-30
+    overflow-y-auto
 `;
 
 export const RestFixed = tw.div`
