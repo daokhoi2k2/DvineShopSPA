@@ -1,8 +1,14 @@
-import { CartIcon, MoreIcon, PersonIcon, PlusIcon, SearchIcon } from "designs/icons/Drawer";
-import SVG from "designs/SVG";
-import React from "react";
-import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import {
+  CartIcon,
+  MoreIcon,
+  PersonIcon,
+  PlusIcon,
+  SearchIcon,
+} from 'designs/icons/Drawer';
+import SVG from 'designs/SVG';
+import React, { useMemo } from 'react';
+import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   AuthControlWrapper,
   AuthWrapper,
@@ -32,23 +38,33 @@ import {
   UserControlWrapper,
   UserInfoWrapper,
   UserText,
-} from "./styles";
-import { setAuthModalBox, toggleNavDrawer } from "redux/actions/config";
-import useAuth, { IUseAuth } from "hooks/useAuth";
+} from './styles';
+import { setAuthModalBox, toggleNavDrawer } from 'redux/actions/config';
+import useAuth, { IUseAuth } from 'hooks/useAuth';
+import { RootState } from 'redux/reducers';
 
 const MainControl: React.FC = () => {
   const dispatch = useDispatch();
-  const account:IUseAuth = useAuth();
-  
+  const cartList = useSelector((state: RootState) => state.cart.cartList);
+  const account: IUseAuth = useAuth();
+
   const handleToggleNavDrawer = () => {
     dispatch(toggleNavDrawer());
   };
+
+  const cartAmountTotal = useMemo(() => {
+    const cartData = Object.values(cartList);
+    return cartData.reduce(
+      (total, currentValue: any) => total + currentValue.quantity,
+      0
+    );
+  }, [cartList]) as number;
 
   const showLoginRegisterModalBox = () => {
     dispatch(
       setAuthModalBox({
         isShow: true,
-        boxName: "login",
+        boxName: 'login',
       })
     );
   };
@@ -57,19 +73,22 @@ const MainControl: React.FC = () => {
     dispatch(
       setAuthModalBox({
         isShow: true,
-        boxName: "register",
+        boxName: 'register',
       })
     );
   };
   const handleLogout = () => {
     account.logout();
-  }
+  };
 
   return (
     <MainControlWrapper>
       <Link to="/" className="lg:hidden">
         <LogoWrapper>
-          <SVG name="logo_divine_pure_white" className="w-[49px] h-[49px]"></SVG>
+          <SVG
+            name="logo_divine_pure_white"
+            className="w-[49px] h-[49px]"
+          ></SVG>
           <LogoText>Divine Shop</LogoText>
         </LogoWrapper>
       </Link>
@@ -93,9 +112,13 @@ const MainControl: React.FC = () => {
               </IconAuth>
             </IconAuthWrapper>
             <ControlAuthWrapper>
-              <ControlAuthItem onClick={showLoginRegisterModalBox}>Đăng nhập</ControlAuthItem>
+              <ControlAuthItem onClick={showLoginRegisterModalBox}>
+                Đăng nhập
+              </ControlAuthItem>
               <ControlAuthItem>/</ControlAuthItem>
-              <ControlAuthItem onClick={showRegisterModelBox}>Đăng ký</ControlAuthItem>
+              <ControlAuthItem onClick={showRegisterModelBox}>
+                Đăng ký
+              </ControlAuthItem>
             </ControlAuthWrapper>
           </AuthWrapper>
         ) : (
@@ -103,7 +126,7 @@ const MainControl: React.FC = () => {
             <UserAvatar>
               <ImgAvatar
                 className="w-[42px] h-[42px]"
-                src={require("../../../../assets/images/trend-avatar-1-73987.jpg")}
+                src={require('../../../../assets/images/trend-avatar-1-73987.jpg')}
               />
             </UserAvatar>
             <UserText>{account.accountInfo.username}</UserText>
@@ -125,7 +148,9 @@ const MainControl: React.FC = () => {
                 <NavItem to="/user/profile">Quản lý tài khoản</NavItem>
                 <NavItem to="/user/orders">Lịch sử đơn hàng</NavItem>
                 <NavItem to="/user/wishlist">Sản phẩm yêu thích</NavItem>
-                <NavItem onClick={handleLogout} to="#">Đăng xuất</NavItem>
+                <NavItem onClick={handleLogout} to="#">
+                  Đăng xuất
+                </NavItem>
               </NavList>
             </UserInfoWrapper>
           </UserControlWrapper>
@@ -134,7 +159,7 @@ const MainControl: React.FC = () => {
       <CartWrapper to="/cart">
         <CartIcon className="text-white w-[20px] h-[17.5px]"></CartIcon>
         <CartTitle>Giỏ hàng</CartTitle>
-        <CartAmount>0</CartAmount>
+        <CartAmount>{cartAmountTotal}</CartAmount>
       </CartWrapper>
     </MainControlWrapper>
   );

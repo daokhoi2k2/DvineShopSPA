@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import tw from "twin.macro";
 
 export const FooterWrapper = tw.div`
-  
+  mt-3
 `;
 
 export const FooterInner = tw.div`

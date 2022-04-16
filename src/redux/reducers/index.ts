@@ -5,6 +5,7 @@ import productReducer from "./product";
 import authReducer from "./auth";
 import userReducer from "./user";
 import locationReducer from "./location";
+import cartReducer from "./cart";
 
 export const rootReducer = combineReducers({
   config: configReducer,
@@ -12,7 +13,8 @@ export const rootReducer = combineReducers({
   product: productReducer,
   auth: authReducer,
   user: userReducer,
-  location: locationReducer
+  location: locationReducer,
+  cart: cartReducer
 });
 
 // Yêu cầu trả về redux của typescript

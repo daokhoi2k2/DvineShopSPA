@@ -15,9 +15,9 @@ declare global {
 
 // Config redux persist
 const persistConfig = {
-  key: 'auth',
+  key: 'app',
   storage,
-  whitelist: ['auth'] // Chỉ lưu localStorage auth
+  whitelist: ['auth', 'cart'] // Just save auth and cart in localStorage
 }
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

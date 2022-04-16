@@ -1,4 +1,6 @@
+import styled from '@emotion/styled';
 import tw from 'twin.macro';
+import { Link } from "react-router-dom";
 
 export const CartListWrapper = tw.div`
     w-full
@@ -46,7 +48,7 @@ export const CartItem = tw.div`
     sm:flex-wrap
 `;
 
-export const CartItemThumbNailWrapper = tw.div`
+export const CartItemThumbNailWrapper = tw(Link)`
     rounded-md
     flex-basis[37.5%]
     sm:flex-basis[100%]
@@ -107,16 +109,18 @@ export const AmountInput = tw.input`
     outline-none
 `;
 
-export const ProductPrice = tw.div`
-    flex
+export const ProductPrice = styled.div<{ haveSale?: boolean }>(
+  ({ haveSale }) => [
+    tw`flex
     flex-col
     items-end
     flex-grow
     my-2
     sm:items-end
     sm:flex-row
-    
-`;
+    `,
+  ]
+);
 
 export const Hr = tw.div`
     border-t

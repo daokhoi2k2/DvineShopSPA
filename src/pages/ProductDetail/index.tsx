@@ -1,4 +1,3 @@
-import Header from 'components/Header';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getProductByHashNameServices } from 'services/product';
@@ -27,18 +26,13 @@ const ProductDetail = () => {
       setProductInfo(response?.data);
     })();
   }, [hash_name]);
-
   return (
     <Container>
       <ProductDetailWrapper>
         <ProductDetailInner>
           <MoreThumbNail thumb_nail={productInfo?.thumb_nail}></MoreThumbNail>
           <ProductMainInfo
-            name={productInfo?.name}
-            status={productInfo?.status}
-            categoryId={productInfo?.categoryId}
-            price={productInfo?.price}
-            price_promotion={productInfo?.price_promotion}
+            productInfo={productInfo}
           ></ProductMainInfo>
           <ProductSubInfo></ProductSubInfo>
         </ProductDetailInner>

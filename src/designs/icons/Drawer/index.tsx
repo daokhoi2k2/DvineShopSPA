@@ -38,6 +38,7 @@ export { ReactComponent as ProductIcon } from "assets/svg/product.svg";
 export { ReactComponent as GridIcon } from "assets/svg/grid.svg";
 export { ReactComponent as EditIcon } from "assets/svg/edit-outline.svg";
 export { ReactComponent as TrashIcon } from "assets/svg/trash-outline.svg";
+export { ReactComponent as TrashIconV2 } from "assets/svg/trashv2.svg";
 export { ReactComponent as LogoutIcon } from "assets/svg/logout.svg";
 
 
