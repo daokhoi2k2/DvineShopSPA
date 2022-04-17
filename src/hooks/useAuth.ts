@@ -25,8 +25,40 @@ const useAuth = () => {
     dispatch(authLogout());
   };
 
+  const memberShip = {
+    id: user?.userInfo?.memberShip,
+    info: (() => {
+      switch (user?.userInfo?.memberShip) {
+        case 1:
+          return {
+            text: 'Vip Đồng',
+            discount: 0,
+            icon: require('../assets/images/bronze.png'),
+          };
+        case 2:
+          return {
+            text: 'Vip Bạc',
+            discount: 1,
+            icon: require('../assets/images/silver.png'),
+          };
+        case 3:
+          return {
+            text: 'Vip Vàng',
+            discount: 2,
+            icon: require('../assets/images/gold.png'),
+          };
+        case 4:
+          return {
+            text: 'Vip Kim Cương',
+            discount: 3,
+            icon: require('../assets/images/diamond.png'),
+          };
+      }
+    })(),
+  };
+
   // useEffect
-  return { isAuth, accountInfo, logout, isAuthAdmin: user?.userInfo?.role };
+  return { isAuth, accountInfo, logout, isAuthAdmin: user?.userInfo?.role, memberShip };
 };
 
 export default useAuth;

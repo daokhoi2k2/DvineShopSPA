@@ -103,8 +103,8 @@ const CartList = () => {
   const handleChangeAmount = (e: BaseSyntheticEvent) => {
     const _id = e.currentTarget.dataset.id;
     let quantity = e.target.value;
-    console.log(quantity)
-    if (quantity <= 0 || isNaN(quantity) || !quantity || quantity === "") {
+    console.log(quantity);
+    if (quantity <= 0 || isNaN(quantity) || !quantity) {
       quantity = 1;
     } else {
       clearTimeout(timer.current);
@@ -118,6 +118,17 @@ const CartList = () => {
 
       fakeLoading();
     }
+  };
+
+  const handleSalePercent = (
+    price_promotion: number | undefined,
+    price: number
+  ) => {
+    if (price_promotion) {
+      const result = (1 - price_promotion / price) * 100;
+      return Math.floor(result);
+    }
+    return 0;
   };
 
   return (
@@ -181,7 +192,7 @@ const CartList = () => {
                       <ProductPrice>
                         <h2 className="font-semibold text-lg">
                           <NumberFormat
-                            value={productInfo.price}
+                            value={productInfo.price_promotion}
                             displayType={'text'}
                             decimalSeparator=","
                             thousandSeparator="."
@@ -194,11 +205,16 @@ const CartList = () => {
                             (!haveSale && 'hidden')
                           }
                         >
-                          <SalePercent className="absolute left-[-60%] sm:static">
-                            -70%
+                          <SalePercent className="absolute left-[-45px] sm:static">
+                            -
+                            {handleSalePercent(
+                              productInfo.price_promotion,
+                              productInfo.price
+                            )}
+                            %
                           </SalePercent>
                           <NumberFormat
-                            value={3360000}
+                            value={productInfo.price}
                             displayType={'text'}
                             decimalSeparator=","
                             thousandSeparator="."

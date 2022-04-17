@@ -42,6 +42,8 @@ import {
 import { setAuthModalBox, toggleNavDrawer } from 'redux/actions/config';
 import useAuth, { IUseAuth } from 'hooks/useAuth';
 import { RootState } from 'redux/reducers';
+import NumberFormat from 'react-number-format';
+import VND from 'components/VND';
 
 const MainControl: React.FC = () => {
   const dispatch = useDispatch();
@@ -138,7 +140,9 @@ const MainControl: React.FC = () => {
               <Balance>
                 <BalanceTitle>Số dư tài khoản</BalanceTitle>
                 <BalanceInfo>
-                  <BalanceMoney>7.893đ</BalanceMoney>
+                  <BalanceMoney>
+                    {<VND value={account.accountInfo.balance} />}
+                  </BalanceMoney>
                   <BalanceIcon>
                     <PlusIcon className="w-[17.5px] h-[17.5px] text-[#2579f2]"></PlusIcon>
                   </BalanceIcon>

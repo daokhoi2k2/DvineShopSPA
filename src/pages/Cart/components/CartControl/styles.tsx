@@ -57,3 +57,12 @@ export const PaymentSubTitle = tw.h5`
   whitespace-nowrap
   text-center
 `;
+
+export const PaymentInfo = tw.div``;
+
+export const PaymentInfoItem = tw.div`
+  flex
+  justify-between
+  text-sm
+  my-2
+`;
