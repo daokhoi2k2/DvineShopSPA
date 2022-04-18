@@ -17,6 +17,7 @@ import Account from 'pages/Account';
 import Affiliate from 'pages/Affiliate';
 import Transactions from 'pages/Transactions';
 import Cart from 'pages/Cart';
+import OrderDetail from 'pages/OrderDetail';
 
 const App: React.FC = () => {
   const { pathname } = useLocation();
@@ -36,6 +37,7 @@ const App: React.FC = () => {
           <Route path="user" element={<Account />}>
             <Route path="profile" element={<Profile />} />
             <Route path="orders" element={<OrderHistory />} />
+            <Route path="order/:id" element={<OrderDetail />} />
             <Route path="wishlist" element={<Wishlist />} />
             <Route path="security" element={<Security />} />
             <Route path="affiliate" element={<Affiliate />} />

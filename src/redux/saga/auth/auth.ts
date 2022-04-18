@@ -69,8 +69,7 @@ export function* logoutUserSaga(): any {
 export function* authRefreshUserSaga(): any {
   try {
     const response = yield call(services.getUserInfoCurrent);
-
-    console.log('Response: ', response);
+    
     if (response.status === 200) {
       yield put(authRefreshuserSuccess(response?.data));
     }

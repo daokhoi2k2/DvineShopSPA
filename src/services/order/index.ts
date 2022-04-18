@@ -13,14 +13,40 @@ export const getAllOrderServices = async () => {
   } catch (err) {
     console.error(err);
   }
-}; 
+};
+
+export const getUserOrderServices = async (payload: any) => {
+  try {
+    const res = await axiosJWT.get(
+      `${process.env.REACT_APP_API_URL}/api/user/order`,
+      {
+        params: payload,
+      }
+    );
+    return res;
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const getOrderByIdServices = async (payload: any) => {
+  try {
+    const res = await axiosJWT.get(
+      `${process.env.REACT_APP_API_URL}/api/order/${payload}`,
+    );
+    return res;
+  } catch (err) {
+    console.error(err);
+  }
+};
 
 export const addOrderServices = async (payload: any) => {
   try {
-    const res = await axiosJWT.post(
+    const res = await axios.post(
       `${process.env.REACT_APP_API_URL}/api/order`,
-      payload,
+      payload
     );
+
     return res;
   } catch (err) {
     console.error(err);

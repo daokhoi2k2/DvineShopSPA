@@ -106,17 +106,16 @@ const Profile = () => {
       },
       {
         title: 'Nhóm khách hàng',
-        value:
-          (
-            <div>
-              <img
-                className="w-[21px] h-[17.5px] inline-block"
-                src={auth?.memberShip.info?.icon}
-                alt={auth?.memberShip?.info?.text}
-              />{' '}
-              {auth?.memberShip?.info?.text}
-            </div>
-          ) || '',
+        value: auth?.memberShip?.info?.text && (
+          <div>
+            <img
+              className="w-[21px] h-[17.5px] inline-block"
+              src={auth?.memberShip.info?.icon}
+              alt={auth?.memberShip?.info?.text}
+            />
+            {auth?.memberShip?.info?.text}
+          </div>
+        ),
       },
       {
         title: 'Số dư',

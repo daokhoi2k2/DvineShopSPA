@@ -6,6 +6,7 @@ import authReducer from "./auth";
 import userReducer from "./user";
 import locationReducer from "./location";
 import cartReducer from "./cart";
+import orderReducer from "./order";
 
 export const rootReducer = combineReducers({
   config: configReducer,
@@ -14,7 +15,8 @@ export const rootReducer = combineReducers({
   auth: authReducer,
   user: userReducer,
   location: locationReducer,
-  cart: cartReducer
+  cart: cartReducer,
+  order: orderReducer
 });
 
 // Yêu cầu trả về redux của typescript

@@ -133,10 +133,13 @@ const MainControl: React.FC = () => {
               />
             </UserAvatar>
             <UserText>{account.accountInfo.username}</UserText>
-            <ImgAvatar
-              className="w-[21px] h-[21px]"
-              src={account?.memberShip?.info?.icon}
-            />
+            {account?.memberShip?.info?.text && (
+              <ImgAvatar
+                className="w-[21px] h-[21px]"
+                src={account?.memberShip?.info?.icon}
+              />
+            )}
+
             <UserInfoWrapper>
               <Balance>
                 <BalanceTitle>Số dư tài khoản</BalanceTitle>

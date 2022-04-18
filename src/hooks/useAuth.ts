@@ -54,6 +54,10 @@ const useAuth = () => {
             discount: 3,
             icon: require('../assets/images/diamond.png'),
           };
+        default: 
+          return {
+            discount: 0
+          }
       }
     })(),
   };

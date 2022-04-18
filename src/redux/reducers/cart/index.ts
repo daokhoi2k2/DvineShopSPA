@@ -77,6 +77,9 @@ const reducer = (state = initialState, action: any) =>
       case types.REMOVE_CART_ITEM_PENDING:
         // console.log('ADD REMOVE', action);
         break;
+      case types.CLEAR_CART:
+        draft.cartList = {}
+        break;
     }
   });
 

@@ -35,6 +35,8 @@ export const Hr = tw.div`
 
 export const FormList = tw.form`
     flex
+    ml-[-8px]
+    mr-[-8px]
 
     xl:flex-wrap
     xl:gap-y-4
@@ -61,7 +63,7 @@ export const ItemWrapper = tw.div`
 
     first-of-type:flex-basis[30%]
     // w-full
-    xl:flex-basis[33%]
+    xl:flex-basis[33.3333333333333333%]
     xl:first-of-type:flex-basis[33%]
     sm:flex-basis[50%]
     sm:first-of-type:flex-basis[100%]

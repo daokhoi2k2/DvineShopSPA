@@ -90,6 +90,7 @@ const RegisterBox: React.FC = () => {
             onBlur={formik.handleBlur}
             value={formik.values.password}
             error={touched.password && errors.password ? true : false}
+            type="password"
           />
           {touched.password && <ErrorMsg>{errors.password}</ErrorMsg>}
 

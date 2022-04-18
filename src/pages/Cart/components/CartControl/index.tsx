@@ -5,6 +5,7 @@ import { Hr } from 'pages/OrderHistory/styles';
 import React, { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setAuthModalBox } from 'redux/actions/config';
+import { createOrder } from 'redux/actions/order';
 import { RootState } from 'redux/reducers';
 import { addOrderServices } from 'services/order';
 import {
@@ -77,54 +78,20 @@ const CartControl = () => {
     const entries = Object.values(cartList).map((item: any) => {
       const {
         _id,
-        name,
-        name_url,
-        price,
-        price_promotion,
-        categoryId,
-        thumb_nail,
       } = item.productInfo;
       const orderItem = {
-        product: {
-          _id,
-          name,
-          name_url,
-          price,
-          price_promotion,
-          categoryId,
-          thumb_nail,
-        },
+        productId: _id,
         quantity: item.quantity,
       };
       return orderItem;
     });
 
     const newOrder = {
-      totals: [
-        {
-          title: 'Thành tiền',
-          value: totalPaymentAfterDiscount,
-        },
-        {
-          title: 'Tổng đơn hàng',
-          value: totalPaymentAfterDiscount,
-        },
-        {
-          title: `Thưởng tiền khách (${auth.memberShip.info.text})`,
-          value: calculatorVipHaveDiscounted,
-        },
-        {
-          title: 'Số dư hiện tại',
-          value: auth?.accountInfo?.balance || 0,
-        },
-      ],
-      discount: auth?.memberShip?.info?.discount,
-      membership: auth?.accountInfo?.membership,
       email: auth?.accountInfo?.email,
       entries,
     };
     // console.log(newOrder);
-    addOrderServices(newOrder);
+    dispatch(createOrder(newOrder));
   };
 
   return (

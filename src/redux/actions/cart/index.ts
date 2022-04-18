@@ -38,3 +38,7 @@ export const removeCartItemSuccess = (payload: any) => ({
     type: types.REMOVE_CART_ITEM_SUCCESS,
     payload
 })
+
+export const clearCart = () => ({
+    type: types.CLEAR_CART,
+})
