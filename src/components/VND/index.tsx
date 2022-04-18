@@ -3,9 +3,10 @@ import NumberFormat from 'react-number-format';
 
 interface IVND {
     value: number | string;
+    className?: any
 }
 
-const VND: React.FC<IVND> = ({ value }) => {
+const VND: React.FC<IVND> = ({ value, className }) => {
   return (
     <NumberFormat
       value={value}
@@ -13,6 +14,7 @@ const VND: React.FC<IVND> = ({ value }) => {
       decimalSeparator=","
       thousandSeparator="."
       suffix={'đ'}
+      className={className}
     />
   );
 };

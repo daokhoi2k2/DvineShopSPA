@@ -1,11 +1,12 @@
+import VND from 'components/VND';
 import Img from 'designs/Img';
 import useAuth from 'hooks/useAuth';
 import { Hr } from 'pages/OrderHistory/styles';
 import React, { useMemo } from 'react';
-import NumberFormat from 'react-number-format';
 import { useDispatch, useSelector } from 'react-redux';
 import { setAuthModalBox } from 'redux/actions/config';
 import { RootState } from 'redux/reducers';
+import { addOrderServices } from 'services/order';
 import {
   CartControlWrapper,
   DisclosureItem,
@@ -72,6 +73,60 @@ const CartControl = () => {
     );
   };
 
+  const handlePayment = () => {
+    const entries = Object.values(cartList).map((item: any) => {
+      const {
+        _id,
+        name,
+        name_url,
+        price,
+        price_promotion,
+        categoryId,
+        thumb_nail,
+      } = item.productInfo;
+      const orderItem = {
+        product: {
+          _id,
+          name,
+          name_url,
+          price,
+          price_promotion,
+          categoryId,
+          thumb_nail,
+        },
+        quantity: item.quantity,
+      };
+      return orderItem;
+    });
+
+    const newOrder = {
+      totals: [
+        {
+          title: 'Thành tiền',
+          value: totalPaymentAfterDiscount,
+        },
+        {
+          title: 'Tổng đơn hàng',
+          value: totalPaymentAfterDiscount,
+        },
+        {
+          title: `Thưởng tiền khách (${auth.memberShip.info.text})`,
+          value: calculatorVipHaveDiscounted,
+        },
+        {
+          title: 'Số dư hiện tại',
+          value: auth?.accountInfo?.balance || 0,
+        },
+      ],
+      discount: auth?.memberShip?.info?.discount,
+      membership: auth?.accountInfo?.membership,
+      email: auth?.accountInfo?.email,
+      entries,
+    };
+    // console.log(newOrder);
+    addOrderServices(newOrder);
+  };
+
   return (
     <CartControlWrapper>
       {/* <DisclosureList>
@@ -87,34 +142,16 @@ const CartControl = () => {
           <PaymentInfo>
             <PaymentInfoItem>
               <h4>Tổng giá trị sản phẩm</h4>
-              <h5 className="font-semibold">
-                {
-                  <NumberFormat
-                    value={totalCartList}
-                    displayType={'text'}
-                    decimalSeparator=","
-                    thousandSeparator="."
-                    suffix={'đ'}
-                  />
-                }
-              </h5>
+              <h5 className="font-semibold">{<VND value={totalCartList} />}</h5>
             </PaymentInfoItem>
             {auth.memberShip.info && (
               <PaymentInfoItem>
                 <h4>
-                  Thưởng tiền khách {auth.memberShip.info.text}(
+                  Thưởng tiền khách {auth.memberShip.info.text} (
                   {auth.memberShip.info.discount}%)
                 </h4>
                 <h5 className="font-semibold">
-                  {
-                    <NumberFormat
-                      value={calculatorVipHaveDiscounted}
-                      displayType={'text'}
-                      decimalSeparator=","
-                      thousandSeparator="."
-                      suffix={'đ'}
-                    />
-                  }
+                  {<VND value={calculatorVipHaveDiscounted} />}
                 </h5>
               </PaymentInfoItem>
             )}
@@ -123,42 +160,20 @@ const CartControl = () => {
             <PaymentInfoItem>
               <h4>Tổng giá trị phải thanh toán</h4>
               <h5 className="font-semibold">
-                {
-                  <NumberFormat
-                    value={totalPaymentAfterDiscount}
-                    displayType={'text'}
-                    decimalSeparator=","
-                    thousandSeparator="."
-                    suffix={'đ'}
-                  />
-                }
+                {<VND value={totalPaymentAfterDiscount} />}
               </h5>
             </PaymentInfoItem>
 
             <PaymentInfoItem>
               <h4>Số dư hiện tại</h4>
               <h5 className="font-semibold">
-                {
-                  <NumberFormat
-                    value={auth?.accountInfo?.balance || 0}
-                    displayType={'text'}
-                    decimalSeparator=","
-                    thousandSeparator="."
-                    suffix={'đ'}
-                  />
-                }
+                {<VND value={auth?.accountInfo?.balance || 0} />}
               </h5>
             </PaymentInfoItem>
             <PaymentInfoItem>
               <h4>Số tiền cần nạp thêm</h4>
               <h5 className="font-semibold">
-                <NumberFormat
-                  value={calculatorBalanceNeedRecharge}
-                  displayType={'text'}
-                  decimalSeparator=","
-                  thousandSeparator="."
-                  suffix={'đ'}
-                />
+                <VND value={calculatorBalanceNeedRecharge} />
               </h5>
             </PaymentInfoItem>
           </PaymentInfo>
@@ -167,6 +182,7 @@ const CartControl = () => {
           <PaymentItem
             disabled={calculatorBalanceNeedRecharge === 0 ? false : true}
             className="bg-[#2579F2] hover:opacity-90 cursor-pointer disabled:bg-[#7CAFF7] disabled:cursor-default"
+            onClick={handlePayment}
           >
             <Img
               className="w-[24.5px] h-[24.5px] mx-2"

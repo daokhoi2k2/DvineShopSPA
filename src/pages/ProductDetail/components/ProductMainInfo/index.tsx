@@ -1,7 +1,7 @@
 import { Price, SalePercent } from 'components/ProductCard/styles';
+import VND from 'components/VND';
 import { BoxIcon, CardIcon, CartIcon, TagIcon } from 'designs/icons/Drawer';
 import React from 'react';
-import NumberFormat from 'react-number-format';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { addCartItem } from 'redux/actions/cart';
@@ -94,27 +94,13 @@ const ProductMainInfo: React.FC<IProductMainInfo> = ({ productInfo }) => {
         <PriceInformation>
           {haveSale && (
             <PricePromotion>
-              <NumberFormat
-                value={productInfo?.price}
-                displayType={'text'}
-                decimalSeparator=","
-                thousandSeparator="."
-                suffix={'đ'}
-              />
+              <VND value={productInfo?.price_promotion} />
             </PricePromotion>
           )}
 
           <ReducedPrice>
             <Price haveSale={haveSale}>
-              {
-                <NumberFormat
-                  value={productInfo?.price_promotion}
-                  displayType={'text'}
-                  decimalSeparator=","
-                  thousandSeparator="."
-                  suffix={'đ'}
-                />
-              }
+              {<VND value={productInfo?.price} />}
             </Price>
             {haveSale && (
               <SalePercent>

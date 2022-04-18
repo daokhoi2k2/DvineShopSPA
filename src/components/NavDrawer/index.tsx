@@ -1,3 +1,4 @@
+import VND from 'components/VND';
 import { HomeIconFC, PlusIconFC } from 'designs/icons/Components';
 import {
   CardIcon,
@@ -11,7 +12,6 @@ import {
 import SVG from 'designs/SVG';
 import useAuth from 'hooks/useAuth';
 import React, { useEffect, useState } from 'react';
-import NumberFormat from 'react-number-format';
 import { useSelector, useDispatch } from 'react-redux';
 import { getAllCategories } from 'redux/actions/category';
 import { setAuthModalBox, setNavDrawer } from 'redux/actions/config';
@@ -157,15 +157,7 @@ const NavDrawer: React.FC = () => {
                   </div>
                   <h3 className="text-sm font-semibold">
                     Số dư:
-                    {
-                      <NumberFormat
-                        value={auth.accountInfo?.balance}
-                        displayType={'text'}
-                        decimalSeparator=","
-                        thousandSeparator="."
-                        suffix={'đ'}
-                      />
-                    }
+                    {<VND value={auth.accountInfo?.balance} />}
                   </h3>
                 </div>
               </UserInfo>

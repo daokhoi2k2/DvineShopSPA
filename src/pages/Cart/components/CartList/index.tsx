@@ -39,6 +39,7 @@ import {
   setQuantityCartItem,
 } from 'redux/actions/cart';
 import { toast } from 'react-toastify';
+import VND from 'components/VND';
 
 const CartList = () => {
   const cartList: IProductCart[] = Object.values(
@@ -191,13 +192,7 @@ const CartList = () => {
                       </ProductAmount>
                       <ProductPrice>
                         <h2 className="font-semibold text-lg">
-                          <NumberFormat
-                            value={productInfo.price_promotion}
-                            displayType={'text'}
-                            decimalSeparator=","
-                            thousandSeparator="."
-                            suffix={'đ'}
-                          />
+                          <VND value={productInfo.price_promotion} />
                         </h2>
                         <div
                           className={
@@ -213,12 +208,8 @@ const CartList = () => {
                             )}
                             %
                           </SalePercent>
-                          <NumberFormat
+                          <VND
                             value={productInfo.price}
-                            displayType={'text'}
-                            decimalSeparator=","
-                            thousandSeparator="."
-                            suffix={'đ'}
                             className="font-semibold line-through text-sm text-[#6b7280] ml-1"
                           />
                         </div>

@@ -8,6 +8,7 @@ export interface IUseAuth {
   isAuth: boolean;
   accountInfo: IUserInfo | any;
   logout: () => void;
+  memberShip: any;
 }
 
 const useAuth = () => {
@@ -26,9 +27,9 @@ const useAuth = () => {
   };
 
   const memberShip = {
-    id: user?.userInfo?.memberShip,
+    id: user?.userInfo?.membership,
     info: (() => {
-      switch (user?.userInfo?.memberShip) {
+      switch (user?.userInfo?.membership) {
         case 1:
           return {
             text: 'Vip Đồng',

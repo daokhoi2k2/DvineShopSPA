@@ -1,7 +1,7 @@
+import VND from 'components/VND';
 import Img from 'designs/Img';
 import React from 'react';
 import LazyLoad from 'react-lazyload';
-import NumberFormat from 'react-number-format';
 import { Link } from 'react-router-dom';
 
 import {
@@ -55,29 +55,9 @@ const ProductCard: React.FC<IProductInfo> = (props) => {
           <Name>{name}</Name>
           <PriceWrapper>
             {haveSale && (
-              <PricePromotion>
-                {
-                  <NumberFormat
-                    value={price_promotion}
-                    displayType={'text'}
-                    decimalSeparator=","
-                    thousandSeparator="."
-                    suffix={'đ'}
-                  />
-                }
-              </PricePromotion>
+              <PricePromotion>{<VND value={price_promotion} />}</PricePromotion>
             )}
-            <Price haveSale={haveSale}>
-              {
-                <NumberFormat
-                  value={price}
-                  displayType={'text'}
-                  decimalSeparator=","
-                  thousandSeparator="."
-                  suffix={'đ'}
-                />
-              }
-            </Price>
+            <Price haveSale={haveSale}>{<VND value={price} />}</Price>
             {haveSale && (
               <SalePercent>
                 -{handleSalePercent(price_promotion, price)}%

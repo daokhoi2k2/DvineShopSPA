@@ -42,7 +42,6 @@ import {
 import { setAuthModalBox, toggleNavDrawer } from 'redux/actions/config';
 import useAuth, { IUseAuth } from 'hooks/useAuth';
 import { RootState } from 'redux/reducers';
-import NumberFormat from 'react-number-format';
 import VND from 'components/VND';
 
 const MainControl: React.FC = () => {
@@ -82,6 +81,8 @@ const MainControl: React.FC = () => {
   const handleLogout = () => {
     account.logout();
   };
+
+  // console.log(account.memberShip.info.icon);
 
   return (
     <MainControlWrapper>
@@ -134,7 +135,7 @@ const MainControl: React.FC = () => {
             <UserText>{account.accountInfo.username}</UserText>
             <ImgAvatar
               className="w-[21px] h-[21px]"
-              src="https://cdn.divineshop.vn/image/catalog/image_compression/badge-gold-2-50px.png"
+              src={account?.memberShip?.info?.icon}
             />
             <UserInfoWrapper>
               <Balance>

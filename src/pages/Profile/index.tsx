@@ -3,7 +3,6 @@ import Select from 'components/Select';
 import { FastField, useFormik } from 'formik';
 import useAuth from 'hooks/useAuth';
 import React, { useEffect, useMemo } from 'react';
-import NumberFormat from 'react-number-format';
 import moment from 'moment';
 import {
   AvatarButton,
@@ -34,6 +33,7 @@ import {
 import { RootState } from 'redux/reducers';
 import { updateUser } from 'redux/actions/user';
 import { setAuthModalBox } from 'redux/actions/config';
+import VND from 'components/VND';
 
 const Profile = () => {
   const auth = useAuth();
@@ -106,31 +106,25 @@ const Profile = () => {
       },
       {
         title: 'Nhóm khách hàng',
-        value: userInfo?.membership || '',
+        value:
+          (
+            <div>
+              <img
+                className="w-[21px] h-[17.5px] inline-block"
+                src={auth?.memberShip.info?.icon}
+                alt={auth?.memberShip?.info?.text}
+              />{' '}
+              {auth?.memberShip?.info?.text}
+            </div>
+          ) || '',
       },
       {
         title: 'Số dư',
-        value: (
-          <NumberFormat
-            value={userInfo?.balance || 0}
-            displayType={'text'}
-            decimalSeparator=","
-            thousandSeparator="."
-            suffix={'đ'}
-          />
-        ),
+        value: <VND value={userInfo?.balance || 0} />,
       },
       {
         title: 'Đã tích lũy',
-        value: (
-          <NumberFormat
-            value={userInfo?.accumulated || 0}
-            displayType={'text'}
-            decimalSeparator=","
-            thousandSeparator="."
-            suffix={'đ'}
-          />
-        ),
+        value: <VND value={userInfo?.accumulated || 0} />,
       },
       {
         title: 'Ngày tham gia',
@@ -150,15 +144,6 @@ const Profile = () => {
       name: 'Nam',
     },
   ];
-
-  const handleOpenLogin = () => {
-    dispatch(
-      setAuthModalBox({
-        isShow: true,
-        boxName: 'login',
-      })
-    );
-  };
 
   return (
     <>
