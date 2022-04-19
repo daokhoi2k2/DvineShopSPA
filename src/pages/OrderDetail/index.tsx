@@ -3,12 +3,20 @@ import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getOrderByIdServices } from 'services/order';
+import { IProductInfo } from 'typings/Product';
 import {
   Hr,
+  InfoPrimary,
+  InfoSub,
   OrderDetailWrapper,
   OrderInfo,
+  OrderItem,
+  OrderItemInfo,
+  OrderList,
+  OrderThumbnail,
   OrderTitle,
   OrderValue,
+  ProductName,
   Subtitle,
   Title,
 } from './styles';
@@ -23,8 +31,6 @@ const OrderDetail: React.FC = () => {
       setOrderDetail(response?.data);
     })();
   }, [id]);
-
-  // const dispatch = useDispatch();
 
   return (
     <>
@@ -50,12 +56,51 @@ const OrderDetail: React.FC = () => {
             return (
               <div key={total.title} className="flex justify-between">
                 <div>{total.title}</div>
-                <div><VND value={total.value} /></div>
+                <div>
+                  <VND value={total.value} />
+                </div>
               </div>
             );
           })}
         </OrderValue>
       </OrderDetailWrapper>
+      <Hr />
+      <OrderList>
+        {orderDetail?.entries?.map(
+          ({
+            product,
+            quantity,
+          }: {
+            product: IProductInfo;
+            quantity: number;
+          }) => {
+            return (
+              <OrderItem>
+                <OrderThumbnail>
+                  <img
+                    src={`${process.env.REACT_APP_API_URL}/${product.thumb_nail}`}
+                    alt="asd"
+                    className="w-full rounded-md"
+                  />
+                </OrderThumbnail>
+                <OrderItemInfo>
+                  <InfoPrimary>
+                    <ProductName>{product.name}</ProductName>
+                    <h3>Số lượng: {quantity}</h3>
+                    <h3>
+                      <VND value={product.price_promotion} />
+                    </h3>
+                  </InfoPrimary>
+                  <InfoSub>
+                    <h4 className="text-[#374151]">Key game</h4>
+                    <h4>ZRAPQ-WIGXY-L7HPG</h4>
+                  </InfoSub>
+                </OrderItemInfo>
+              </OrderItem>
+            );
+          }
+        )}
+      </OrderList>
     </>
   );
 };

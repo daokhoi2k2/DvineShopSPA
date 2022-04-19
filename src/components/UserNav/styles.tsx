@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import tw from "twin.macro";
-import { Link, NavLink } from "react-router-dom";
+import { Link  } from "react-router-dom";
 
 export const UserNavWrapper = tw.div`
     flex-basis[20.83333333%]
@@ -23,7 +23,7 @@ export const ListAnchor = tw.div`
 `;
 
 
-export const Anchor = styled(Link)<{ active: string }>(({ active }) => {
+export const Anchor = styled(Link)<{ active?: string }>(({ active }) => {
   return [
     tw`
         p-5 

@@ -76,12 +76,14 @@ const UserOrder: React.FC = () => {
   ];
 
   useEffect(() => {
-    dispatch(
-      getUserOder({
-        page: 1,
-        limit: 20,
-      })
-    );
+    if(userOrder.length <= 0) {
+      dispatch(
+        getUserOder({
+          page: 1,
+          limit: 20,
+        })
+      );
+    }
   }, []);
 
   const handleCoppyClipboard = (e: BaseSyntheticEvent) => {
