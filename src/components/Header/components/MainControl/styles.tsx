@@ -34,6 +34,12 @@ export const LogoText = tw.h4`
 export const SearchWrapper = tw.div`
     flex
     flex-grow
+
+    relative
+    before:absolute
+    before:top-[40px]
+    before:w-full
+    before:h-[120px]
 `;
 
 export const InputSearch = tw.input`
@@ -43,7 +49,28 @@ export const InputSearch = tw.input`
     placeholder:text-gray-400
     placeholder:text-[14px]
     focus:outline-none
+`;
 
+export const SearchList = tw.div`
+    px-[14px]
+    py-5
+    rounded-md
+    w-full
+    absolute
+    top-[55px]
+    bg-white
+    shadow-xl
+    text-sm
+    z-40
+    hidden
+
+    peer-focus:block
+    group-hover:block
+`;
+
+export const SearchItem = tw(Link)`
+    hover:underline
+    block
 `;
 
 export const ButtonSearch = tw.button`

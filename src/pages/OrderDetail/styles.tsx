@@ -46,11 +46,13 @@ export const OrderList = tw.div`
 
 export const OrderItem = tw.div`
     flex
+    sm:flex-wrap
     gap-x-3
 `;
 
 export const OrderThumbnail = tw.div`
     flex-basis[25%]
+    sm:flex-basis[100%]
 `;
 
 export const OrderItemInfo = tw.div`
@@ -58,12 +60,15 @@ export const OrderItemInfo = tw.div`
     flex
     flex-col
     justify-between
+    sm:flex-basis[100%]
+    sm:mt-3
 `;
 
 export const InfoPrimary = tw.div`
     flex
     font-semibold
     justify-between
+    sm:flex-wrap
 `;
 
 export const InfoSub = tw.div`
@@ -72,4 +77,5 @@ export const InfoSub = tw.div`
 
 export const ProductName = tw.h3`
     flex-basis[54.16666667%]
+    sm:flex-basis[100%]
 `;

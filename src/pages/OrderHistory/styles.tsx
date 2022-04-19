@@ -1,3 +1,4 @@
+import styled from "@emotion/styled";
 import tw from "twin.macro";
 
 export const UserOrderWrapper = tw.div`
@@ -76,3 +77,15 @@ export const DateItemWrapper = tw.div`
     xl:w-[33%]
     sm:w-[50%]
 `;
+
+export const ProductLayout = tw.div`
+    flex-basis[100%]
+    md:flex-basis[40%]
+`;
+
+export const OrderStatus = styled.h4<{active?: boolean}>(({active}) => [
+    tw`text-[#dc3545]
+        whitespace-nowrap
+    `,
+    active && tw`text-[#29b474]`
+])

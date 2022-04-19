@@ -54,7 +54,7 @@ const OrderDetail: React.FC = () => {
           <OrderTitle>Giá trị đơn hàng</OrderTitle>
           {orderDetail?.totals?.map((total: any) => {
             return (
-              <div key={total.title} className="flex justify-between">
+              <div key={total.title} className="flex gap-x-5 justify-between">
                 <div>{total.title}</div>
                 <div>
                   <VND value={total.value} />
@@ -75,7 +75,7 @@ const OrderDetail: React.FC = () => {
             quantity: number;
           }) => {
             return (
-              <OrderItem>
+              <OrderItem key={product._id}>
                 <OrderThumbnail>
                   <img
                     src={`${process.env.REACT_APP_API_URL}/${product.thumb_nail}`}

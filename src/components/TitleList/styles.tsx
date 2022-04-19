@@ -1,4 +1,6 @@
-import tw from "twin.macro";
+import tw from 'twin.macro';
+import { Link } from 'react-router-dom';
+import styled from '@emotion/styled';
 
 export const TitleListWrapper = tw.div``;
 
@@ -7,16 +9,19 @@ export const Title = tw.div`
     font-semibold
 `;
 
-export const Discover = tw.button`
+export const Discover = styled(Link)(() => [
+  tw`    
     text-white
     bg-[#2579F2]
     text-sm
     rounded-md
     px-2.5
+    py-1.5
     font-semibold
+    block
 
-    hover:bg-[#2985FF]
-`;
+    hover:bg-[#2985FF]`,
+]);
 
 export const Main = tw.div`
     flex

@@ -6,7 +6,7 @@ import {
   SearchIcon,
 } from 'designs/icons/Drawer';
 import SVG from 'designs/SVG';
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -32,6 +32,8 @@ import {
   MainControlWrapper,
   NavItem,
   NavList,
+  SearchItem,
+  SearchList,
   SearchWrapper,
   ShowMore,
   UserAvatar,
@@ -47,6 +49,7 @@ import VND from 'components/VND';
 const MainControl: React.FC = () => {
   const dispatch = useDispatch();
   const cartList = useSelector((state: RootState) => state.cart.cartList);
+  const [searchText, setSearchText] = useState('');
   const account: IUseAuth = useAuth();
 
   const handleToggleNavDrawer = () => {
@@ -100,11 +103,21 @@ const MainControl: React.FC = () => {
         <MoreIcon className="w-6 h-9 text-white" />
       </ShowMore>
       {/* End */}
-      <SearchWrapper>
-        <InputSearch placeholder="Tìm kiếm sản phẩm" />
+      <SearchWrapper className='group'>
+        <InputSearch className='peer' placeholder="Tìm kiếm sản phẩm" />
+
         <ButtonSearch>
           <SearchIcon className="w-[17.5px] h-[17.5px]" />
         </ButtonSearch>
+        <SearchList>
+          <SearchItem to="/search">Discord Nitro chỉ từ 63K/tháng</SearchItem>
+          <SearchItem to="/search">Tài khoản GTA 5 khuyễn mãi</SearchItem>
+          <SearchItem to="/search">Tài khoản Amazon Prime Gaming</SearchItem>
+          <SearchItem to="/search">Tài khoản Battlefield giá rẻ</SearchItem>
+          <SearchItem to="/search">Gia hạn Youtube Premium</SearchItem>
+          <SearchItem to="/search">Elden Ring (CD Key Steam)</SearchItem>
+          <SearchItem to="/search">Tài khoản Netflix Premium</SearchItem>
+        </SearchList>
       </SearchWrapper>
       <AuthControlWrapper className="group">
         {!account.isAuth ? (

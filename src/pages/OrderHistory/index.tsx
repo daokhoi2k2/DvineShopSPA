@@ -3,14 +3,9 @@ import Input from 'components/Input';
 import VND from 'components/VND';
 import { FilterIcon } from 'designs/icons/Drawer';
 import { useFormik } from 'formik';
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from 'react-router-dom';
 import moment from 'moment';
-import React, {
-  BaseSyntheticEvent,
-  SyntheticEvent,
-  useEffect,
-  useMemo,
-} from 'react';
+import React, { BaseSyntheticEvent, useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { getUserOder } from 'redux/actions/order';
@@ -21,6 +16,8 @@ import {
   FormList,
   Hr,
   ItemWrapper,
+  OrderStatus,
+  ProductLayout,
   Subtitle,
   Title,
 } from './styles';
@@ -28,29 +25,37 @@ import TableOrder, { IColmunsAccount } from './TableOrder';
 
 const UserOrder: React.FC = () => {
   const dispatch = useDispatch();
+  const [searchParams, setSearchParams]: any = useSearchParams();
   const userOrder = useSelector(
     (state: RootState) => state.order.userOrder.list
   );
-  // const renderTable = useMemo(() => {
-  //   return [
-  //     {
-  //       render:
-  //     }
-  //   ]
-  // }, [userOrder])
 
-  // console.log(renderTable)
-  // const auth = useAuth();
+  const searchParamsObject = useMemo(() => {
+    return Object.fromEntries([...searchParams]);
+  }, [searchParams]);
+
+  const initialValuesSearch = {
+    orderId: searchParamsObject?.order_id || '',
+    priceFrom: searchParamsObject?.price_from || '',
+    priceTo: searchParamsObject?.price_to || '',
+    dateFrom: searchParamsObject?.date_from || '',
+    dateTo: searchParamsObject?.date_to || '',
+  };
+
   const formik = useFormik({
-    initialValues: {
-      madh: '',
-      minMoney: '',
-      maxMoney: '',
-      startDay: '',
-      endDay: '',
-    },
-    onSubmit: (values) => {
-      console.log(values);
+    initialValues: initialValuesSearch,
+    onSubmit: (values: any) => {
+      const { orderId, priceFrom, priceTo, dateFrom, dateTo } = values;
+
+      const searchQuery: any = {};
+
+      orderId && (searchQuery.order_id = orderId);
+      priceFrom && (searchQuery.price_from = priceFrom);
+      priceTo && (searchQuery.price_to = priceTo);
+      dateFrom && (searchQuery.date_from = dateFrom);
+      dateTo && (searchQuery.date_to = dateTo);
+
+      setSearchParams(searchQuery);
     },
   });
 
@@ -76,15 +81,16 @@ const UserOrder: React.FC = () => {
   ];
 
   useEffect(() => {
-    if(userOrder.length <= 0) {
-      dispatch(
-        getUserOder({
-          page: 1,
-          limit: 20,
-        })
-      );
-    }
-  }, []);
+    // if (userOrder.length <= 0) {
+    // }
+    dispatch(
+      getUserOder({
+        page: 1,
+        limit: 20,
+        ...searchParamsObject,
+      })
+    );
+  }, [searchParams]);
 
   const handleCoppyClipboard = (e: BaseSyntheticEvent) => {
     const element = e.currentTarget;
@@ -103,11 +109,11 @@ const UserOrder: React.FC = () => {
         <ItemWrapper>
           <Input
             title="Mã đơn hàng"
-            name="madh"
+            name="orderId"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            id="madh"
-            value={formik.values.madh}
+            id="orderId"
+            value={formik.values.orderId}
           />
         </ItemWrapper>
         <ItemWrapper>
@@ -115,9 +121,9 @@ const UserOrder: React.FC = () => {
             title="Số tiền từ"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            id="minMoney"
-            name="minMoney"
-            value={formik.values.minMoney}
+            id="priceFrom"
+            name="priceFrom"
+            value={formik.values.priceFrom}
           />
         </ItemWrapper>
         <ItemWrapper>
@@ -125,16 +131,16 @@ const UserOrder: React.FC = () => {
             title="Số tiền đến"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            id="maxMoney"
-            name="maxMoney"
-            value={formik.values.maxMoney}
+            id="priceTo"
+            name="priceTo"
+            value={formik.values.priceTo}
           />
         </ItemWrapper>
         <DateItemWrapper>
           <DateSelect
             title="Từ ngày"
-            name="startDay"
-            id="startDay"
+            name="dateFrom"
+            id="dateFrom"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           />
@@ -142,8 +148,8 @@ const UserOrder: React.FC = () => {
         <DateItemWrapper>
           <DateSelect
             title="Đến ngày"
-            name="endDay"
-            id="endDay"
+            name="dateTo"
+            id="dateTo"
             onChange={formik.handleChange}
           />
         </DateItemWrapper>
@@ -167,36 +173,65 @@ const UserOrder: React.FC = () => {
               render: (
                 <div
                   onClick={handleCoppyClipboard}
-                  className="cursor-pointer whitespace-nowrap max-w-[100px] truncate"
+                  className="cursor-pointer whitespace-nowrap max-w-[100px] truncate md:font-semibold md:max-w-none"
                 >
+                  <span className="hidden md:inline-block">#</span>
                   {item._id}
                 </div>
               ),
             },
             {
               name: 'name',
-              render: item.entries.map((entry: any) => {
-                return (
-                  <div
-                    key={entry.product._id}
-                    className="flex justify-between gap-x-3"
-                  >
-                    {entry.product.name} <div>x{entry.quantity}</div>
-                  </div>
-                );
-              }),
+              render: (
+                <div className="flex gap-x-3 flex-wrap md:gap-y-3">
+                  {item.entries.map((entry: any) => {
+                    return (
+                      <ProductLayout key={entry.product._id}>
+                        <div className="hidden md:block">
+                          <img
+                            src={`${process.env.REACT_APP_API_URL}/${entry.product.thumb_nail}`}
+                            className="rounded-md"
+                            alt={entry.product.name}
+                          />
+                        </div>
+                        <div className="flex justify-between gap-x-3 md:hidden">
+                          {entry.product.name} <div>x{entry.quantity}</div>
+                        </div>
+                      </ProductLayout>
+                    );
+                  })}
+                </div>
+              ),
             },
             {
               name: 'total',
-              render: <VND value={item.totals[1].value} />,
+              render: (
+                <div className="md:font-semibold">
+                  <span className="hidden md:inline-block mr-1">
+                    Tổng tiền:
+                  </span>
+                  <VND value={item.totals[1].value} />
+                </div>
+              ),
             },
             {
               name: 'status',
-              render: 'Đã hủy',
+              render: (
+                <OrderStatus active={item.status}>
+                  {item.status === 1 ? 'Đã xử lý' : 'Đã hủy'}
+                </OrderStatus>
+              ),
             },
             {
               name: 'control',
-              render: <Link to={`/user/order/${item._id}`}>Chi tiết</Link>,
+              render: (
+                <Link
+                  className="text-[#2579f2] whitespace-nowrap"
+                  to={`/user/order/${item._id}`}
+                >
+                  Chi tiết
+                </Link>
+              ),
             },
           ];
         }}

@@ -32,7 +32,7 @@ export const AccountLayout = tw.div`
 export const AccountLayoutInner = tw.div`
     p-10
 
-    md:p-5
+    lg:p-5
 `;
 
 export const SubmitBtn = tw.button`

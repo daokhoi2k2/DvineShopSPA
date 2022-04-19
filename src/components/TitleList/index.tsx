@@ -12,7 +12,7 @@ const TitleList: React.FC<IProps> = ({ title, discover, subTitle }) => {
     <TitleListWrapper>
       <Main>
         <Title>{title}</Title>
-        {discover && <Discover>Khám phá</Discover>}
+        {discover && <Discover to="/search">Khám phá</Discover>}
       </Main>
       <Sub>
         <Subtitle>{subTitle}</Subtitle>
