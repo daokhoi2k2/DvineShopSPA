@@ -1,5 +1,14 @@
-import React, { memo } from "react";
-import { Icolumn, RowItem, TableWrapper, Tbody, Theader, TheaderItem, Wrapper } from "./styles";
+import React, { memo } from 'react';
+import {
+  Icolumn,
+  RowItem,
+  TableWrapper,
+  Tbody,
+  Theader,
+  TheaderItem,
+  Wrapper,
+} from './styles';
+import LazyLoad from 'react-lazyload';
 
 export interface IColumns {
   text: string;
@@ -21,29 +30,28 @@ export interface ITable {
 }
 
 const Table: React.FC<ITable> = (props) => {
-
   const { columns, children } = props;
   return (
     <Wrapper>
-        <TableWrapper>
-      <Theader>
-        <RowItem>
-          {columns?.map((item) => (
-            <TheaderItem key={item.text}>{item.text}</TheaderItem>
-          ))}
-        </RowItem>
-      </Theader>
-      <Tbody>
-        {children &&
-          children?.map((item: any, index: any) => (
-            <RowItem key={index}>
-              {columns?.map((column, index) => (
-                <Icolumn key={index}>{item[0][column.dataField]}</Icolumn>
-              ))}
-            </RowItem>
-          ))}
-      </Tbody>
-    </TableWrapper>
+      <TableWrapper>
+        <Theader>
+          <RowItem>
+            {columns?.map((item) => (
+              <TheaderItem key={item.text}>{item.text}</TheaderItem>
+            ))}
+          </RowItem>
+        </Theader>
+        <Tbody>
+          {children &&
+            children?.map((item: any, index: any) => (
+              <RowItem key={index}>
+                {columns?.map((column, index) => (
+                  <Icolumn key={index}>{item[0][column.dataField]}</Icolumn>
+                ))}
+              </RowItem>
+            ))}
+        </Tbody>
+      </TableWrapper>
     </Wrapper>
   );
 };

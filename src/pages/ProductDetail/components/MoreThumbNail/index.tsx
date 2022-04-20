@@ -18,7 +18,7 @@ const MoreThumbNail: React.FC<IMoreThumbNail> = (props) => {
         <ThumbNailPrimary>
           {thumb_nail && (
             <img
-              className="rounded-md "
+              className="rounded-md absolute w-full h-full top-0"
               src={`${process.env.REACT_APP_API_URL}/${thumb_nail}`}
               alt="..."
             />

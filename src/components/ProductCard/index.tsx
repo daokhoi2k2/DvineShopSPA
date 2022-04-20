@@ -41,16 +41,16 @@ const ProductCard: React.FC<IProductInfo> = (props) => {
 
   return (
     <ProductCardWrapper>
-      <Link to={'/' + name_url}>
-        <LazyLoad>
-          <CardImg>
+      <Link className='block' to={'/' + name_url}>
+        <CardImg>
+          <LazyLoad className='relative pt-[50%] bg-fallback' placeholder={<Img className='rounded-md absolute w-full h-full top-0' name="fallback.png" />}>
             <img
               src={`${process.env.REACT_APP_API_URL}/${thumb_nail}`}
               alt={name}
-              className="rounded-md"
+              className="rounded-md absolute w-full h-full top-0"
             />
-          </CardImg>
-        </LazyLoad>
+          </LazyLoad>
+        </CardImg>
         <CardInfo>
           <Name>{name}</Name>
           <PriceWrapper>

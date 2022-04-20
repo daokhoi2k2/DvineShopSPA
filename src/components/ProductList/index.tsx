@@ -1,6 +1,6 @@
-import ProductCard from "components/ProductCard";
-import React from "react";
-import { ProductListWrapper } from "./styles";
+import ProductCard from 'components/ProductCard';
+import React, { Suspense } from 'react';
+import { ProductListWrapper } from './styles';
 
 interface IProductInfo {
   name: string;
@@ -17,7 +17,7 @@ interface IProductList {
 
 const ProductList: React.FC<IProductList> = ({ data }) => {
   return (
-    <ProductListWrapper>
+    <ProductListWrapper className={data.length === 0 ? 'min-h-[460px]' : ''}>
       {data.map((item) => (
         <ProductCard
           key={item.name}

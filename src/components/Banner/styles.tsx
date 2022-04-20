@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import tw from "twin.macro";
 
 export const BannerWrapper = tw.div`
@@ -40,4 +41,13 @@ export const ListMiniBanner = tw.div`
     sm:grid-rows-2
     sm:grid-cols-2
     // sm:pt-0
+`;
+
+export const ImgHref = tw(Link)`
+    block
+    pt-[50%]
+    relative
+    h-0
+    bg-fallback
+    rounded-md
 `;

@@ -1,14 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { Container, HotProductInner, HotProductWrapper } from './styles';
-import Header from 'components/Header';
 import Banner from 'components/Banner';
 import TitleList from 'components/TitleList';
 import ProductList from 'components/ProductList';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from 'redux/reducers';
-import { getAllProducts } from 'redux/actions/product';
 import { getProductsListServices } from 'services/product';
 
 const Home = () => {
@@ -27,7 +23,6 @@ const Home = () => {
       }
     })();
   }, []);
-
   return (
     <Container>
       <Banner></Banner>

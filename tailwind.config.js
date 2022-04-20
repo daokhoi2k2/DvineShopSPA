@@ -37,6 +37,7 @@ module.exports = {
       },
       backgroundImage: {
         'arrowDown': `url("assets/svg/arrowDown.svg")`,
+        'fallback': `url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAARwAAACUAQMAAAB7rgSiAAAAA1BMVEXt7vB7AFJXAAAAHElEQVRYw+3BMQEAAADCIPuntsNuYAAAAAAAZAcVZAABCxyMjwAAAABJRU5ErkJggg==")`
       },
     },
   },

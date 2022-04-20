@@ -41,6 +41,14 @@
     height: 100%;
   }
 
+  .SliderWrapper {
+    @apply h-0 pt-[50%]
+  }
+
+  .SliderWrapper .slick-list {
+    @apply absolute top-0 w-full rounded-md
+  }
+
   .toastCustom {
     @apply text-sm;
   }
