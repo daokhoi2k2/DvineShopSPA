@@ -3,6 +3,7 @@ import { Route, Routes, useLocation } from 'react-router-dom';
 import Home from 'pages/Home';
 import ProductDetail from 'pages/ProductDetail';
 import { ToastContainer } from 'react-toastify';
+import Tags from 'pages/Admin/Tags';
 
 const Search = React.lazy(() => import('pages/Search'));
 const Profile = React.lazy(() => import('pages/Profile'));
@@ -62,7 +63,10 @@ const App: React.FC = () => {
             }
           >
             <Route index element={<Overview />} />
-            <Route path="product" element={<ProductAdmin />} />
+            <Route path="product">
+              <Route index element={<ProductAdmin />} />
+              <Route path="tags" element={<Tags />} />
+            </Route>
             <Route
               path="private"
               element={

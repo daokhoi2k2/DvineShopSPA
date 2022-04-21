@@ -13,11 +13,14 @@ export const TableWrapper = tw.table`
     overflow-x-auto
 `;
 
-export const RowItem = tw.tr``;
+export const RowItem = tw.tr`
+    w-full
+    overflow-hidden
+`;
 
 export const Icolumn = tw.td`
-    py-4
-    px-6
+    // py-4
+    // px-4
     whitespace-nowrap
 `;
 
@@ -29,8 +32,8 @@ export const Theader = tw.thead`
 `;
 
 export const TheaderItem = tw.th`
-    px-6
-    py-6
+    // px-4
+    // py-4
 `;
 
 export const Tbody = tw.tbody`

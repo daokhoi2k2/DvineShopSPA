@@ -1,5 +1,4 @@
-import styled from '@emotion/styled';
-import tw from 'twin.macro';
+import tw from "twin.macro";
 
 export const Wrapper = tw.div`
 `;
@@ -13,7 +12,7 @@ export const Layout = tw.div`
     grid-template-columns[auto 1fr]
 
     lg:flex
-`;
+`
 
 export const Content = tw.div`
     p-14
@@ -44,22 +43,3 @@ export const AddButton = tw.button`
     text-white
     font-bold
 `;
-
-export const BtnItem = tw.button`
-    p-3
-    rounded-md
-    hover:bg-gray-200
-`;
-
-export const ControlWrapper = tw.div`
-    flex
-`;
-
-export const StatusButton = styled('button')<{ status: boolean }>(
-  ({ status }) => [
-    tw` h-9 px-2 text-white transition-colors duration-150  rounded-lg focus:shadow-md w-[110px] text-sm`,
-    status
-      ? tw`bg-green-700 hover:bg-green-800`
-      : tw`bg-red-700 hover:bg-red-800`,
-  ]
-);

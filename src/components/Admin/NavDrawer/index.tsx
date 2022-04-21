@@ -1,35 +1,22 @@
-import { ClipboardIcon, ProductIcon } from "designs/icons/Drawer";
-import SVG from "designs/SVG";
-import React from "react";
-import { useSelector } from "react-redux";
-import { useLocation, useMatch, useResolvedPath } from "react-router-dom";
-import { RootState } from "redux/reducers";
+import { PATH_ADMIN } from 'common/routes';
+import { ArrowIcon, ClipboardIcon, ProductIcon, TagIcon } from 'designs/icons/Drawer';
+import SVG from 'designs/SVG';
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { useLocation, useMatch, useResolvedPath } from 'react-router-dom';
+import { RootState } from 'redux/reducers';
+import RouteItem from './RouteItem';
 import {
-  IconRoute,
   LogoText,
   LogoWrapper,
   NavDrawerWrapper,
-  RouteItem,
   Routes,
-  TitleRoute,
-} from "./styles";
+} from './styles';
 
 const NavDrawer: React.FC = () => {
-  const isAdminDrawerNav = useSelector((state: RootState) => state.config.isAdminNavDrawer);
-  const path = useLocation();
-
-  const RouteList = [
-    {
-      icon: <ClipboardIcon />,
-      title: "Tổng quan",
-      path: "/admin",
-    },
-    {
-      icon: <ProductIcon />,
-      title: "Sản phẩm",
-      path: "/admin/product",
-    },
-  ];
+  const isAdminDrawerNav = useSelector(
+    (state: RootState) => state.config.isAdminNavDrawer
+  );
 
   return (
     <NavDrawerWrapper isAdminDrawerNav={isAdminDrawerNav}>
@@ -38,14 +25,13 @@ const NavDrawer: React.FC = () => {
         <LogoText>Divine Shop</LogoText>
       </LogoWrapper>
       <Routes>
-        {RouteList.map((route) => (
-          <RouteItem key={route.path} to={route.path} active={route.path === path.pathname.toLowerCase() ? "true" : "false"}>
-            <IconRoute>
-              {route.icon}
-            </IconRoute>
-            <TitleRoute isAdminDrawerNav={isAdminDrawerNav}>{route.title}</TitleRoute>
-          </RouteItem>
-        ))}
+        {PATH_ADMIN.map((route) => {
+          return (
+            <RouteItem route={route} key={route.path}>
+              
+            </RouteItem>
+          );
+        })}
       </Routes>
     </NavDrawerWrapper>
   );

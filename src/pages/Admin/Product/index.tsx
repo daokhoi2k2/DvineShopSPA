@@ -3,10 +3,16 @@ import TopHeader from 'components/Admin/TopHeader';
 import Input from 'components/Input';
 import Table, { IColumns } from 'components/Table';
 import { EditIcon, TrashIcon } from 'designs/icons/Drawer';
+import Img from 'designs/Img';
 import React, { useEffect, useMemo, useState } from 'react';
+import LazyLoad from 'react-lazyload';
 import { useDispatch, useSelector } from 'react-redux';
 import { setDialogModal } from 'redux/actions/config';
-import { deleteProduct, getAllProducts } from 'redux/actions/product';
+import {
+  deleteProduct,
+  getAllProducts,
+  updateProduct,
+} from 'redux/actions/product';
 import { RootState } from 'redux/reducers';
 import AlertPrompt from './components/AlertPrompt';
 import Dialog from './components/Dialog';
@@ -21,6 +27,7 @@ import {
   ControlWrapper,
   Layout,
   SearchInput,
+  StatusButton,
   Wrapper,
 } from './styles';
 
@@ -38,26 +45,41 @@ const ProductAdmin: React.FC = () => {
     console.log(searchValue);
   };
 
+  const handleToggleStatus = (values: any) => {
+    const newItem = { ...values };
+    newItem.amount = '';
+    newItem.status = !newItem.status;
+
+    const formData: any = new FormData();
+
+    // // Append all form field for formData
+    for (let key in newItem) {
+      formData.append(key, newItem[key]);
+    }
+
+    dispatch(updateProduct(formData));
+  };
+
   const columns: IColumns[] = useMemo(
     () => [
       {
-        text: 'Thumnail',
+        text: <div className="p-6">Thumbnail</div>,
         dataField: 'thumbnail',
       },
       {
-        text: 'Mã sản phẩm',
+        text: <div className="p-6">Mã sản phẩm</div>,
         dataField: 'masp',
       },
       {
-        text: 'Tên sản phẩm',
+        text: <div className="xl:hidden">Tên sản phẩm</div>,
         dataField: 'namesp',
       },
       {
-        text: 'Hiển thị',
-        dataField: 'isShow',
+        text: <div className="p-6">Trạng thái</div>,
+        dataField: 'status',
       },
       {
-        text: 'Điều khiển',
+        text: <div className="p-6">Điều khiển</div>,
         dataField: 'control',
       },
     ],
@@ -97,20 +119,37 @@ const ProductAdmin: React.FC = () => {
         <Table columns={columns} page={1} totalSize={10}>
           {products?.map((item: any) => [
             {
-              masp: item.code,
+              masp: <div className="p-6">{item.code}</div>,
               thumbnail: (
-                <img
-                  className="w-[100px]"
-                  src={
-                    item.thumb_nail
-                      ? process.env.REACT_APP_API_URL + `/${item.thumb_nail}`
-                      : require('../../../assets/images/defaultProduct.png')
+                <LazyLoad
+                  className="relative pt-[50%] bg-fallback mx-[10px] my-[5px]"
+                  placeholder={
+                    <Img
+                      className="rounded-md absolute w-full h-full top-0"
+                      name="fallback.png"
+                    />
                   }
-                  alt={item.thumbnail}
-                />
+                >
+                  <img
+                    className="rounded-md absolute w-full h-full top-0"
+                    src={
+                      item.thumb_nail
+                        ? process.env.REACT_APP_API_URL + `/${item.thumb_nail}`
+                        : require('../../../assets/images/defaultProduct.png')
+                    }
+                    alt={item.thumbnail}
+                  />
+                </LazyLoad>
               ),
-              namesp: item.name,
-              isShow: <h1>{item.status ? 'Còn hàng' : 'Hết hàng'} </h1>,
+              namesp: <div className="xl:hidden">{item.name}</div>,
+              status: (
+                <StatusButton
+                  onClick={() => handleToggleStatus(item)}
+                  status={item.status}
+                >
+                  {item.status ? 'Còn hàng' : 'Hết hàng'}{' '}
+                </StatusButton>
+              ),
               control: (
                 <ControlWrapper>
                   <BtnItem

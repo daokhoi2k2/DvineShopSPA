@@ -25,7 +25,7 @@ import ProgressBar from 'components/ProgressBar';
 import Select from 'components/Select';
 import { getAllCategories } from 'redux/actions/category';
 import parseUrl from 'utils/parseUrl';
-import MultipleSelect from 'MultipleSelect';
+import MultipleSelect from 'components/MultipleSelect';
 
 const Dialog = () => {
   const dispatch = useDispatch();
@@ -35,6 +35,22 @@ const Dialog = () => {
   const percentProgressAddProduct = useSelector(
     (state: RootState) => state.config.progressPercentUpdateProduct
   );
+
+  const modules = {
+    toolbar: [
+      [{ color: [] }],
+      [{ size: [] }],
+      ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+      [
+        { list: 'ordered' },
+        { list: 'bullet' },
+        { indent: '-1' },
+        { indent: '+1' },
+      ],
+      ['link', 'image', 'video'],
+      ['clean'],
+    ],
+  };
 
   const categoryList = useSelector(
     (state: RootState) => state.category.allCategory
@@ -52,9 +68,29 @@ const Dialog = () => {
       status: editField?.status || false,
       thumb_nail: editField?.thumb_nail || null,
       categoryId: editField?.categoryId || '-1',
+      tags: editField?.tags || [],
     }),
     [editField]
   );
+
+  const selectList = [
+    {
+      id: 1,
+      text: 'Python',
+    },
+    {
+      id: 2,
+      text: 'Javascript',
+    },
+    {
+      id: 3,
+      text: 'Ruby',
+    },
+    {
+      id: 4,
+      text: 'Java',
+    },
+  ];
 
   useEffect(() => {
     if (!categoryList.length) {
@@ -134,7 +170,6 @@ const Dialog = () => {
                 if (key === 'price_promotion' && !values[key]) {
                   values[key] = values.price;
                 }
-                // if()
                 formData.append(key, values[key]);
               }
 
@@ -147,6 +182,7 @@ const Dialog = () => {
                 dispatch(addProduct(formData));
                 resetForm();
               }
+
             }}
           >
             {(formik) => {
@@ -232,16 +268,22 @@ const Dialog = () => {
                     ></Select>
                   </GroupRow>
                   <GroupRow>
-                    <MultipleSelect></MultipleSelect>
+                    <MultipleSelect
+                      name="tags"
+                      id="tags"
+                      tags={selectList}
+                      onChange={formik.handleChange}
+                      value={formik.values.tags}
+                    ></MultipleSelect>
                   </GroupRow>
                   <GroupRow>
                     <Field name="description">
                       {({ field }: any) => (
                         <ReactQuill
                           className="w-full min-h-[200px] mb-14 rounded-md"
+                          modules={modules}
                           value={field.value}
                           onChange={field.onChange(field.name)}
-                          formats={['color']}
                           onBlur={() =>
                             formik.handleBlur({
                               target: { name: 'description' },

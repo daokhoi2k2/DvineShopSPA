@@ -40,6 +40,7 @@ export { ReactComponent as EditIcon } from "assets/svg/edit-outline.svg";
 export { ReactComponent as TrashIcon } from "assets/svg/trash-outline.svg";
 export { ReactComponent as TrashIconV2 } from "assets/svg/trashv2.svg";
 export { ReactComponent as LogoutIcon } from "assets/svg/logout.svg";
+export { ReactComponent as ArrowIcon } from "assets/svg/arrow.svg";
 
 
 export { ReactComponent as FCPhone } from "assets/svg/Nap-thesvg-30724.svg";

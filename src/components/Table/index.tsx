@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { Component, memo } from 'react';
 import {
   Icolumn,
   RowItem,
@@ -11,7 +11,7 @@ import {
 import LazyLoad from 'react-lazyload';
 
 export interface IColumns {
-  text: string;
+  text: any;
   dataField: string;
   formatter?: (record: any) => React.FC;
 }
@@ -37,7 +37,11 @@ const Table: React.FC<ITable> = (props) => {
         <Theader>
           <RowItem>
             {columns?.map((item) => (
-              <TheaderItem key={item.text}>{item.text}</TheaderItem>
+              <TheaderItem
+                key={item.dataField}
+              >
+                {item.text}
+              </TheaderItem>
             ))}
           </RowItem>
         </Theader>
