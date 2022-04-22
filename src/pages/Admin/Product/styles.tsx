@@ -53,6 +53,8 @@ export const BtnItem = tw.button`
 
 export const ControlWrapper = tw.div`
     flex
+    justify-end
+    px-4
 `;
 
 export const StatusButton = styled('button')<{ status: boolean }>(

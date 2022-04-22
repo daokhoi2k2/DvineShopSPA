@@ -7,6 +7,7 @@ import userReducer from "./user";
 import locationReducer from "./location";
 import cartReducer from "./cart";
 import orderReducer from "./order";
+import tagReducer from "./tag";
 
 export const rootReducer = combineReducers({
   config: configReducer,
@@ -16,7 +17,8 @@ export const rootReducer = combineReducers({
   user: userReducer,
   location: locationReducer,
   cart: cartReducer,
-  order: orderReducer
+  order: orderReducer,
+  tag: tagReducer
 });
 
 // Yêu cầu trả về redux của typescript

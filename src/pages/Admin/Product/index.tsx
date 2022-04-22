@@ -60,6 +60,15 @@ const ProductAdmin: React.FC = () => {
     dispatch(updateProduct(formData));
   };
 
+  useEffect(() => {
+    dispatch(
+      setDialogModal({
+        isOpen: false,
+        editField: null,
+      })
+    );
+  }, []);
+
   const columns: IColumns[] = useMemo(
     () => [
       {
@@ -79,7 +88,7 @@ const ProductAdmin: React.FC = () => {
         dataField: 'status',
       },
       {
-        text: <div className="p-6">Điều khiển</div>,
+        text: <div className="p-6 flex justify-end">Tính năng</div>,
         dataField: 'control',
       },
     ],

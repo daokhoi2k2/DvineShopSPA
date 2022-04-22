@@ -43,3 +43,7 @@ export const AddButton = tw.button`
     text-white
     font-bold
 `;
+
+export const TagCol = tw.div`
+    px-6
+`;
