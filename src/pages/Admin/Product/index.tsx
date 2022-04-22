@@ -13,6 +13,7 @@ import {
   getAllProducts,
   updateProduct,
 } from 'redux/actions/product';
+import { getAllTags } from 'redux/actions/tag';
 import { RootState } from 'redux/reducers';
 import AlertPrompt from './components/AlertPrompt';
 import Dialog from './components/Dialog';
@@ -35,6 +36,7 @@ const ProductAdmin: React.FC = () => {
   const [searchValue, setSearchValue] = useState('');
   const dispatch = useDispatch();
 
+  const allTags = useSelector((state: RootState) => state.tag.allTag);
   const products = useSelector((state: RootState) => state.product.allProducts);
 
   useEffect(() => {
@@ -103,6 +105,12 @@ const ProductAdmin: React.FC = () => {
       })
     );
   };
+
+   useEffect(() => {
+    if(allTags.length === 0) {
+      dispatch(getAllTags())
+    }
+  }, [])
 
   return (
     <Container className="w-full">

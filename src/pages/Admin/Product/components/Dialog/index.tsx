@@ -24,6 +24,7 @@ import { addProduct, updateProduct } from 'redux/actions/product';
 import ProgressBar from 'components/ProgressBar';
 import Select from 'components/Select';
 import { getAllCategories } from 'redux/actions/category';
+import { getAllTags } from 'redux/actions/tag';
 import parseUrl from 'utils/parseUrl';
 import MultipleSelect from 'components/MultipleSelect';
 
@@ -32,6 +33,7 @@ const Dialog = () => {
   const { isOpen, editField } = useSelector(
     (state: RootState) => state.config.isDialogModal
   );
+  const allTags = useSelector((state: RootState) => state.tag.allTag);
   const percentProgressAddProduct = useSelector(
     (state: RootState) => state.config.progressPercentUpdateProduct
   );
@@ -170,6 +172,12 @@ const Dialog = () => {
                 if (key === 'price_promotion' && !values[key]) {
                   values[key] = values.price;
                 }
+                if (key === 'tags') {
+                  for (var i = 0; i < values.tags.length; i++) {
+                    formData.append('tags[]', values.tags[i]);
+                  }
+                  continue;
+                }
                 formData.append(key, values[key]);
               }
 
@@ -271,7 +279,7 @@ const Dialog = () => {
                     <MultipleSelect
                       name="tags"
                       id="tags"
-                      tags={selectList}
+                      tags={allTags}
                       onChange={formik.handleChange}
                       value={formik.values.tags}
                     ></MultipleSelect>

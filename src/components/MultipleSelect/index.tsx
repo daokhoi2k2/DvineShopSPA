@@ -17,17 +17,17 @@ const MultipleSelect: React.FC<IMultipleSelect> = (props) => {
   const { tags, name, onChange, value } = props;
 
   const tagsSelecetedValue = tags.filter((tag: any) => {
-    return value.includes(tag.id);
+    return value.includes(tag._id);
   });
 
   const filterTags = useMemo(() => {
     const regexPattern = new RegExp(`^${filterValue}`);
     const result = tags.filter((tag: any) => {
-      return tag.text.toLowerCase().match(regexPattern)
+      return tag.tag_name.toLowerCase().match(regexPattern)
     });
 
     return result;
-  }, [filterValue]);
+  }, [filterValue, tags]);
 
   const handleChange = (value: any) => {
     const changeEvent = {

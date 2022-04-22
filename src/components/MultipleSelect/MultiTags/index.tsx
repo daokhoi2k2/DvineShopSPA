@@ -26,7 +26,7 @@ const MultiTags: React.FC<IMultiTags> = (props) => {
   } = props;
 
   const handleClick = (e: BaseSyntheticEvent) => {
-    const id = +e.currentTarget.dataset.id;
+    const id = e.currentTarget.dataset.id;
     const result = selectedIds.filter((item) => {
       return item !== id;
     });
@@ -55,13 +55,13 @@ const MultiTags: React.FC<IMultiTags> = (props) => {
         <TagsContent>
           {tagsSelecetedValue?.map((tag: any) => {
             return (
-              <TagSelectedItem key={tag.id}>
+              <TagSelectedItem key={tag._id}>
                 <div className="text-xs font-normal leading-none max-w-full flex-initial">
-                  {tag.text}
+                  {tag.tag_name}
                 </div>
                 <div
                   className="flex flex-auto flex-row-reverse"
-                  data-id={tag.id}
+                  data-id={tag._id}
                   onClick={handleClick}
                 >
                   <div>

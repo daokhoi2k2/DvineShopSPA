@@ -17,7 +17,7 @@ const MultiSelectBox: React.FC<IMultiSelectBox> = (props) => {
   const { selectList, selectedTags, isOpenSelectBox, onChange } = props;
 
   const handleSelectTag = (e: BaseSyntheticEvent) => {
-    const tagId = +e.currentTarget.dataset.tag;
+    const tagId = e.currentTarget.dataset.tag;
 
     const isExists = selectedTags.includes(tagId);
 
@@ -40,13 +40,13 @@ const MultiSelectBox: React.FC<IMultiSelectBox> = (props) => {
         {selectList.map((selectItem: any) => {
           return (
             <TagItem
-              key={selectItem.id}
-              data-tag={selectItem.id}
+              key={selectItem._id}
+              data-tag={selectItem._id}
               onClick={handleSelectTag}
             >
-              <TagItemInner selected={selectedTags.includes(selectItem.id)}>
+              <TagItemInner selected={selectedTags.includes(selectItem._id)}>
                 <div className="w-full items-center flex">
-                  <div className="mx-2 leading-6">{selectItem.text}</div>
+                  <div className="mx-2 leading-6">{selectItem.tag_name}</div>
                 </div>
               </TagItemInner>
             </TagItem>
