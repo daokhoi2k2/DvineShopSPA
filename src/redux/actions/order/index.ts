@@ -14,6 +14,11 @@ export const getUserOder = (payload: any) => ({
     payload
 })
 
+export const getUserOderPending = () => ({
+    type: types.GET_USER_ORDER_PENDING,
+})
+
+
 export const getUserOrderSuccess = (payload: any) => ({
     type: types.GET_USER_ORDER_SUCCESS,
     payload

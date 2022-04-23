@@ -31,7 +31,7 @@ export const LogoText = tw.h4`
 `;
 
 // Search Style
-export const SearchWrapper = tw.div`
+export const SearchWrapper = tw.form`
     flex
     flex-grow
 

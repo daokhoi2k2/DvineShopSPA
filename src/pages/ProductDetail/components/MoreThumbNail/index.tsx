@@ -1,3 +1,4 @@
+import ImgFallBack, { ImgFallBackLoading } from 'designs/ImgFallback';
 import React from 'react';
 import {
   MoreThumbNailWrapper,
@@ -10,22 +11,34 @@ interface IMoreThumbNail {
   thumb_nail: string;
 }
 
+const MoreThumbNailLoading = () => {
+  return (
+    <ThumbNailInner>
+      <ThumbNailPrimary>
+        <ImgFallBackLoading />
+      </ThumbNailPrimary>
+      <ThumNailMoreButton>Xem thêm ảnh</ThumNailMoreButton>
+    </ThumbNailInner>
+  );
+};
+
 const MoreThumbNail: React.FC<IMoreThumbNail> = (props) => {
   const { thumb_nail } = props;
   return (
     <MoreThumbNailWrapper>
-      <ThumbNailInner>
-        <ThumbNailPrimary>
-          {thumb_nail && (
-            <img
-              className="rounded-md absolute w-full h-full top-0"
+      {!thumb_nail ? (
+        <MoreThumbNailLoading />
+      ) : (
+        <ThumbNailInner>
+          <ThumbNailPrimary>
+            <ImgFallBack
               src={`${process.env.REACT_APP_API_URL}/${thumb_nail}`}
-              alt="..."
+              alt={thumb_nail}
             />
-          )}
-        </ThumbNailPrimary>
-        <ThumNailMoreButton>Xem thêm ảnh</ThumNailMoreButton>
-      </ThumbNailInner>
+          </ThumbNailPrimary>
+          <ThumNailMoreButton>Xem thêm ảnh</ThumNailMoreButton>
+        </ThumbNailInner>
+      )}
     </MoreThumbNailWrapper>
   );
 };

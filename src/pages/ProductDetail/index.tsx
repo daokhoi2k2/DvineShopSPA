@@ -28,33 +28,26 @@ const ProductDetail = () => {
   }, [hash_name]);
 
   return (
-    <Container className={!productInfo ? "min-h-[1000px]" : ""}>
-      {/* If have data, then render the component */}
-      {productInfo && (
-        <>
-          <ProductDetailWrapper>
-            <ProductDetailInner>
-              <MoreThumbNail
-                thumb_nail={productInfo?.thumb_nail}
-              ></MoreThumbNail>
-              <ProductMainInfo productInfo={productInfo}></ProductMainInfo>
-              <ProductSubInfo></ProductSubInfo>
-            </ProductDetailInner>
-          </ProductDetailWrapper>
-          <ProductDetailDescription>
-            <DescriptionInner>
-              <DescriptionTitle>Chi tiết sản phẩm</DescriptionTitle>
-              <DescriptionContent>
-                <ReactQuill
-                  value={productInfo?.description}
-                  readOnly={true}
-                  theme="bubble"
-                />
-              </DescriptionContent>
-            </DescriptionInner>
-          </ProductDetailDescription>
-        </>
-      )}
+    <Container className={!productInfo ? 'min-h-[1000px]' : ''}>
+      <ProductDetailWrapper>
+        <ProductDetailInner>
+          <MoreThumbNail thumb_nail={productInfo?.thumb_nail}></MoreThumbNail>
+          <ProductMainInfo productInfo={productInfo}></ProductMainInfo>
+          <ProductSubInfo code={productInfo?.code}></ProductSubInfo>
+        </ProductDetailInner>
+      </ProductDetailWrapper>
+      <ProductDetailDescription>
+        <DescriptionInner>
+          <DescriptionTitle>Chi tiết sản phẩm</DescriptionTitle>
+          <DescriptionContent>
+            <ReactQuill
+              value={productInfo?.description}
+              readOnly={true}
+              theme="bubble"
+            />
+          </DescriptionContent>
+        </DescriptionInner>
+      </ProductDetailDescription>
     </Container>
   );
 };

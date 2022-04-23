@@ -1,7 +1,9 @@
 import VND from 'components/VND';
 import Img from 'designs/Img';
+import ImgFallBack from 'designs/ImgFallback';
 import React from 'react';
 import LazyLoad from 'react-lazyload';
+import Skeleton from 'react-loading-skeleton';
 import { Link } from 'react-router-dom';
 
 import {
@@ -24,6 +26,25 @@ interface IProductInfo {
   name_url: string;
 }
 
+const ProductCardLoading: React.FC = () => {
+  return (
+    <ProductCardWrapper>
+      <div className="block">
+        <CardImg>
+          <LazyLoad className="relative pt-[50%]">
+            <Skeleton className="rounded-md absolute w-full h-full top-0" />
+          </LazyLoad>
+        </CardImg>
+        <CardInfo>
+          <Name>
+            <Skeleton count={2} />
+          </Name>
+        </CardInfo>
+      </div>
+    </ProductCardWrapper>
+  );
+};
+
 const ProductCard: React.FC<IProductInfo> = (props) => {
   const { thumb_nail, name, price, price_promotion, name_url } = props;
   const haveSale = price_promotion && price !== price_promotion && true;
@@ -41,13 +62,12 @@ const ProductCard: React.FC<IProductInfo> = (props) => {
 
   return (
     <ProductCardWrapper>
-      <Link className='block' to={'/' + name_url}>
+      <Link className="block" to={'/' + name_url}>
         <CardImg>
-          <LazyLoad className='relative pt-[50%] bg-fallback' placeholder={<Img className='rounded-md absolute w-full h-full top-0' name="fallback.png" />}>
-            <img
+          <LazyLoad once>
+            <ImgFallBack
               src={`${process.env.REACT_APP_API_URL}/${thumb_nail}`}
               alt={name}
-              className="rounded-md absolute w-full h-full top-0"
             />
           </LazyLoad>
         </CardImg>
@@ -70,4 +90,7 @@ const ProductCard: React.FC<IProductInfo> = (props) => {
   );
 };
 
-export default ProductCard;
+export default {
+  Success: ProductCard,
+  Loading: ProductCardLoading,
+};

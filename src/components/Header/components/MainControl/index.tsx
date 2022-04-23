@@ -6,8 +6,8 @@ import {
   SearchIcon,
 } from 'designs/icons/Drawer';
 import SVG from 'designs/SVG';
-import React, { useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useMemo } from 'react';
+import { Link, useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   AuthControlWrapper,
@@ -45,12 +45,18 @@ import { setAuthModalBox, toggleNavDrawer } from 'redux/actions/config';
 import useAuth, { IUseAuth } from 'hooks/useAuth';
 import { RootState } from 'redux/reducers';
 import VND from 'components/VND';
+import { Formik } from 'formik';
 
 const MainControl: React.FC = () => {
   const dispatch = useDispatch();
   const cartList = useSelector((state: RootState) => state.cart.cartList);
-  const [searchText, setSearchText] = useState('');
   const account: IUseAuth = useAuth();
+  const navgiate = useNavigate();
+  const [searchParams, setSearchParams]: any = useSearchParams();
+  // const location = useLocation();
+  const searchParamsObject = useMemo(() => {
+    return Object.fromEntries([...searchParams]);
+  }, [searchParams]);
 
   const handleToggleNavDrawer = () => {
     dispatch(toggleNavDrawer());
@@ -84,9 +90,7 @@ const MainControl: React.FC = () => {
   const handleLogout = () => {
     account.logout();
   };
-
   // console.log(account.memberShip.info.icon);
-
   return (
     <MainControlWrapper>
       <Link to="/" className="lg:hidden">
@@ -103,22 +107,55 @@ const MainControl: React.FC = () => {
         <MoreIcon className="w-6 h-9 text-white" />
       </ShowMore>
       {/* End */}
-      <SearchWrapper className='group'>
-        <InputSearch className='peer' placeholder="Tìm kiếm sản phẩm" />
 
-        <ButtonSearch>
-          <SearchIcon className="w-[17.5px] h-[17.5px]" />
-        </ButtonSearch>
-        <SearchList>
-          <SearchItem to="/search">Discord Nitro chỉ từ 63K/tháng</SearchItem>
-          <SearchItem to="/search">Tài khoản GTA 5 khuyễn mãi</SearchItem>
-          <SearchItem to="/search">Tài khoản Amazon Prime Gaming</SearchItem>
-          <SearchItem to="/search">Tài khoản Battlefield giá rẻ</SearchItem>
-          <SearchItem to="/search">Gia hạn Youtube Premium</SearchItem>
-          <SearchItem to="/search">Elden Ring (CD Key Steam)</SearchItem>
-          <SearchItem to="/search">Tài khoản Netflix Premium</SearchItem>
-        </SearchList>
-      </SearchWrapper>
+      <Formik
+        initialValues={{
+          search: searchParamsObject?.q || '',
+        }}
+        onSubmit={(values) => {
+          const redirectTo = `/search?q=${values.search}`;
+          // const currentLink = location.pathname + location.search;
+          // có cũng được không có cũng k sao vì đã check bằng depend bên search
+          // if(currentLink !== redirectTo) {
+            navgiate(redirectTo);
+          // }
+        }}
+      >
+        {(formik) => {
+          return (
+            <SearchWrapper onSubmit={formik.handleSubmit} className="group">
+              <InputSearch
+                onChange={formik.handleChange}
+                className="peer"
+                placeholder="Tìm kiếm sản phẩm"
+                name="search"
+                id="search"
+                value={formik.values.search}
+              />
+
+              <ButtonSearch type="submit">
+                <SearchIcon className="w-[17.5px] h-[17.5px]" />
+              </ButtonSearch>
+              <SearchList>
+                <SearchItem to="/search">
+                  Discord Nitro chỉ từ 63K/tháng
+                </SearchItem>
+                <SearchItem to="/search">Tài khoản GTA 5 khuyễn mãi</SearchItem>
+                <SearchItem to="/search">
+                  Tài khoản Amazon Prime Gaming
+                </SearchItem>
+                <SearchItem to="/search">
+                  Tài khoản Battlefield giá rẻ
+                </SearchItem>
+                <SearchItem to="/search">Gia hạn Youtube Premium</SearchItem>
+                <SearchItem to="/search">Elden Ring (CD Key Steam)</SearchItem>
+                <SearchItem to="/search">Tài khoản Netflix Premium</SearchItem>
+              </SearchList>
+            </SearchWrapper>
+          );
+        }}
+      </Formik>
+
       <AuthControlWrapper className="group">
         {!account.isAuth ? (
           <AuthWrapper>

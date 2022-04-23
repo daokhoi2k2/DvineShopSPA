@@ -66,6 +66,7 @@ const Search: React.FC = () => {
     priceFrom: searchParamsObject?.price_from || '',
     priceTo: searchParamsObject?.price_to || '',
     sort: searchParamsObject?.sort || '',
+    q: searchParamsObject?.q || ''
   };
   const categories = useSelector(
     (state: RootState) => state.category.allCategory
@@ -97,7 +98,7 @@ const Search: React.FC = () => {
             <Formik
               initialValues={initialValuesSearch}
               onSubmit={(values) => {
-                const { categoryId, priceFrom, priceTo, sort } = values;
+                const { categoryId, priceFrom, priceTo, sort, q } = values;
 
                 const searchQuery: any = {};
 
@@ -105,6 +106,7 @@ const Search: React.FC = () => {
                 priceFrom && (searchQuery.price_from = priceFrom);
                 priceTo && (searchQuery.price_to = priceTo);
                 sort && (searchQuery.sort = sort);
+                q && (searchQuery.q = q);
 
                 setSearchParams(searchQuery);
               }}

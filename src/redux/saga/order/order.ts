@@ -1,6 +1,6 @@
 import { call, put } from 'redux-saga/effects';
 import * as services from 'services/order';
-import { getAllOrderSuccess, getUserOrderSuccess } from 'redux/actions/order';
+import { getAllOrderSuccess, getUserOderPending, getUserOrderSuccess } from 'redux/actions/order';
 import { toast } from 'react-toastify';
 import { clearCart } from 'redux/actions/cart';
 import { getUserInfoCurrent } from 'services/auth';
@@ -17,6 +17,7 @@ export function* getAllOrderSaga(): any {
 
 
 export function* getUserOrderSaga({payload}: any): any {
+  yield put(getUserOderPending());
   const response = yield call(services.getUserOrderServices, payload);
   const result = response?.data;
   if (result) {

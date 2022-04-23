@@ -24,13 +24,13 @@ export const Name = tw.div`
 `;
 
 export const ExtraInformation = tw.div`
-    flex
     my-1.5
 `;
 
 export const Text = tw.h3`
     text-sm
     ml-1.5
+    inline-block
 `;
 
 export const StatusText = styled.span<any>(({ success }) => [

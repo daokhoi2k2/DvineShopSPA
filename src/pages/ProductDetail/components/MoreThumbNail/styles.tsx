@@ -11,7 +11,7 @@ export const ThumbNailInner = tw.div`
 `;
 
 export const ThumbNailPrimary = tw.div`
-  relative pt-[50%] bg-fallback rounded-md
+
 `;
 
 export const ThumNailMoreButton = tw.div`

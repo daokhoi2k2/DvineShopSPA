@@ -45,9 +45,4 @@ export const ListMiniBanner = tw.div`
 
 export const ImgHref = tw(Link)`
     block
-    pt-[50%]
-    relative
-    h-0
-    bg-fallback
-    rounded-md
 `;

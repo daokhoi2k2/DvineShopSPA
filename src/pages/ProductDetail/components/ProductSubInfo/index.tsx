@@ -1,21 +1,31 @@
-import { CoppyIcon } from "designs/icons/Drawer";
-import React, { useEffect, useRef } from "react";
-import { GiftButton, GiftCode, GiftInput, ProductSubInfoWrapper } from "./styles";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { CoppyIcon } from 'designs/icons/Drawer';
+import React, { useEffect, useRef } from 'react';
+import {
+  GiftButton,
+  GiftCode,
+  GiftInput,
+  ProductSubInfoWrapper,
+} from './styles';
+import { toast } from 'react-toastify';
+import Skeleton from 'react-loading-skeleton';
 
-const ProductSubInfo: React.FC = () => {
+interface IProductSubInfo {
+  code: string;
+}
+
+const ProductSubInfo: React.FC<IProductSubInfo> = (props) => {
+  const { code } = props;
   const inputEle: any = useRef(null);
 
   const handleCoppyToClipBoard = async () => {
     await navigator.clipboard.writeText(inputEle.current.value);
-    toast.success("Đã sao chép liên kết giới thiệu");
+    toast.success('Đã sao chép liên kết giới thiệu');
   };
 
   return (
     <ProductSubInfoWrapper>
       <p className="text-sm text-[#374151] my-1">Mã sản phẩm</p>
-      <p className="text-sm font-semibold my-1">acc netflix1</p>
+      <p className="text-sm font-semibold my-1">{code ? code : <Skeleton />}</p>
       <h3 className="text-lg font-semibold my-3">Giới thiệu bạn bè</h3>
       <p className="text-sm text-[#374151] my-1">
         Bạn bè được giảm 5% giá sản phẩm và bạn nhận hoa hồng vĩnh viễn.

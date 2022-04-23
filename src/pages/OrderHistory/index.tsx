@@ -22,6 +22,7 @@ import {
   Title,
 } from './styles';
 import TableOrder, { IColmunsAccount } from './TableOrder';
+import Loading from 'components/Loading';
 
 const UserOrder: React.FC = () => {
   const dispatch = useDispatch();
@@ -29,7 +30,6 @@ const UserOrder: React.FC = () => {
   const userOrder = useSelector(
     (state: RootState) => state.order.userOrder.list
   );
-
   const searchParamsObject = useMemo(() => {
     return Object.fromEntries([...searchParams]);
   }, [searchParams]);

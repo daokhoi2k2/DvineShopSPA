@@ -7,6 +7,8 @@ import { GlobalStyles } from 'twin.macro';
 import { PersistGate } from 'redux-persist/integration/react';
 import 'react-quill/dist/quill.snow.css';
 import 'react-quill/dist/quill.bubble.css';
+import "react-loading-skeleton/dist/skeleton.css";
+import "react-toastify/dist/ReactToastify.css";
 import 'index.css';
 
 
