@@ -9,7 +9,7 @@ import Img from 'designs/Img';
 import { Form, Formik } from 'formik';
 import { FilterButton } from 'pages/OrderHistory/styles';
 
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
 import { getAllCategories } from 'redux/actions/category';
@@ -29,6 +29,7 @@ import {
 const Search: React.FC = () => {
   const [searchParams, setSearchParams]: any = useSearchParams();
   const [products, setProducts] = useState([]);
+  const [isFetching, setIsFeching] = useState(false);
 
   const searchParamsObject = useMemo(() => {
     return Object.fromEntries([...searchParams]);
@@ -66,7 +67,7 @@ const Search: React.FC = () => {
     priceFrom: searchParamsObject?.price_from || '',
     priceTo: searchParamsObject?.price_to || '',
     sort: searchParamsObject?.sort || '',
-    q: searchParamsObject?.q || ''
+    q: searchParamsObject?.q || '',
   };
   const categories = useSelector(
     (state: RootState) => state.category.allCategory
@@ -82,10 +83,11 @@ const Search: React.FC = () => {
   useEffect(() => {
     searchParamsObject.limit = 24;
     searchParamsObject.page = 1;
-
     (async () => {
+      setIsFeching(true);
       const response = await getProductsListServices(searchParamsObject);
       setProducts(response?.data);
+      setIsFeching(false);
     })();
   }, [searchParamsObject]);
 
@@ -147,7 +149,6 @@ const Search: React.FC = () => {
                     labelStyle={{ paddingLeft: '1.5rem' }}
                     onChange={formik.handleChange}
                     value={formik.values.priceTo}
-                    // type="number"
                   />
                   <Select
                     name="sort"
@@ -173,9 +174,10 @@ const Search: React.FC = () => {
             </Formik>
           </SearchController>
           <SearchTable>
-            {products.length ? (
+            {(products.length !== 0 || isFetching === true) && (
               <ProductList data={products}></ProductList>
-            ) : (
+            )}
+            {products.length === 0 && isFetching === false && (
               <ProductEmpty>
                 <h2 className="text-lg font-semibold text-center">
                   Không có sản phẩm phù hợp với tìm kiếm!

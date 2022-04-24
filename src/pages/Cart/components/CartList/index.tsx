@@ -86,7 +86,6 @@ const CartList = () => {
     const _id = e.currentTarget.dataset.id;
     clearTimeout(timer.current);
     dispatch(increaseQuantityCartItem(_id));
-    // if()
 
     fakeLoading();
   };
@@ -104,7 +103,6 @@ const CartList = () => {
   const handleChangeAmount = (e: BaseSyntheticEvent) => {
     const _id = e.currentTarget.dataset.id;
     let quantity = e.target.value;
-    console.log(quantity);
     if (quantity <= 0 || isNaN(quantity) || !quantity) {
       quantity = 1;
     } else {
@@ -149,7 +147,7 @@ const CartList = () => {
                 <CartItem key={productInfo._id}>
                   <CartItemThumbNailWrapper to={`/${productInfo?.name_url}`}>
                     <CartItemThumbNail
-                      src={`${process.env.REACT_APP_API_URL}/${productInfo.thumb_nail}`}
+                      src={`${process.env.REACT_APP_API_URL}/images/thumb_nails/${productInfo.thumb_nail}`}
                     ></CartItemThumbNail>
                   </CartItemThumbNailWrapper>
                   <CartItemInfo>

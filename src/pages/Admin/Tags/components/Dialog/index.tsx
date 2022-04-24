@@ -83,6 +83,7 @@ const Dialog = () => {
               if(editField) {
                 values._id = editField._id;
                 dispatch(updateTag(values))
+                resetForm();
               } else {
                 dispatch(addTag(values));
                 resetForm();

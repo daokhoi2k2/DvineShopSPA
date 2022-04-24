@@ -27,6 +27,18 @@ export const getProductsListServices = async (payload: any) => {
   }
 };
 
+export const getAutoCompleteListServices = async (payload: any) => {
+  try {
+    const res = await axios.get(
+      `${process.env.REACT_APP_API_URL}/api/product/autocomplete`,
+      { params: payload }
+    );
+    return res;
+  } catch (err) {
+    console.error(err);
+  }
+};
+
 export const getProductByHashNameServices = async (payload: any) => {
   try {
     const res = await axios.get(

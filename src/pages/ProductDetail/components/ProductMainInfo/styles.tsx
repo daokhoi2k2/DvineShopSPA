@@ -30,7 +30,7 @@ export const ExtraInformation = tw.div`
 export const Text = tw.h3`
     text-sm
     ml-1.5
-    inline-block
+    inline
 `;
 
 export const StatusText = styled.span<any>(({ success }) => [

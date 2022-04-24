@@ -62,6 +62,7 @@ export const SubmitBtn = tw.button`
     text-sm
     font-semibold
     // ml-auto
+    disabled:bg-gray-500
 `;
 
 export const ResetBtn = tw.button`

@@ -13,6 +13,7 @@ interface IMultiTags {
   setIsOpenSelectBox: any;
   setFilterValue: any;
   isOpenSelectBox: boolean;
+  filterValue: string;
 }
 
 const MultiTags: React.FC<IMultiTags> = (props) => {
@@ -23,6 +24,7 @@ const MultiTags: React.FC<IMultiTags> = (props) => {
     setIsOpenSelectBox,
     isOpenSelectBox,
     setFilterValue,
+    filterValue,
   } = props;
 
   const handleClick = (e: BaseSyntheticEvent) => {
@@ -91,6 +93,7 @@ const MultiTags: React.FC<IMultiTags> = (props) => {
               onFocus={handleFocusSelectBox}
               onChange={handleFilterTags}
               className="bg-transparent p-1 px-2 appearance-none outline-none h-full w-full text-gray-800"
+              value={filterValue}
             />
           </div>
         </TagsContent>

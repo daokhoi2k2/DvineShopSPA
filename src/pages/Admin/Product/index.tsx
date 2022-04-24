@@ -56,6 +56,12 @@ const ProductAdmin: React.FC = () => {
 
     // // Append all form field for formData
     for (let key in newItem) {
+      if (key === 'tags') {
+        for (var i = 0; i < values.tags.length; i++) {
+          formData.append('tags[]', values.tags[i]);
+        }
+        continue;
+      }
       formData.append(key, newItem[key]);
     }
 
@@ -151,7 +157,7 @@ const ProductAdmin: React.FC = () => {
                     className="rounded-md absolute w-full h-full top-0"
                     src={
                       item.thumb_nail
-                        ? process.env.REACT_APP_API_URL + `/${item.thumb_nail}`
+                        ? process.env.REACT_APP_API_URL + `/images/thumb_nails/${item.thumb_nail}`
                         : require('../../../assets/images/defaultProduct.png')
                     }
                     alt={item.thumbnail}

@@ -1,15 +1,18 @@
-import styled from "@emotion/styled";
-import tw from "twin.macro";
+import styled from '@emotion/styled';
+import tw from 'twin.macro';
 
 export const ProductCardWrapper = tw.div`
     py-3
     cursor-pointer
 `;
 
-export const CardImg = tw.div`
+export const CardImg = styled('div')<{ status?: boolean }>(({ status }) => [
+  tw`   
     rounded-md
     w-full
-`;
+    `,
+    status && tw`relative`
+]);
 
 export const CardInfo = tw.div``;
 
@@ -49,4 +52,3 @@ export const SalePercent = tw.div`
 export const PriceWrapper = tw.div`
     flex
 `;
-

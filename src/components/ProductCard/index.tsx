@@ -24,6 +24,7 @@ interface IProductInfo {
   sale_percent: number;
   thumb_nail: string;
   name_url: string;
+  status: boolean;
 }
 
 const ProductCardLoading: React.FC = () => {
@@ -46,7 +47,7 @@ const ProductCardLoading: React.FC = () => {
 };
 
 const ProductCard: React.FC<IProductInfo> = (props) => {
-  const { thumb_nail, name, price, price_promotion, name_url } = props;
+  const { thumb_nail, name, price, price_promotion, name_url, status } = props;
   const haveSale = price_promotion && price !== price_promotion && true;
 
   const handleSalePercent = (
@@ -63,12 +64,16 @@ const ProductCard: React.FC<IProductInfo> = (props) => {
   return (
     <ProductCardWrapper>
       <Link className="block" to={'/' + name_url}>
-        <CardImg>
+        <CardImg status={!status}>
           <LazyLoad once>
             <ImgFallBack
-              src={`${process.env.REACT_APP_API_URL}/${thumb_nail}`}
+              src={`${process.env.REACT_APP_API_URL}/images/thumb_nails/${thumb_nail}`}
               alt={name}
+              className={!status ? "opacity-50" : ""}
             />
+            {
+              !status && <div className='absolute top-3 left-3 text-white bg-black rounded-md px-3 py-1 text-sm'>Hết hàng</div>
+            }
           </LazyLoad>
         </CardImg>
         <CardInfo>

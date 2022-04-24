@@ -2,7 +2,7 @@ import Input from 'components/Input';
 import Select from 'components/Select';
 import { FastField, useFormik } from 'formik';
 import useAuth from 'hooks/useAuth';
-import React, { useEffect, useMemo } from 'react';
+import React, { BaseSyntheticEvent, useEffect, useMemo } from 'react';
 import moment from 'moment';
 import {
   AvatarButton,
@@ -31,15 +31,32 @@ import {
   getCityLocation,
 } from 'redux/actions/location';
 import { RootState } from 'redux/reducers';
-import { updateUser } from 'redux/actions/user';
+import { updateAvatar, updateUser } from 'redux/actions/user';
 import { setAuthModalBox } from 'redux/actions/config';
 import VND from 'components/VND';
+import checkImageValid from 'common/functions/uploadFile';
+import { toast } from 'react-toastify';
 
 const Profile = () => {
   const auth = useAuth();
   const dispatch = useDispatch();
   const location = useSelector((state: RootState) => state.location);
   const userInfo: any = auth.accountInfo;
+
+  const handleChangeAvatar = (e: BaseSyntheticEvent) => {
+    const avatarFile = e.target.files[0];
+    const formData: any = new FormData();
+
+    const isValidImage = checkImageValid(avatarFile, 5120);
+
+    if(isValidImage) {
+      formData.append('avatar', avatarFile);
+      dispatch(updateAvatar(formData));
+    } else {
+      toast.error("Hình ảnh không hợp lệ, vui lòng chọn ảnh khác");  
+    }
+    e.target.value = null;
+  };
 
   const formik = useFormik({
     initialValues: {
@@ -112,7 +129,7 @@ const Profile = () => {
               className="w-[21px] h-[17.5px] inline-block"
               src={auth?.memberShip.info?.icon}
               alt={auth?.memberShip?.info?.text}
-            />
+            />{" "}
             {auth?.memberShip?.info?.text}
           </div>
         ),
@@ -158,13 +175,19 @@ const Profile = () => {
       <Hr />
       <AvatarWrapper>
         <AvatarContent
-          src={require('../../assets/images/trend-avatar-1-73987.jpg')}
+          src={userInfo?.avatar ? `${process.env.REACT_APP_API_URL}/images/avatars/${userInfo.avatar}` : require('../../assets/images/trend-avatar-1-73987.jpg')}
         ></AvatarContent>
         <AvatarControlWrapper>
           <AvatarButtonWrapper>
             <AvatarButton htmlFor="fileAvatar">Sửa ảnh đại diện</AvatarButton>
           </AvatarButtonWrapper>
-          <input type="file" id="fileAvatar" hidden />
+          <input
+            type="file"
+            id="fileAvatar"
+            onChange={handleChangeAvatar}
+            hidden
+            accept="image/*"
+          />
           <HrY />
           <AvatarDescription>
             <p>Vui lòng chọn ảnh nhỏ hơn 5MB</p>{' '}

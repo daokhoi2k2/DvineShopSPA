@@ -4,6 +4,7 @@ import useAuth from 'hooks/useAuth';
 import { Hr } from 'pages/OrderHistory/styles';
 import React, { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 import { setAuthModalBox } from 'redux/actions/config';
 import { createOrder } from 'redux/actions/order';
 import { RootState } from 'redux/reducers';
@@ -75,22 +76,35 @@ const CartControl = () => {
   };
 
   const handlePayment = () => {
+    const outOfStockList: string[] = [];
     const entries = Object.values(cartList).map((item: any) => {
       const {
         _id,
       } = item.productInfo;
+
+      // Add product is out of stock to list
+      if(!item.productInfo.status) {
+        outOfStockList.push(item.productInfo.name)
+      }
+      
       const orderItem = {
         productId: _id,
         quantity: item.quantity,
       };
+
       return orderItem;
     });
-
+    
+    if(outOfStockList.length > 0) {
+      toast.error(`Sản phẩm ${outOfStockList.join(", ")} đã hết hàng`)
+      return;
+    }
+    
     const newOrder = {
       email: auth?.accountInfo?.email,
       entries,
     };
-    // console.log(newOrder);
+
     dispatch(createOrder(newOrder));
   };
 

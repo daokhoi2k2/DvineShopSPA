@@ -6,8 +6,15 @@ import {
   SearchIcon,
 } from 'designs/icons/Drawer';
 import SVG from 'designs/SVG';
-import React, { useMemo } from 'react';
-import { Link, useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom';
+import React, { useMemo, useRef, useState } from 'react';
+import {
+  createSearchParams,
+  Link,
+  useLocation,
+  useNavigate,
+  useParams,
+  useSearchParams,
+} from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   AuthControlWrapper,
@@ -46,12 +53,19 @@ import useAuth, { IUseAuth } from 'hooks/useAuth';
 import { RootState } from 'redux/reducers';
 import VND from 'components/VND';
 import { Formik } from 'formik';
+import { BaseSyntheticEvent } from 'react';
+import { getAutoCompleteListServices } from 'services/product';
+import { useEffect } from 'react';
 
 const MainControl: React.FC = () => {
   const dispatch = useDispatch();
   const cartList = useSelector((state: RootState) => state.cart.cartList);
-  const account: IUseAuth = useAuth();
+  const [autocompleteList, setAutoCompleteList]: any = useState();
+  const [isShowAutoComplete, setIsShowAutoComplete] = useState(false);
+  const account: any = useAuth();
   const navgiate = useNavigate();
+  const timerSearch: any = useRef();
+  const autoCompleteEle: any = useRef(null);
   const [searchParams, setSearchParams]: any = useSearchParams();
   // const location = useLocation();
   const searchParamsObject = useMemo(() => {
@@ -90,7 +104,44 @@ const MainControl: React.FC = () => {
   const handleLogout = () => {
     account.logout();
   };
-  // console.log(account.memberShip.info.icon);
+
+  const handleChangeSearch = (e: BaseSyntheticEvent, formik: any) => {
+    clearTimeout(timerSearch.current);
+    timerSearch.current = setTimeout(async () => {
+      const autoCompleteList = await getAutoCompleteListServices({
+        q: e.target.value,
+      });
+
+      setAutoCompleteList(autoCompleteList?.data);
+    }, 300);
+    formik.handleChange(e);
+  };
+
+  const handleFocusSearch = async () => {
+    setIsShowAutoComplete(true);
+    const autoCompleteList = await getAutoCompleteListServices({
+      q: '',
+    });
+
+    setAutoCompleteList(autoCompleteList?.data);
+  };
+
+  useEffect(() => {
+    if (isShowAutoComplete) {
+      document.onclick = (e: any) => {
+        const isClickInsideEle = autoCompleteEle.current.contains(e.target);
+        // If click outside will hide auto complete box
+        if (!isClickInsideEle) {
+          setIsShowAutoComplete(false);
+        }
+      };
+    }
+
+    return () => {
+      document.onclick = null;
+    };
+  }, [isShowAutoComplete]);
+
   return (
     <MainControlWrapper>
       <Link to="/" className="lg:hidden">
@@ -113,31 +164,64 @@ const MainControl: React.FC = () => {
           search: searchParamsObject?.q || '',
         }}
         onSubmit={(values) => {
-          const redirectTo = `/search?q=${values.search}`;
+          const redirectTo = `/search`;
           // const currentLink = location.pathname + location.search;
           // có cũng được không có cũng k sao vì đã check bằng depend bên search
           // if(currentLink !== redirectTo) {
-            navgiate(redirectTo);
+          navgiate({
+            pathname: redirectTo,
+            search: `?${createSearchParams({
+              ...searchParamsObject,
+              q: values.search,
+            })}`,
+          });
           // }
         }}
       >
         {(formik) => {
           return (
-            <SearchWrapper onSubmit={formik.handleSubmit} className="group">
+            <SearchWrapper
+              ref={autoCompleteEle}
+              onSubmit={formik.handleSubmit}
+              className="group"
+            >
               <InputSearch
-                onChange={formik.handleChange}
+                onChange={(e) => handleChangeSearch(e, formik)}
                 className="peer"
                 placeholder="Tìm kiếm sản phẩm"
                 name="search"
                 id="search"
                 value={formik.values.search}
+                autoComplete="off"
+                onMouseDown={handleFocusSearch}
               />
 
               <ButtonSearch type="submit">
                 <SearchIcon className="w-[17.5px] h-[17.5px]" />
               </ButtonSearch>
-              <SearchList>
-                <SearchItem to="/search">
+              <SearchList isShow={isShowAutoComplete}>
+                {autocompleteList?.map((item: any) => {
+                  return (
+                    <SearchItem
+                      key={item.name_url}
+                      to={`/${item.name_url}`}
+                    >
+                      {item.name}
+                    </SearchItem>
+                  );
+                })}
+                {autocompleteList?.length === 0 && (
+                  <div>
+                    <h3 className="font-semibold">
+                      Không có sản phẩm phù hợp với tìm kiếm
+                    </h3>
+                    <p className="my-1">
+                      Bạn có thể thử từ khóa đơn giản hơn hoặc liên hệ với hỗ
+                      trợ.
+                    </p>
+                  </div>
+                )}
+                {/* <SearchItem to="/search">
                   Discord Nitro chỉ từ 63K/tháng
                 </SearchItem>
                 <SearchItem to="/search">Tài khoản GTA 5 khuyễn mãi</SearchItem>
@@ -149,7 +233,7 @@ const MainControl: React.FC = () => {
                 </SearchItem>
                 <SearchItem to="/search">Gia hạn Youtube Premium</SearchItem>
                 <SearchItem to="/search">Elden Ring (CD Key Steam)</SearchItem>
-                <SearchItem to="/search">Tài khoản Netflix Premium</SearchItem>
+                <SearchItem to="/search">Tài khoản Netflix Premium</SearchItem> */}
               </SearchList>
             </SearchWrapper>
           );
@@ -179,7 +263,11 @@ const MainControl: React.FC = () => {
             <UserAvatar>
               <ImgAvatar
                 className="w-[42px] h-[42px]"
-                src={require('../../../../assets/images/trend-avatar-1-73987.jpg')}
+                src={
+                  account?.accountInfo?.avatar
+                    ? `${process.env.REACT_APP_API_URL}/images/avatars/${account?.accountInfo?.avatar}`
+                    : require('../../../../assets/images/trend-avatar-1-73987.jpg')
+                }
               />
             </UserAvatar>
             <UserText>{account.accountInfo.username}</UserText>

@@ -21,9 +21,9 @@ const MultipleSelect: React.FC<IMultipleSelect> = (props) => {
   });
 
   const filterTags = useMemo(() => {
-    const regexPattern = new RegExp(`^${filterValue}`);
+    const regexPattern = new RegExp(`^${filterValue}`, 'gi');
     const result = tags.filter((tag: any) => {
-      return tag.tag_name.toLowerCase().match(regexPattern)
+      return tag.tag_name.match(regexPattern)
     });
 
     return result;
@@ -36,7 +36,7 @@ const MultipleSelect: React.FC<IMultipleSelect> = (props) => {
         value: value,
       },
     };
-
+    setFilterValue("")
     onChange(changeEvent);
   };
 
@@ -49,6 +49,7 @@ const MultipleSelect: React.FC<IMultipleSelect> = (props) => {
         selectedIds={value}
         onClickCloseTag={handleChange}
         setFilterValue={setFilterValue}
+        filterValue={filterValue}
       />
       <MultiSelectBox
         isOpenSelectBox={isOpenSelectBox}

@@ -14,6 +14,8 @@ import * as types from 'redux/types/product';
 const initialState = {
   allProducts: [],
   updateFailMsg: {},
+  pending: false,
+  success: false,
 };
 
 const reducer = (state = initialState, action: any) =>

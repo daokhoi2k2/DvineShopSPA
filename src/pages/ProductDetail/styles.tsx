@@ -37,3 +37,12 @@ export const DescriptionTitle = tw.h4`
 `;
 
 export const DescriptionContent = tw.div``;
+
+export const ErrorPageWrapper = tw.div`
+    max-w-[1200px]
+    mx-auto
+    flex
+    flex-col
+    py-6
+    px-3
+`;

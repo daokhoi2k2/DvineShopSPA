@@ -4,6 +4,7 @@ import { BoxIcon, CardIcon, CartIcon, TagIcon } from 'designs/icons/Drawer';
 import React from 'react';
 import Skeleton from 'react-loading-skeleton';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { addCartItem } from 'redux/actions/cart';
 import { RootState } from 'redux/reducers';
@@ -71,6 +72,7 @@ const ProductMainInfoLoading: React.FC = () => {
 };
 
 const ProductMainInfo: React.FC<IProductMainInfo> = ({ productInfo }) => {
+  const navigate = useNavigate();
   // const cart = useSelector((state: RootState) => state.cart.cartList);
   const dispatch = useDispatch();
 
@@ -93,11 +95,12 @@ const ProductMainInfo: React.FC<IProductMainInfo> = ({ productInfo }) => {
   const handleAddCardItem = () => {
     const fakeLoading = new Promise((resolve) => {
       setTimeout(() => {
+        const { description, ...productInfoCart } = productInfo;
         dispatch(
           addCartItem({
             _id: productInfo?._id,
             quantity: 1,
-            productInfo: productInfo,
+            productInfo: productInfoCart,
           })
         );
         resolve(1);
@@ -109,6 +112,51 @@ const ProductMainInfo: React.FC<IProductMainInfo> = ({ productInfo }) => {
       success: 'Sản phẩm đã được thêm vào giỏ hàng',
       error: 'Thêm sản phẩm vào giỏ hàng thất bại',
     });
+  };
+
+  const handleBuyItem = () => {
+    const fakeLoading = new Promise((resolve) => {
+      setTimeout(() => {
+        const { description, ...productInfoCart } = productInfo;
+        dispatch(
+          addCartItem({
+            _id: productInfo?._id,
+            quantity: 1,
+            productInfo: productInfoCart,
+          })
+        );
+        resolve(1);
+      }, 1000);
+    });
+
+    toast.promise(fakeLoading, {
+      pending: 'Thêm sản phẩm vào giỏ hàng',
+      success: 'Sản phẩm đã được thêm vào giỏ hàng',
+      error: 'Thêm sản phẩm vào giỏ hàng thất bại',
+    });
+
+    fakeLoading.then(() => {
+      navigate("/cart")
+    })
+
+  }
+
+  const handleCategoryTags = () => {
+    const tags = productInfo?.tags.map((item: any) => ({
+      to: `/search?q=${item.tag_name}`,
+      text: item.tag_name,
+    }));
+
+    const listComponentCategory = [
+      {
+        to: `/search?category_id=${productInfo.categoryId._id}`,
+        text: productInfo?.categoryId?.title,
+      },
+      ...tags,
+    ];
+
+    // console.log(productInfo?.tags.map((item: any) => <Link to={`/search?q=${item.tag_name}`}>{item.tag_name}</Link>))
+    return listComponentCategory;
   };
 
   return (
@@ -129,7 +177,32 @@ const ProductMainInfo: React.FC<IProductMainInfo> = ({ productInfo }) => {
             </ExtraInformation>
             <ExtraInformation>
               <TagIcon className="w-[17.5px] h-[17.5px] inline-block" />
-              <Text>Thể loại: {productInfo?.categoryId?.title}</Text>
+              <Text>
+                Thể loại:
+                {handleCategoryTags().map((item, index) => {
+                  // Xử lý  xóa dấu ',' ở thể loại cuối cùng.
+                  if (handleCategoryTags().length - index === 1) {
+                    return (
+                      <Link
+                        className="hover:underline"
+                        key={item.text}
+                        to={item.to}
+                      >
+                        {item.text}
+                      </Link>
+                    );
+                  } else {
+                    return (
+                      <span key={item.text} className="">
+                        <Link className="hover:underline" to={item.to}>
+                          {item.text}
+                        </Link>
+                        ,&nbsp;
+                      </span>
+                    );
+                  }
+                })}
+              </Text>
             </ExtraInformation>
             <PriceInformation>
               {haveSale && (
@@ -167,7 +240,7 @@ const ProductMainInfo: React.FC<IProductMainInfo> = ({ productInfo }) => {
           </VariantsList>
         </VariantsSelect> */}
             <BuyControl>
-              <Button primary>
+              <Button primary onClick={handleBuyItem}>
                 <CardIcon className="w-[17.5px] h-[17.5px]" />
                 <TextButton>Mua ngay</TextButton>
               </Button>

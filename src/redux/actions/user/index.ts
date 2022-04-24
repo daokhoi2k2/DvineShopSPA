@@ -14,3 +14,8 @@ export const updateUser = (payload: any) => ({
     type: types.UPDATE_USER,
     payload
 })
+
+export const updateAvatar = (payload: any) => ({
+    type: types.UPDATE_AVATAR,
+    payload
+})

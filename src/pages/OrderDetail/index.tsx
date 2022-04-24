@@ -1,5 +1,6 @@
 import VND from 'components/VND';
 import moment from 'moment';
+import { OrderStatus } from 'pages/OrderHistory/styles';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getOrderByIdServices } from 'services/order';
@@ -47,7 +48,7 @@ const OrderDetail: React.FC = () => {
             Ngày tạo:{' '}
             {moment(orderDetail?.createdAt).format('YYYY-MM-DD HH:mm:ss')}
           </div>
-          <div>Trạng thái đơn hàng: Đã hủy</div>
+          <div>Trạng thái đơn hàng: <OrderStatus className='inline' active={orderDetail?.status}>{orderDetail?.status ? "Đã xử lý" : "Đã hủy"}</OrderStatus></div>
           <div>Người nhận: {orderDetail?.email}</div>
         </OrderInfo>
         <OrderValue>
@@ -78,7 +79,7 @@ const OrderDetail: React.FC = () => {
               <OrderItem key={product._id}>
                 <OrderThumbnail>
                   <img
-                    src={`${process.env.REACT_APP_API_URL}/${product.thumb_nail}`}
+                    src={`${process.env.REACT_APP_API_URL}/images/thumb_nails/${product.thumb_nail}`}
                     alt="asd"
                     className="w-full rounded-md"
                   />

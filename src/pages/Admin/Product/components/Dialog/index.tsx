@@ -75,25 +75,6 @@ const Dialog = () => {
     [editField]
   );
 
-  const selectList = [
-    {
-      id: 1,
-      text: 'Python',
-    },
-    {
-      id: 2,
-      text: 'Javascript',
-    },
-    {
-      id: 3,
-      text: 'Ruby',
-    },
-    {
-      id: 4,
-      text: 'Java',
-    },
-  ];
-
   useEffect(() => {
     if (!categoryList.length) {
       dispatch(getAllCategories());
@@ -184,7 +165,6 @@ const Dialog = () => {
               if (editField) {
                 const _id = editField?._id;
                 formData.append('_id', _id);
-
                 dispatch(updateProduct(formData));
               } else {
                 dispatch(addProduct(formData));

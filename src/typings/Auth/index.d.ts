@@ -13,5 +13,6 @@ export interface IUserInfo {
   createdAt: string;
   updatedAt: string;
   membership: number;
+  avatar: string;
 }
 

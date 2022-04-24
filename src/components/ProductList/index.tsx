@@ -1,6 +1,5 @@
 import ProductCard from 'components/ProductCard';
 import React, { Suspense } from 'react';
-import Skeleton from 'react-loading-skeleton';
 import { ProductListWrapper } from './styles';
 
 interface IProductInfo {
@@ -9,6 +8,7 @@ interface IProductInfo {
   price: number;
   thumb_nail: string;
   name_url: string;
+  status: boolean;
   // sale_percent: number;
 }
 
@@ -16,7 +16,9 @@ interface IProductList {
   data: IProductInfo[];
 }
 
+
 const ProductList: React.FC<IProductList> = ({ data }) => {
+
   return (
     <ProductListWrapper className={data.length === 0 ? 'min-h-[460px]' : ''}>
       {
@@ -29,6 +31,7 @@ const ProductList: React.FC<IProductList> = ({ data }) => {
             thumb_nail={item.thumb_nail}
             price_promotion={item?.price_promotion}
             name_url={item.name_url}
+            status={item.status}
           />
         )) : Array(8).fill(0).map((item, index) => <ProductCard.Loading key={index} />)
       }

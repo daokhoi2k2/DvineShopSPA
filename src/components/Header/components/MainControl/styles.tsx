@@ -48,25 +48,24 @@ export const InputSearch = tw.input`
     w-[100%]
     placeholder:text-gray-400
     placeholder:text-[14px]
-    focus:outline-none
+    outline-none
 `;
 
-export const SearchList = tw.div`
-    px-[14px]
-    py-5
-    rounded-md
-    w-full
-    absolute
-    top-[55px]
-    bg-white
-    shadow-xl
-    text-sm
-    z-40
-    hidden
-
-    peer-focus:block
-    group-hover:block
-`;
+export const SearchList = styled("div")<{isShow: boolean}>(({isShow = false}) => [
+    tw` 
+        px-[14px]
+        py-5
+        rounded-md
+        w-full
+        absolute
+        top-[55px]
+        bg-white
+        shadow-xl
+        text-sm
+        z-40
+        hidden`,
+    isShow && tw`block`
+])
 
 export const SearchItem = tw(Link)`
     hover:underline

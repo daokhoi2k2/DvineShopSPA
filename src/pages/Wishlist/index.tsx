@@ -1,15 +1,19 @@
-import Header from "components/Header";
-import UserNav from "components/UserNav";
-import React from "react";
-import { Container, UserInner, UserWrapper } from "./styles";
-import UserWishlist from "./UserWishlist";
-import UserOrder from "./UserWishlist";
+import Header from 'components/Header';
+import UserNav from 'components/UserNav';
+import ImgFallBack from 'designs/ImgFallback';
+import React from 'react';
+import { Container, UserInner, UserWrapper } from './styles';
+import UserWishlist from './UserWishlist';
+import UserOrder from './UserWishlist';
 // import UserProfile from "./UserProfile";
 
 const Wishlist = () => {
   return (
     <>
-      Wishlish
+      <div className="text-2xl text-center font-bold">
+        The system is maintenancing
+      </div>
+      <ImgFallBack isStaticImg={true} src="maintance.jpg" alt="maintance" />
     </>
   );
 };

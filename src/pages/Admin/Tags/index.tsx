@@ -52,6 +52,10 @@ const Tags: React.FC = () => {
     console.log(searchValue);
   };
 
+  const handleDeleteTag = (_id: string) => {
+    console.log(_id)
+  }
+
   const columns: IColumns[] = useMemo(
     () => [
       {
@@ -111,7 +115,7 @@ const Tags: React.FC = () => {
                     <EditIcon className="w-[20px] h-[20px]" />
                   </BtnItem>
                   <BtnItem>
-                    <TrashIcon className="w-[20px] h-[20px]" />
+                    <TrashIcon onClick={() => handleDeleteTag(item._id)} className="w-[20px] h-[20px]" />
                   </BtnItem>
                 </ControlWrapper>
               ),

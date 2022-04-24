@@ -9,4 +9,5 @@ export interface IProductInfo {
     description: string;
     code: string;   
     categoryId: any;
+    tags?: any;
 }

@@ -32,7 +32,7 @@ const MoreThumbNail: React.FC<IMoreThumbNail> = (props) => {
         <ThumbNailInner>
           <ThumbNailPrimary>
             <ImgFallBack
-              src={`${process.env.REACT_APP_API_URL}/${thumb_nail}`}
+              src={`${process.env.REACT_APP_API_URL}/images/thumb_nails/${thumb_nail}`}
               alt={thumb_nail}
             />
           </ThumbNailPrimary>

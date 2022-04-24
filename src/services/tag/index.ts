@@ -35,3 +35,14 @@ export const updateTagService = async (payload: any) => {
     return err;
   }
 };
+
+export const deleteTagService = async (payload: any) => {
+  try {
+    const res = await axiosJWT.delete(
+      `${process.env.REACT_APP_API_URL}/api/tag/${payload}`
+    );
+    return res;
+  } catch (err) {
+    return err;
+  }
+};

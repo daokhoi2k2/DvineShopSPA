@@ -141,6 +141,7 @@ const UserOrder: React.FC = () => {
             title="Từ ngày"
             name="dateFrom"
             id="dateFrom"
+            value={formik.values.dateFrom}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           />
@@ -150,6 +151,7 @@ const UserOrder: React.FC = () => {
             title="Đến ngày"
             name="dateTo"
             id="dateTo"
+            value={formik.values.dateTo}
             onChange={formik.handleChange}
           />
         </DateItemWrapper>
@@ -189,7 +191,7 @@ const UserOrder: React.FC = () => {
                       <ProductLayout key={entry.product._id}>
                         <div className="hidden md:block">
                           <img
-                            src={`${process.env.REACT_APP_API_URL}/${entry.product.thumb_nail}`}
+                            src={`${process.env.REACT_APP_API_URL}/images/thumb_nails/${entry.product.thumb_nail}`}
                             className="rounded-md"
                             alt={entry.product.name}
                           />

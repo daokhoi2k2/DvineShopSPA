@@ -27,6 +27,9 @@ const ImgFallBack: React.FC<IImgFallBack> = (props) => {
         onLoad={(e: any) => {
           e.target.parentElement.classList.remove('bg-fallback');
         }}
+        onError={(e: any) => {
+          e.target.parentElement.classList.remove('bg-fallback');
+        }}
         alt={alt}
         className={`rounded-md absolute w-full h-full top-0 ${className}`}
         src={isStaticImg ? require(`../../assets/images/${src}`) : src}
