@@ -49,6 +49,8 @@ export const PaymentItem = tw.button`
   font-bold
   items-center
   my-3
+
+  active:scale-[0.97]
 `;
 
 export const PaymentSubTitle = tw.h5`

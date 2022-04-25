@@ -148,7 +148,7 @@ const MainControl: React.FC = () => {
         <LogoWrapper>
           <SVG
             name="logo_divine_pure_white"
-            className="w-[49px] h-[49px]"
+            className="w-[49px] h-[49px] hover:animate-heartbeat"
           ></SVG>
           <LogoText>Divine Shop</LogoText>
         </LogoWrapper>

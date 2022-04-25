@@ -39,6 +39,21 @@ module.exports = {
         'arrowDown': `url("assets/svg/arrowDown.svg")`,
         'fallback': `url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAARwAAACUAQMAAAB7rgSiAAAAA1BMVEXt7vB7AFJXAAAAHElEQVRYw+3BMQEAAADCIPuntsNuYAAAAAAAZAcVZAABCxyMjwAAAABJRU5ErkJggg==")`
       },
+      keyframes: {
+        heartbeat: {
+          '8%': {transform: 'scale(1.075)'},
+          '15%': {transform: 'none'},
+          '20%': {transform: 'none'},
+          '30%': {transform: 'scale(1.25)'},
+          '45%': {transform: 'none'},
+          '62%': {transform: 'none'},
+          '80%': {transform: 'scale(1.1)'},
+          '90%': {transform: 'none'},
+        },
+      },
+      animation: {
+        heartbeat: 'heartbeat 1.5s forwards',
+      }
     },
   },
   plugins: [

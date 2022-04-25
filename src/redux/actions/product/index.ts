@@ -10,6 +10,14 @@ export const getAllProductsSuccess = (payload: any) => ({
   payload,
 });
 
+export const getProductsFeatured = () => ({
+  type: types.GET_PRODUCTS_FEATURED,
+})
+
+export const getProductsFeaturedSuccess = (payload: any) => ({
+  type: types.GET_PRODUCTS_FEATURED_SUCCESS,
+})
+
 /* CREATE */
 
 export const addProduct = (payload: any) => ({

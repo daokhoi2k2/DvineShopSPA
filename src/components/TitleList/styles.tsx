@@ -19,7 +19,9 @@ export const Discover = styled(Link)(() => [
     py-1.5
     font-semibold
     block
+    select-none
 
+    active:scale-[0.97]
     hover:bg-[#2985FF]`,
 ]);
 

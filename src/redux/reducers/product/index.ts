@@ -13,9 +13,9 @@ import * as types from 'redux/types/product';
 
 const initialState = {
   allProducts: [],
+  productsFeatured: [],
   updateFailMsg: {},
   pending: false,
-  success: false,
 };
 
 const reducer = (state = initialState, action: any) =>
@@ -26,6 +26,16 @@ const reducer = (state = initialState, action: any) =>
         break;
       case types.UPDATE_PRODUCT_FAILED:
         draft.updateFailMsg = action.payload;
+        break;
+      case types.GET_PRODUCTS_FEATURED:
+        draft.pending = true;
+        break;
+      case types.GET_PRODUCTS_FEATURED_SUCCESS:
+        draft.productsFeatured = [
+          ...state.productsFeatured,
+          ...action.payload,
+        ] as any;
+        draft.pending = false;
         break;
     }
   });

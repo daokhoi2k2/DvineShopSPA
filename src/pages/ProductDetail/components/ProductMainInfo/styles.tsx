@@ -120,6 +120,7 @@ export const Button = styled.button<any>(({ primary }) => [
     font-semibold 
     gap-x-2 
     hover:border-[#2579f2]
+    active:scale-[0.97]
     mid:flex-basis[99%]
     `,
   primary && tw`text-white bg-[#2579f2]`,

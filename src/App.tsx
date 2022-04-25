@@ -21,6 +21,7 @@ const Transactions = React.lazy(() => import('pages/Transactions'));
 const Cart = React.lazy(() => import('pages/Cart'));
 const OrderDetail = React.lazy(() => import('pages/OrderDetail'));
 
+
 const App: React.FC = () => {
   const { pathname } = useLocation();
 

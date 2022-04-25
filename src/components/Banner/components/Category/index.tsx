@@ -6,17 +6,6 @@ import { CategoryItem, CategoryList, CategoryWrapper, CateIco, CateText } from "
 
 const Category: React.FC = () => {
   const categories = useSelector((state:RootState) => state.category.allCategory);
-  const dispatch = useDispatch();
-  // const getAllCategories = useSelector
-  useEffect(() => {
-    if(!categories.length) {
-      dispatch(getAllCategories())
-    }
-  }, [dispatch])
-
-  useEffect(() => {
-    // dispatch(fetchProduct());
-  }, [dispatch]);
 
   return (
     <CategoryWrapper>

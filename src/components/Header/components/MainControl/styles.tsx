@@ -77,6 +77,9 @@ export const ButtonSearch = tw.button`
     bg-[#0a59cc]
     rounded-r-md
     text-white
+
+    active:scale-[0.97]
+    select-none
 `;
 
 // Auth Style
@@ -130,6 +133,7 @@ export const CartWrapper = tw(Link)`
     cursor-pointer
     min-w-[141px]
     hover:opacity-90
+    active:scale-[0.97]
     sm:min-w-0
 
 `;

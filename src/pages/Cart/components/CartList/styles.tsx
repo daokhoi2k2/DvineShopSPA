@@ -94,6 +94,7 @@ export const ChangeAmountBtn = tw.button`
     w-[26px]
     h-[26px]
     border
+    active:scale-[0.97]
 `;
 
 export const AmountInput = tw.input`

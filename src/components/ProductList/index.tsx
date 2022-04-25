@@ -18,11 +18,10 @@ interface IProductList {
 
 
 const ProductList: React.FC<IProductList> = ({ data }) => {
-
   return (
-    <ProductListWrapper className={data.length === 0 ? 'min-h-[460px]' : ''}>
+    <ProductListWrapper className={data?.length === 0 ? 'min-h-[460px]' : ''}>
       {
-        data.length !== 0 ? data.map((item) => (
+        data?.length !== 0 ? data?.map((item) => (
           <ProductCard.Success
             key={item.name}
             name={item.name}
@@ -38,5 +37,6 @@ const ProductList: React.FC<IProductList> = ({ data }) => {
     </ProductListWrapper>
   );
 };
+
 
 export default ProductList;

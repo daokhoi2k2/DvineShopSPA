@@ -231,7 +231,7 @@ const CartList = () => {
                           Xác nhận xóa
                         </div>
                         <TrashIconV2
-                          className="text-[#DC3545] cursor-pointer w-[16px] h-[17.5px]"
+                          className="text-[#DC3545] cursor-pointer w-[16px] h-[17.5px] active:scale-[0.97] select-none"
                           onClick={handleShowConfirmBox}
                         />
                       </ProductInfoStatus>

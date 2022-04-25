@@ -1,41 +1,25 @@
-import React, { Suspense, useEffect, useState } from 'react';
+import React from 'react';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import { Container, HotProductInner, HotProductWrapper } from './styles';
+import {
+  Container,
+} from './styles';
 import Banner from 'components/Banner';
-import TitleList from 'components/TitleList';
-import ProductList from 'components/ProductList';
-import { getProductsListServices } from 'services/product';
+import LazyLoad from 'react-lazyload';
+import HotProductList from './components/HotProductList';
+import HotKeyword from './components/HotKeyword';
+import WalletProductList from './components/WalletProductList';
 
-const Home = () => {
-  // const allProducts = useSelector((state: RootState) => state.product.allProducts);
-  const [products, setProducts] = useState([]);
+const Home: React.FC = () => {
 
-  useEffect(() => {
-    (async () => {
-      if (!products.length) {
-        const productList = await getProductsListServices({
-          limit: 8,
-          page: 1,
-        });
-
-        setProducts(productList?.data);
-      }
-    })();
-  }, []);
   return (
     <Container>
       <Banner></Banner>
-      <HotProductWrapper>
-        <HotProductInner>
-          <TitleList
-            title="Sản phẩm nổi bật"
-            discover
-            subTitle="Danh sách những sản phẩm theo xu hướng mà có thể bạn sẽ thích"
-          />
-          <ProductList data={products}></ProductList>
-        </HotProductInner>
-      </HotProductWrapper>
+      <HotProductList />
+      <HotKeyword />
+      <LazyLoad offset={100} once>
+        <WalletProductList />
+      </LazyLoad>
     </Container>
   );
 };
