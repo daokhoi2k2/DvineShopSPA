@@ -36,10 +36,6 @@ export const SearchWrapper = tw.form`
     flex-grow
 
     relative
-    before:absolute
-    before:top-[40px]
-    before:w-full
-    before:h-[120px]
 `;
 
 export const InputSearch = tw.input`
