@@ -25,7 +25,7 @@ const reducer = (state = initialState, action: any) =>
         draft.userOrder.pending = true;
         break;
       case types.GET_ORDER_BY_ID_SUCCESS: 
-        console.log("Log")
+        // console.log("Log")
         break;
     }
   });

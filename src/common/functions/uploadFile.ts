@@ -8,7 +8,6 @@ const checkImageValid = (file: File, sizeKb: number) => {
   ) {
     // Check size
     const fileKb = file.size / 1024;
-    console.log(fileKb, sizeKb)
     if (fileKb <= sizeKb) {
       return true;
     }

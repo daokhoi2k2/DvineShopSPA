@@ -49,11 +49,11 @@ const Tags: React.FC = () => {
   };
 
   const onBlurSearch = () => {
-    console.log(searchValue);
+    // console.log(searchValue);
   };
 
   const handleDeleteTag = (_id: string) => {
-    console.log(_id)
+    // console.log(_id)
   }
 
   const columns: IColumns[] = useMemo(

@@ -9,8 +9,6 @@ import React, { memo, useEffect, useState } from 'react';
 import { getProductsListServices } from 'services/product';
 
 const WalletProductList = () => {
-  console.log('Import ProductLayout');
-
   const [products, setProducts] = useState([]);
   const [isMore, setIsMore] = useState(true);
 
