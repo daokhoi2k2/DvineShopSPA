@@ -30,10 +30,9 @@ const ProductDetail = () => {
     })();
   }, [hash_name]);
 
-  console.log(productInfo);
   return (
     <Container>
-      {!productInfo ? (
+      {productInfo === undefined ? (
         <ErrorPageWrapper>
           <div>
             <Link
