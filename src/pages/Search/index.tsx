@@ -175,7 +175,7 @@ const Search: React.FC = () => {
           </SearchController>
           <SearchTable>
             {(products.length !== 0 || isFetching === true) && (
-              <ProductList data={products}></ProductList>
+              <ProductList loading={isFetching} data={products}></ProductList>
             )}
             {products.length === 0 && isFetching === false && (
               <ProductEmpty>

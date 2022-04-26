@@ -5,49 +5,38 @@ import {
   ProductInner,
   ProductListWrapper,
 } from 'pages/Home/styles';
-import React, { memo, useEffect, useState } from 'react';
-import { getProductsListServices } from 'services/product';
+import React, { memo, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getProductsWallet } from 'redux/actions/product';
+import { RootState } from 'redux/reducers';
 
 const WalletProductList = () => {
-  const [products, setProducts] = useState([]);
-  const [isMore, setIsMore] = useState(true);
+  const { data: products, isMore, loading } = useSelector(
+    (state: RootState) => state.product.productsWallet
+  );
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    (async () => {
-      if (!products.length) {
-        const productList = await getProductsListServices({
-          slug: 'wallet',
-          page: 1,
-        });
-
-        if (productList?.data?.isMore === false) {
-          setIsMore(false);
-        }
-
-        setProducts(productList?.data?.list);
-      }
-    })();
+    if(products.length === 0) {
+      dispatch(getProductsWallet({
+        slug: 'wallet',
+        page: 1,
+      }))
+    }
   }, []);
 
-  const showMoreWallet = async () => {
-    const productList = await getProductsListServices({
+  const showMoreWallet = () => {
+    dispatch(getProductsWallet({
       slug: 'wallet',
-      page: (products.length + 8) / 8,
-    });
-
-    if (productList?.data?.isMore === false) {
-      setIsMore(false);
-    }
-
-    const newProducts = [...products, ...productList?.data?.list];
-    setProducts(newProducts as any);
+      page: (products.length + 8) / 8
+    }))
   };
 
   return (
     <ProductListWrapper>
       <ProductInner>
         <TitleList title="Code Wallet" discover />
-        <ProductList data={products}></ProductList>
+        <ProductList loading={loading} data={products}></ProductList>
         {isMore ? (
           <ButtonAnimate>
             <div

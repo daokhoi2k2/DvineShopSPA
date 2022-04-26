@@ -185,7 +185,7 @@ const ProductMainInfo: React.FC<IProductMainInfo> = ({ productInfo }) => {
                     return (
                       <Link
                         className="hover:underline"
-                        key={item.text}
+                        key={item.to}
                         to={item.to}
                       >
                         {item.text}

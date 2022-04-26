@@ -14,14 +14,15 @@ interface IProductInfo {
 
 interface IProductList {
   data: IProductInfo[];
+  loading: boolean;
 }
 
 
-const ProductList: React.FC<IProductList> = ({ data }) => {
+const ProductList: React.FC<IProductList> = ({ data, loading }) => {
   return (
     <ProductListWrapper className={data?.length === 0 ? 'min-h-[460px]' : ''}>
       {
-        data?.length !== 0 ? data?.map((item) => (
+        data?.length !== 0 && data?.map((item) => (
           <ProductCard.Success
             key={item.name}
             name={item.name}
@@ -32,7 +33,11 @@ const ProductList: React.FC<IProductList> = ({ data }) => {
             name_url={item.name_url}
             status={item.status}
           />
-        )) : Array(8).fill(0).map((item, index) => <ProductCard.Loading key={index} />)
+        ))
+      }
+
+      {
+        loading && Array(8).fill(0).map((item, index) => <ProductCard.Loading key={index} />)
       }
     </ProductListWrapper>
   );

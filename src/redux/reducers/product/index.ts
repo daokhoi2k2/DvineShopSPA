@@ -13,9 +13,17 @@ import * as types from 'redux/types/product';
 
 const initialState = {
   allProducts: [],
-  productsFeatured: [],
+  productsFeatured: {
+    loading: false,
+    isMore: true,
+    data: [],
+  },
+  productsWallet: {
+    loading: false,
+    isMore: true,
+    data: [],
+  },
   updateFailMsg: {},
-  pending: false,
 };
 
 const reducer = (state = initialState, action: any) =>
@@ -28,14 +36,26 @@ const reducer = (state = initialState, action: any) =>
         draft.updateFailMsg = action.payload;
         break;
       case types.GET_PRODUCTS_FEATURED:
-        draft.pending = true;
+        draft.productsFeatured.loading = true;
         break;
       case types.GET_PRODUCTS_FEATURED_SUCCESS:
-        draft.productsFeatured = [
-          ...state.productsFeatured,
-          ...action.payload,
+        draft.productsFeatured.loading = false;
+        draft.productsFeatured.isMore = action.payload.isMore;
+        draft.productsFeatured.data = [
+          ...draft.productsFeatured.data,
+          ...action.payload.list,
         ] as any;
-        draft.pending = false;
+        break;
+      case types.GET_PRODUCTS_WALLET:
+        draft.productsWallet.loading = true;
+        break;
+      case types.GET_PRODUCTS_WALLET_SUCCESS:
+        draft.productsWallet.loading = false;
+        draft.productsWallet.isMore = action.payload.isMore;
+        draft.productsWallet.data = [
+          ...draft.productsWallet.data,
+          ...action.payload.list,
+        ] as any;
         break;
     }
   });

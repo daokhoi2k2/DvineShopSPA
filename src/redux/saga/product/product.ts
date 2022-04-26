@@ -4,6 +4,9 @@ import {
   addProductSuccess,
   getAllProducts,
   getAllProductsSuccess,
+  getProductsFeaturedSuccess,
+  getProductsWalletSuccess,
+  IGetProductListPayload,
   updateProductFailed,
 } from 'redux/actions/product';
 import { toast } from 'react-toastify';
@@ -18,6 +21,24 @@ export function* getAllProductsSaga(): any {
 
   if (result) {
     yield put(getAllProductsSuccess(result));
+  }
+}
+
+export function* getProductsFeaturedSaga({ payload }: any): any {
+  const response = yield call(services.getProductsListServices, payload);
+  const result = response?.data;
+
+  if (result) {
+    yield put(getProductsFeaturedSuccess(result));
+  }
+}
+
+export function* getProductsWalletSaga({ payload }: any): any {
+  const response = yield call(services.getProductsListServices, payload);
+  const result = response?.data;
+
+  if (result) {
+    yield put(getProductsWalletSuccess(result));
   }
 }
 
@@ -61,13 +82,12 @@ export function* updateProductSaga({ payload }: any): any {
       toast.success('Cập nhật sản phẩm thành công');
     }
 
-    if(response?.duplicateKeys) {
-      yield put(updateProductFailed(response.duplicateKeys))
+    if (response?.duplicateKeys) {
+      yield put(updateProductFailed(response.duplicateKeys));
       toast.error('Đường dẫn sản phẩm không được trùng');
     }
-
   } catch (err) {
-    console.log("Lỗi", err)
+    console.log('Lỗi', err);
     return err;
   }
 }
@@ -81,7 +101,6 @@ export function* deleteProductSaga({ payload }: any): any {
       toast.success('Xóa sản phẩm thành công');
     }
   } catch (err) {
-
     return err;
   }
 }

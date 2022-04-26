@@ -6,37 +6,35 @@ import {
   ProductListWrapper,
 } from 'pages/Home/styles';
 import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getProductsFeatured } from 'redux/actions/product';
+import { RootState } from 'redux/reducers';
 import { getProductsListServices } from 'services/product';
 
 const HotProductList: React.FC = () => {
-  const [products, setProducts] = useState([]);
-  const [isMore, setIsMore] = useState(true);
+  const { data: products, isMore, loading } = useSelector(
+    (state: RootState) => state.product.productsFeatured
+  );
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    (async () => {
-      if (!products.length) {
-        const productList = await getProductsListServices({
+    if (products.length === 0) {
+      dispatch(
+        getProductsFeatured({
           slug: 'featured',
           page: 1,
-        });
-
-        setProducts(productList?.data?.list);
-      }
-    })();
+        })
+      );
+    }
   }, []);
 
   const showMoreFeatured = async () => {
-    const productList = await getProductsListServices({
-      slug: 'featured',
-      page: (products.length + 8) / 8,
-    });
-
-    if (productList?.data?.isMore === false) {
-      setIsMore(false);
-    }
-
-    const newProducts = [...products, ...productList?.data?.list];
-    setProducts(newProducts as any);
+    dispatch(
+      getProductsFeatured({
+        slug: 'featured',
+        page: (products.length + 8) / 8,
+      })
+    );
   };
 
   return (
@@ -47,9 +45,7 @@ const HotProductList: React.FC = () => {
           discover
           subTitle="Danh sách những sản phẩm theo xu hướng mà có thể bạn sẽ thích"
         />
-        <ProductList
-          data={products}
-        ></ProductList>
+        <ProductList data={products} loading={loading}></ProductList>
         {isMore ? (
           <ButtonAnimate>
             <div

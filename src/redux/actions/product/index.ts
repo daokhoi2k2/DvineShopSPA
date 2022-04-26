@@ -1,5 +1,10 @@
 import * as types from 'redux/types/product';
 
+export interface IGetProductListPayload {
+  slug: string;
+  page: number;
+}
+
 /* GET */
 export const getAllProducts = () => ({
   type: types.GET_ALL_PRODUCTS,
@@ -10,13 +15,35 @@ export const getAllProductsSuccess = (payload: any) => ({
   payload,
 });
 
-export const getProductsFeatured = () => ({
+export const getProductsFeatured = (payload: IGetProductListPayload) => ({
   type: types.GET_PRODUCTS_FEATURED,
-})
+  payload,
+});
 
 export const getProductsFeaturedSuccess = (payload: any) => ({
   type: types.GET_PRODUCTS_FEATURED_SUCCESS,
-})
+  payload,
+});
+
+export const getProductsWallet = (payload: IGetProductListPayload) => ({
+  type: types.GET_PRODUCTS_WALLET,
+  payload,
+});
+
+export const getProductsWalletSuccess = (payload: any) => ({
+  type: types.GET_PRODUCTS_WALLET_SUCCESS,
+  payload,
+});
+
+// export const getProductsList = (payload: IGetProductListPayload) => ({
+//   type: types.GET_PRODUCTS_LIST,
+//   payload
+// })
+
+// export const getProductsListSuccess = (payload: any) => ({
+//   type: types.GET_PRODUCTS_LIST_SUCCESS,
+//   payload
+// })
 
 /* CREATE */
 
