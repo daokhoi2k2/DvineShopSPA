@@ -9,33 +9,33 @@ const HotKeyword: React.FC = () => {
       <ProductInner>
         <TitleList title="Từ khóa nổi bật" />
         <ListBox>
-          <BoxItem className="bg-[#3D5A80]">
-            <BoxItemLayout to="/search?q=Làm+việc">
+          <BoxItem>
+            <BoxItemLayout className="bg-[#3D5A80]" to="/search?q=Làm+việc">
               <BoxItemContent>Làm việc</BoxItemContent>
             </BoxItemLayout>
           </BoxItem>
-          <BoxItem className="bg-[#98C1D9]">
-            <BoxItemLayout to="/search?q=Giải+trí">
+          <BoxItem>
+            <BoxItemLayout className="bg-[#98C1D9]" to="/search?q=Giải+trí">
               <BoxItemContent>Giải trí</BoxItemContent>
             </BoxItemLayout>
           </BoxItem>
-          <BoxItem className="bg-[#EE6C4D]">
-            <BoxItemLayout to="/search?q=Học+tập">
+          <BoxItem>
+            <BoxItemLayout className="bg-[#EE6C4D]" to="/search?q=Học+tập">
               <BoxItemContent>Học tập</BoxItemContent>
             </BoxItemLayout>
           </BoxItem>
-          <BoxItem className="bg-[#293241]">
-            <BoxItemLayout to="/search?q=Spotify">
+          <BoxItem>
+            <BoxItemLayout className="bg-[#293241]" to="/search?q=Spotify">
               <BoxItemContent>Spotify</BoxItemContent>
             </BoxItemLayout>
           </BoxItem>
-          <BoxItem className="bg-[#545B67]">
-            <BoxItemLayout to="/search?q=Wallet">
+          <BoxItem>
+            <BoxItemLayout className="bg-[#545B67]" to="/search?q=Wallet">
               <BoxItemContent>Wallet</BoxItemContent>
             </BoxItemLayout>
           </BoxItem>
-          <BoxItem className="bg-[#767C85]">
-            <BoxItemLayout  to="/search?q=Youtube">
+          <BoxItem>
+            <BoxItemLayout className="bg-[#767C85]" to="/search?q=Youtube">
               <BoxItemContent>Youtube</BoxItemContent>
             </BoxItemLayout>
           </BoxItem>

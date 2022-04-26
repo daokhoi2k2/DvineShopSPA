@@ -20,6 +20,7 @@ export const Discover = styled(Link)(() => [
     font-semibold
     block
     select-none
+    // whitespace-nowrap
 
     active:scale-[0.97]
     hover:bg-[#2985FF]`,

@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
-import tw from "twin.macro";
+import { Link } from 'react-router-dom';
+import tw from 'twin.macro';
 
 export const ListBox = tw.div`
     flex
@@ -7,25 +7,27 @@ export const ListBox = tw.div`
 
     sm:flex-wrap
     justify-around
-    gap-x-5
-    sm:gap-y-4
+
     my-4
+
+    mx-[-12px]
+    w-full
 `;
 
 export const BoxItem = tw.div`
     p-3
     flex-basis[16.66666667%]
 
-    sm:flex-basis[30%]
-    rounded-md
-    text-white
-    font-semibold
+    sm:flex-basis[33.3333333333%]
 `;
 
 export const BoxItemLayout = tw(Link)`
-    pt-[35%]
+    pt-[45%]
     relative
     block
+    rounded-md
+    text-white
+    font-semibold
 `;
 
 export const BoxItemContent = tw.div`
