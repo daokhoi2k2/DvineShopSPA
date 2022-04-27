@@ -41,7 +41,7 @@ const WalletProductList = () => {
           <ButtonAnimate>
             <div
               onClick={showMoreWallet}
-              className="active:scale-[0.97] cursor-pointer"
+              className="active:scale-[0.97] cursor-pointer whitespace-nowrap"
             >
               Xem thêm
             </div>

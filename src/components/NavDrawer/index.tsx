@@ -138,11 +138,11 @@ const NavDrawer: React.FC = () => {
               <UserInfo>
                 <img
                   src={
-                    auth.accountInfo?.avatar ||
+                    `${process.env.REACT_APP_API_URL}/images/avatars/${auth.accountInfo?.avatar}` ||
                     require('../../assets/images/trend-avatar-1-73987.jpg')
                   }
                   className="w-[42px] h-[42px] rounded-full"
-                  alt="asd"
+                  alt={auth.accountInfo?.avatar}
                 />
                 <div className="text-white font-medium">
                   <div className="flex gap-x-2 items-center">

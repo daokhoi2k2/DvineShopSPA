@@ -50,7 +50,7 @@ const HotProductList: React.FC = () => {
           <ButtonAnimate>
             <div
               onClick={showMoreFeatured}
-              className="active:scale-[0.97] cursor-pointer"
+              className="active:scale-[0.97] cursor-pointer whitespace-nowrap"
             >
               Xem thêm
             </div>
